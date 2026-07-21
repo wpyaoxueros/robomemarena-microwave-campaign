@@ -1,5 +1,13 @@
 # RoboMemArena Task20 v49c6 Reproduction
 
+## 版本
+
+- `v49c6`：仓库根目录原始版本，固定 RoboMemArena `514ecdf`。
+- `v110_placecookies11_latest622`：固定 RoboMemArena `6221403`，使用 VLM c24，
+  并把 `place cookies` EEF 阈值放宽为 `0.11 m`。入口是
+  `scripts/run_task20_v110.sh`，说明见
+  `versions/v110_placecookies11_latest622/README.md`。
+
 这是 Task20 v49c6 的冻结评测包。VLM 自主输出子任务 prompt；运行时只使用 EEF hold/release、第二次经过计数和机器人状态 anchor 控制切换时机。它不注入下一个 prompt，不使用 object anchor，也不使用物体/夹爪/lift/region gate。
 
 该包复现的是历史 v49c6 口径，官方 RoboMemArena 必须固定在 commit `514ecdf86ba47d496ab1728a827670833107ffd3`。这不是后续 `6221403` 最新 stage-scorer 的结果，不能混报。
