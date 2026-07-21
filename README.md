@@ -11,6 +11,8 @@
 - VLM 负责输出所有子任务 prompt；没有 oracle next-prompt 注入，没有 object anchor。
 - 评分固定到 RoboMemArena `62214036103ee8d5fef9b475dd8b344b6e2cfc03`。Close Microwave
   仍是审计项；Task23 成功按三个必需 stage 全完成判定。
+- 已完成固定 seed105 的 20 条有效 episode：`15/20 = 75.0%` stage-only success，平均
+  stage score `88.3%`。完整组成和四次独立基础设施中止记录见 `history/RESULT.md`。
 
 运行结果、视频名和外部产物哈希记录在 `history/RESULT.md`；不要根据仓库名推断成功或失败，
 必须以该文件、每条 `summary.tsv` 和视频为准。
