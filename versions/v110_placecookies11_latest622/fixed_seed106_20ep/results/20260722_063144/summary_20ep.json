@@ -1,0 +1,11 @@
+{
+  "average_stage_score_pct": 71.67,
+  "episode_max": 19,
+  "episode_min": 0,
+  "episodes": 20,
+  "fixed_seed": 106,
+  "goal_success_rate": 0.4,
+  "goal_successes": 8,
+  "stage_success_rate": 0.4,
+  "stage_successes": 8
+}
