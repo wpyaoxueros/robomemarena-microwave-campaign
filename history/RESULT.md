@@ -1,6 +1,7 @@
 # Task23 v145 结果
 
-状态：等待同版本重跑。
+状态：无有效成功。Attempt 001 是基础设施失败；Attempt 003-004 已完成且均为
+`66.7%`，最后一个官方必需 stage 未完成；Attempt 002 仍在运行。
 
 ## Attempt 001: 运行时无效
 
@@ -22,9 +23,16 @@
 
 | Attempt | seed | Slurm job | 节点 | 状态 |
 | --- | --- | --- | --- | --- |
-| 002 | 104 | `427447` | ACD1-6 | 运行中 |
-| 003 | 105 | `427462` | ACD1-29 | 运行中 |
-| 004 | 106 | `427461` | ACD1-19 | 运行中 |
+| 002 | 104 | `427447` | ACD1-6 | 运行中；节点上 rollout 明显慢于 seed105/106，尚未产生有效 summary/video |
+| 003 | 105 | `427462` | ACD1-29 | 完成；`66.7%`，前两 stage=Y，`03_Place_Popcorn_Microwave=N` |
+| 004 | 106 | `427461` | ACD1-19 | 完成；`66.7%`，前两 stage=Y，`03_Place_Popcorn_Microwave=N` |
 
-这些是同一冻结版本的独立 episode，不是新的代码版本。完成后逐条写入 stage、goal
-审计值、视频和输出校验信息。
+这些是同一冻结版本的独立 episode，不是新的代码版本。v145 已在 seed105/106 上稳定
+复现到前两 stage，不满足最终成功条件；后续单变量尝试进入独立 v146 仓库。
+
+## 可审计产物
+
+- seed105 main 视频：`task23_v145_remove_cream_place_anchor_seed105_20260721_202500/videos/task23/task23_failure_ep0_seed105.mp4`
+- seed106 main 视频：`task23_v145_remove_cream_place_anchor_seed106_20260721_202500/videos/task23/task23_failure_ep0_seed106.mp4`
+- 两条 summary 均在相应输出根目录的 `summary.tsv`；官方 scorer commit 固定为
+  `62214036103ee8d5fef9b475dd8b344b6e2cfc03`。
