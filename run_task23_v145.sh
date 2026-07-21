@@ -10,7 +10,7 @@ fi
 # shellcheck disable=SC1090
 source "${INPUTS_FILE}"
 
-for required in OPENPI_ROOT INFER_ROOT TARGET_LIBERO_PATH ROBOMEMARENA_REMOTE_ROOT VLA_POLICY VLA_REPO_ID VLM_CKPT OUT_ROOT; do
+for required in OPENPI_ROOT INFER_ROOT TARGET_LIBERO_PATH ROBOMEMARENA_REMOTE_ROOT VLA_POLICY VLA_REPO_ID VLM_CKPT; do
   [[ -n "${!required:-}" ]] || { echo "missing ${required} in ${INPUTS_FILE}" >&2; exit 2; }
 done
 
@@ -18,6 +18,7 @@ export PACK_DIR="${ROOT}"
 export WORKSPACE_ROOT="${WORKSPACE_ROOT:-${ROOT}}"
 export MODE=vlm_free
 export RUN_ID="${RUN_ID:-task23_v145_remove_cream_place_anchor}"
+export OUT_ROOT="${OUT_ROOT:-${OUT_BASE:?OUT_BASE is required when OUT_ROOT is unset}/${RUN_ID}}"
 export NUM_TRIALS="${NUM_TRIALS:-1}"
 export SEED="${SEED:-104}"
 export MAX_STEPS="${MAX_STEPS:-2000}"
