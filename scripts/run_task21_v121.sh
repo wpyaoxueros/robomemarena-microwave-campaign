@@ -44,11 +44,12 @@ export ENDPOSE_HOLD_RELEASE_MIN_STEPS_BY_SUBTASK_FILE=${PACK_DIR}/config/task21_
 export POST_PICK_HOLD_RELEASE_SAME_PROMPT_STEPS=50
 
 mkdir -p "${OUT_ROOT}/runtime_config"
+RELEASE_ANCHOR_TEMPLATE=${TASK21_RELEASE_ANCHOR_TEMPLATE:-${PACK_DIR}/config/task21_v121_release_anchors.template.json}
+[[ -f "${RELEASE_ANCHOR_TEMPLATE}" ]] || { echo "missing release-anchor template: ${RELEASE_ANCHOR_TEMPLATE}" >&2; exit 2; }
 python3 "${PACK_DIR}/scripts/materialize_task21_paths.py" \
-  --template "${PACK_DIR}/config/task21_v121_release_anchors.template.json" \
+  --template "${RELEASE_ANCHOR_TEMPLATE}" \
   --output "${OUT_ROOT}/runtime_config/task21_v121_release_anchors.json" \
   --data-root "${TASK21_DATA_ROOT}"
 export SUBTASK_RELEASE_ANCHORS_JSON=${OUT_ROOT}/runtime_config/task21_v121_release_anchors.json
 
 exec bash "${PACK_DIR}/scripts/run_task21_v110_historicalvlm_eef_pickfinish50_latest622_1ep.sh"
-
