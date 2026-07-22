@@ -14,6 +14,7 @@ CALLER_OUTPUT_ROOT="${OUTPUT_ROOT}"
 source "${PRIVATE_INPUTS_FILE}"
 OUTPUT_ROOT="${CALLER_OUTPUT_ROOT}"
 : "${ROBOMEMARENA_REMOTE_ROOT:?private inputs must define ROBOMEMARENA_REMOTE_ROOT}"
+git config --global --add safe.directory "${REPO_DIR}"
 git config --global --add safe.directory "${ROBOMEMARENA_REMOTE_ROOT}"
 EXPECTED_OFFICIAL_COMMIT=62214036103ee8d5fef9b475dd8b344b6e2cfc03
 ACTUAL_OFFICIAL_COMMIT="$(git -C "${ROBOMEMARENA_REMOTE_ROOT}" rev-parse HEAD)"
