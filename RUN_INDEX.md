@@ -11,6 +11,7 @@ committed here.
 | 21 | v123_latest622_multiseed_smoke_emptyanchors | `robomemarena-task21-v121-repro` | `80e0496` | 104, 107 | invalid startup recorded: a nested script overwrote min-hold config with missing legacy file |
 | 21 | v124_latest622_multiseed_smoke_preserve_minhold | `robomemarena-task21-v121-repro` | `80e0496` | 104, 107 | seed107 valid success: 3/3 stages; seed104 valid 2/3-stage failure |
 | 21 | v125_pickchocolate_tol050_seed104_smoke | `robomemarena-task21-v121-repro` | `8bb9390` | 104 | incomplete diagnostic: VLM reached `place butter`, but pick-forward direction guard blocked handoff at 1.14cm; does not assess the changed pick-chocolate tolerance |
+| 21 | v126_latest622_multiseed_replay | `robomemarena-task21-v121-repro` | `a59cbe3` | 107, 108, 109 | planned: exact v124 behavior replay across three seeds; only dispatch and record wrapper differs |
 | 22 | v1_latest622_baseline_smoke | `robomemarena-task22-autonomous-repro` | `aede542` | 104, 105 | seed104 valid 1/3 stage; seed105 invalid process abort, excluded |
 | 22 | v2_vlm_eef_pour_forwardguard | `robomemarena-task22-autonomous-repro` | `8f0e90d` | 104 smoke | valid 1/3-stage failure: tomato lifted, then VLM repeatedly output `place tomato aside` instead of `pour first`; guard blocked but never substituted a prompt |
 | 23 | v156_fixedseed105_repeat20_replay | `robomemarena-task23-v155-fixedseed105-repeat20` | `a1f54ae` | 105 x 20 | incomplete: 4 valid episodes (1 stage-only success); 8 rc=134 evaluator aborts excluded; remaining workers cancelled |
