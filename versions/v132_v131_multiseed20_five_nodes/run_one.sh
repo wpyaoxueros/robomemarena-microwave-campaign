@@ -13,6 +13,9 @@ EXPECTED_OFFICIAL_COMMIT=62214036103ee8d5fef9b475dd8b344b6e2cfc03
 
 # shellcheck disable=SC1090
 source "${PRIVATE_INPUTS_FILE}"
+# Historical v131 login shells inherited this exact public configuration name.
+# Make it explicit so non-login Slurm workers do not depend on inherited state.
+export VLA_CONFIG="${VLA_CONFIG:-pi05_libero_robomemarena_fullvlm_v2_noflip_dataset}"
 for required in \
   OPENPI_ROOT INFER_ROOT TARGET_LIBERO_PATH ROBOMEMARENA_REMOTE_ROOT \
   ROBOMEMARENA_FULLVLM_DATA_ROOT VLA_POLICY VLA_CONFIG VLA_REPO_ID \

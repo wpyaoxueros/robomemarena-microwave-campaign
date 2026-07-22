@@ -31,6 +31,7 @@ assert config["pick popcorn"] == 0.07, config
 PY
 
 rg -F 'export MODE=vlm_free' "${VERSION_DIR}/run_one.sh" >/dev/null
+rg -F 'pi05_libero_robomemarena_fullvlm_v2_noflip_dataset' "${VERSION_DIR}/run_one.sh" >/dev/null
 rg -F 'ORACLE_HOLD_RELEASE_NEXT=0' "${RUNTIME_DIR}/scripts/run_task23_24_v112_historicalvlm_eef_pickfinish50_latest622_1ep.sh" >/dev/null
 rg -F 'ENDPOSE_PLACE_OBJECT_GATE_JSON=' "${RUNTIME_DIR}/scripts/run_task23_24_v112_historicalvlm_eef_pickfinish50_latest622_1ep.sh" >/dev/null
 rg -F '"object_anchor": false' "${RUNTIME_DIR}/config/release_anchors_t21_t23_t24_no_pick2place_robotonly_20260718.json" >/dev/null

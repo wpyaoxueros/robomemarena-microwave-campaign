@@ -27,6 +27,11 @@ each on five physical nodes.
 is never committed. The runner checks the scorer commit and refuses to run if
 `task2_26_reference_stage.py` is unavailable.
 
+The v131 VLA configuration name is fixed in `run_one.sh` to
+`pi05_libero_robomemarena_fullvlm_v2_noflip_dataset`. Historical interactive
+shells inherited this value; making it explicit preserves the same setting for
+non-login Slurm workers.
+
 The original candidate allocation was
 `ACD1-25,ACD1-2,ACD1-3,ACD1-6,ACD1-9`, and its exact resource shape was
 allocation-probed before submission. If those nodes are subsequently occupied,
