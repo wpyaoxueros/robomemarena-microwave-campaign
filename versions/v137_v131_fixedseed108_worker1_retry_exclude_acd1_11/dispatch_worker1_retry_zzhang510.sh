@@ -35,9 +35,12 @@ MEM_MB="${MEM_MB:-160000}"
 WALLTIME="${WALLTIME:-01:00:00}"
 SLURM_PARTITION="${SLURM_PARTITION:-acd_ue}"
 EXCLUDE_NODE="${EXCLUDE_NODE:-ACD1-11}"
+SHARED_GROUP="${SHARED_GROUP:-irpn}"
 BATCH_ROOT="${OUTPUT_ROOT}/task24_v137_v131_fixedseed108_worker1_retry_${STAMP}"
 RUNTIME_ENV="${BATCH_ROOT}/worker1.env"
 mkdir -p "${BATCH_ROOT}/worker1"
+chgrp "${SHARED_GROUP}" "${BATCH_ROOT}/worker1"
+chmod 2770 "${BATCH_ROOT}/worker1"
 [[ -z "$(git -C "${REPO_DIR}" status --porcelain -- "${REL_VERSION}" 2>/dev/null)" ]] || {
   echo "refuse to launch from a dirty v137 version directory" >&2
   exit 2

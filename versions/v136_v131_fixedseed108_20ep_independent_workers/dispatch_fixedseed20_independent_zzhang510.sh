@@ -35,6 +35,7 @@ CPUS_PER_TASK="${CPUS_PER_TASK:-8}"
 MEM_MB="${MEM_MB:-160000}"
 WALLTIME="${WALLTIME:-01:00:00}"
 SLURM_PARTITION="${SLURM_PARTITION:-acd_ue}"
+SHARED_GROUP="${SHARED_GROUP:-irpn}"
 [[ "${SLURM_PARTITION}" =~ ^(acd_u|acd_ue|emergency_acd)$ ]] || {
   echo "unsupported partition: ${SLURM_PARTITION}" >&2
   exit 2
@@ -71,6 +72,8 @@ for worker_id in 0 1 2 3 4; do
   env_q="$(printf '%q' "${runtime_env}")"
   submit_log="${BATCH_ROOT}/worker${worker_id}/submit.log"
   mkdir -p "${BATCH_ROOT}/worker${worker_id}"
+  chgrp "${SHARED_GROUP}" "${BATCH_ROOT}/worker${worker_id}"
+  chmod 2770 "${BATCH_ROOT}/worker${worker_id}"
   inner="set -o pipefail; srun -p ${SLURM_PARTITION} --nodes=1 --ntasks=1 --gres=gpu:2 -c${CPUS_PER_TASK} --mem=${MEM_MB}M --time=${WALLTIME} --job-name=${job_name} bash ${runner_q} ${env_q} 2>&1 | tee -a $(printf '%q' "${submit_log}"); rc=\${PIPESTATUS[0]}; echo \"[TMUX_EXIT] status=\${rc}\"; exit \${rc}"
   tmux -f /dev/null -L hlei573borrow new-session -d -s "${session}" \
     "bash -lc $(printf '%q' "${inner}")"
