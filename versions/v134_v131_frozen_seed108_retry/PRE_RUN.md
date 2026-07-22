@@ -9,7 +9,9 @@
 - The VLA norm repo is materialized under the historical asset identifier
   `robomemarena_fullvlm_v2_noflip_dataset_v2`; its norm file SHA-256 is
   `4f71f864b3d34e3b58616d5c01b5efa86e57b317e014a091f62f9ef13ba67a8a`.
-  This reproduces v131's local-norm load followed by the data-config fallback
-  route, rather than the distinct fallback-asset route seen in the aborted
-  pre-rollout launch.
+  The VLA checkpoint is also materialized as an isolated link tree containing
+  the historical parameter files but no `assets/` directory. This restores
+  v131's local-norm load followed by the data-config fallback route, rather
+  than the later-added checkpoint-asset route seen in the aborted pre-rollout
+  launch.
 - This retry does not claim trajectory identity with the historical success because v131 did not record the VLA diffusion sampling RNG/noise stream.
