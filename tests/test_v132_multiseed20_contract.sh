@@ -33,6 +33,7 @@ PY
 rg -F 'export MODE=vlm_free' "${VERSION_DIR}/run_one.sh" >/dev/null
 rg -F 'pi05_libero_robomemarena_fullvlm_v2_noflip_dataset' "${VERSION_DIR}/run_one.sh" >/dev/null
 rg -F '[[ -n "${VLA_CONFIG}" ]]' "${VERSION_DIR}/run_one.sh" >/dev/null
+rg -F 'PREFLIGHT_ONLY' "${VERSION_DIR}/run_one.sh" >/dev/null
 if sed -n '/for required in/,/done/p' "${VERSION_DIR}/run_one.sh" | rg -F 'VLA_CONFIG'; then
   echo 'VLA_CONFIG must not be validated as a filesystem path' >&2
   exit 1

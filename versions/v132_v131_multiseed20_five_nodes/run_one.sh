@@ -43,6 +43,11 @@ fi
   exit 3
 }
 
+if [[ "${PREFLIGHT_ONLY:-0}" == "1" ]]; then
+  printf 'PREFLIGHT_OK task=24 scorer=%s seed=%s\n' "${actual_commit}" "${SEED}"
+  exit 0
+fi
+
 export MODE=vlm_free
 export NUM_TRIALS=1
 export MAX_STEPS="${MAX_STEPS:-2000}"
