@@ -37,3 +37,13 @@ allowing the boundary samples to dominate it.
   and result record.
 - Any later hard-case augmentation from rollout frames is a separate version;
   it must not be mixed into v3.
+
+## Training Contract
+
+The v3 finetune starts from the same private Task22 VLM checkpoint used by v2,
+not from a random base.  It uses the recovered original full-finetune recipe:
+two GPUs, frozen vision tower, predictive-coding head enabled, learning rate
+`1e-5`, and gradient accumulation `2`.  A one-step batch-4/2 Slurm probe is
+recorded before the 500-step run; the largest passing batch is used.  Optimizer
+state is not resumed, so the only intended model-input change is the accepted
+v3 dataset frequency adjustment.
