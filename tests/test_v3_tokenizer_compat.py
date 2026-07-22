@@ -32,6 +32,22 @@ def main() -> None:
             json.dumps({"added_tokens": [{"content": token} for token in tokens]}),
             encoding="utf-8",
         )
+        (source / "config.json").write_text(
+            json.dumps(
+                {
+                    "model_type": "qwen3_vl",
+                    "text_config": {
+                        "rope_parameters": {
+                            "mrope_interleaved": True,
+                            "mrope_section": [24, 20, 20],
+                            "rope_theta": 5_000_000,
+                            "rope_type": "default",
+                        }
+                    },
+                }
+            ),
+            encoding="utf-8",
+        )
         (source / "model.safetensors").write_bytes(b"weights")
 
         subprocess.run(
@@ -42,6 +58,16 @@ def main() -> None:
         with (output / "tokenizer_config.json").open(encoding="utf-8") as handle:
             config = json.load(handle)
         assert config["extra_special_tokens"] == {}
+        with (output / "config.json").open(encoding="utf-8") as handle:
+            model_config = json.load(handle)
+        text_config = model_config["text_config"]
+        assert text_config["rope_theta"] == 5_000_000
+        assert text_config["rope_scaling"] == {
+            "mrope_interleaved": True,
+            "mrope_section": [24, 20, 20],
+            "rope_type": "default",
+        }
+        assert "rope_parameters" not in text_config
         assert (output / "model.safetensors").is_symlink()
         assert (output / "model.safetensors").read_bytes() == b"weights"
 
@@ -49,6 +75,7 @@ def main() -> None:
             manifest = json.load(handle)
         assert manifest["source_extra_special_tokens_type"] == "list"
         assert manifest["preserved_token_count"] == len(tokens)
+        assert manifest["rope_parameters_normalized"] is True
         assert "source_path" not in manifest
 
     print("task22 tokenizer compatibility overlay: PASS")
