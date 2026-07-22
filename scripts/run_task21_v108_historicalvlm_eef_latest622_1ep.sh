@@ -52,7 +52,9 @@ export ENDPOSE_PICK_DEFERRED_GRIPPER_RELEASE=0
 export ENDPOSE_HOLD_TARGETS_JSON=${ENDPOSE_HOLD_TARGETS_JSON:-${PACK_DIR}/config/tasks2_26_endpose_targets_seed100_199.json}
 export ENDPOSE_TARGET_PASSAGE_COUNTS_JSON=${ENDPOSE_TARGET_PASSAGE_COUNTS_JSON:-${PACK_DIR}/config/tasks2_26_target_passage_counts_seed100_199_alltasks_tol045_20260624_074452.json}
 export ENDPOSE_HOLD_POS_TOL_BY_SUBTASK_FILE=${ENDPOSE_HOLD_POS_TOL_BY_SUBTASK_FILE:-${PACK_DIR}/config/task21_eef_open105_pick045_place060_tol_20260718.json}
-export ENDPOSE_HOLD_RELEASE_MIN_STEPS_BY_SUBTASK_FILE=${PACK_DIR}/config/task21_eef_runtime_pickplace_hold30_20260718.json
+# Keep a task-specific caller override. The v121 wrapper supplies its frozen
+# min-hold config; only legacy callers should use the historical default.
+export ENDPOSE_HOLD_RELEASE_MIN_STEPS_BY_SUBTASK_FILE=${ENDPOSE_HOLD_RELEASE_MIN_STEPS_BY_SUBTASK_FILE:-${PACK_DIR}/config/task21_eef_runtime_pickplace_hold30_20260718.json}
 export ENDPOSE_HOLD_CONSECUTIVE_BY_SUBTASK_JSON='{"open microwave":1,"place butter":3,"place chocolate":3}'
 export ENDPOSE_HOLD_START_AFTER_RELEASE_ANCHOR=1
 export ENDPOSE_HOLD_START_AFTER_RELEASE_ANCHOR_SUBTASKS="pick butter,pick chocolate"
