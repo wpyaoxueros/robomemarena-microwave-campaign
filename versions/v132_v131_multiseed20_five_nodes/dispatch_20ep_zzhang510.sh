@@ -37,6 +37,7 @@ FAST_NODES=ACD1-25,ACD1-2,ACD1-3,ACD1-6,ACD1-9
 BASE_PORTS=(10100 10120 10140 10160 10180)
 PARTITIONS=(acd_u acd_ue emergency_acd)
 CPUS_PER_TASK=8
+RESOURCE_MODE="${RESOURCE_MODE:-wait}"
 BATCH_ROOT="${OUTPUT_ROOT}/task24_v132_v131_multiseed20_fivenodes_${STAMP}"
 RUNTIME_ENV_DIR="${BATCH_ROOT}/runtime_env"
 mkdir -p "${RUNTIME_ENV_DIR}"
@@ -46,26 +47,40 @@ mkdir -p "${RUNTIME_ENV_DIR}"
 }
 FROZEN_COMMIT="$(git -C "${REPO_DIR}" rev-parse HEAD)"
 cp -a "${VERSION_DIR}" "${BATCH_ROOT}/code_snapshot_v132"
-printf 'status=started\nstarted_at=%s\nseed_start=%s\nseed_end=%s\nworkers=5\nepisodes_per_worker=%s\nrequested_nodes=5\nfast_nodes=%s\nfrozen_commit=%s\n' \
-  "$(date -Is)" "${SEED_START}" "$((SEED_START + 19))" "${EPISODES_PER_WORKER}" "${FAST_NODES}" "${FROZEN_COMMIT}" >"${BATCH_ROOT}/LIVE_STATUS.txt"
+printf 'status=started\nstarted_at=%s\nseed_start=%s\nseed_end=%s\nworkers=5\nepisodes_per_worker=%s\nrequested_nodes=5\nresource_mode=%s\nprobe_nodes=%s\nfrozen_commit=%s\n' \
+  "$(date -Is)" "${SEED_START}" "$((SEED_START + 19))" "${EPISODES_PER_WORKER}" "${RESOURCE_MODE}" "${FAST_NODES}" "${FROZEN_COMMIT}" >"${BATCH_ROOT}/LIVE_STATUS.txt"
 
 PARTITION=""
 REQUESTED_MEM_MB="${MEM_MB:-}"
 MEM_MB=""
-for candidate in "${PARTITIONS[@]}"; do
-  MAX_MEM_PER_CPU_MB="$(scontrol show partition "${candidate}" | sed -n 's/.*MaxMemPerCPU=\([0-9][0-9]*\).*/\1/p' | head -1)"
-  candidate_mem_mb="${REQUESTED_MEM_MB:-$((CPUS_PER_TASK * ${MAX_MEM_PER_CPU_MB:-20480}))}"
-  if srun --immediate=20 -p "${candidate}" --nodelist="${FAST_NODES}" --nodes=5 --ntasks=5 --ntasks-per-node=1 \
-    --gres=gpu:2 -c"${CPUS_PER_TASK}" --mem="${candidate_mem_mb}M" --time=00:01:00 \
-    --job-name="task24v132probe_${STAMP}" bash -lc 'nvidia-smi --query-gpu=name --format=csv,noheader | head -2 >/dev/null' </dev/null; then
-    PARTITION="${candidate}"
-    MEM_MB="${candidate_mem_mb}"
-    break
-  fi
-done
-[[ -n "${PARTITION}" ]] || { echo "no five-node GPU probe succeeded" >&2; exit 3; }
-printf 'probe=passed\npartition=%s\nprobe_finished=%s\nmem_mb=%s\n' \
-  "${PARTITION}" "$(date -Is)" "${MEM_MB}" >>"${BATCH_ROOT}/LIVE_STATUS.txt"
+NODELIST_OPT=""
+case "${RESOURCE_MODE}" in
+  wait)
+    PARTITION=acd_u
+    MAX_MEM_PER_CPU_MB="$(scontrol show partition "${PARTITION}" | sed -n 's/.*MaxMemPerCPU=\([0-9][0-9]*\).*/\1/p' | head -1)"
+    MEM_MB="${REQUESTED_MEM_MB:-$((CPUS_PER_TASK * ${MAX_MEM_PER_CPU_MB:-20480}))}"
+    printf 'probe=previous_shape_probe_passed\npartition=%s\nqueue_mode=wait_for_any_five_nodes\nmem_mb=%s\n' \
+      "${PARTITION}" "${MEM_MB}" >>"${BATCH_ROOT}/LIVE_STATUS.txt"
+    ;;
+  immediate)
+    for candidate in "${PARTITIONS[@]}"; do
+      MAX_MEM_PER_CPU_MB="$(scontrol show partition "${candidate}" | sed -n 's/.*MaxMemPerCPU=\([0-9][0-9]*\).*/\1/p' | head -1)"
+      candidate_mem_mb="${REQUESTED_MEM_MB:-$((CPUS_PER_TASK * ${MAX_MEM_PER_CPU_MB:-20480}))}"
+      if srun --immediate=20 -p "${candidate}" --nodelist="${FAST_NODES}" --nodes=5 --ntasks=5 --ntasks-per-node=1 \
+        --gres=gpu:2 -c"${CPUS_PER_TASK}" --mem="${candidate_mem_mb}M" --time=00:01:00 \
+        --job-name="task24v132probe_${STAMP}" bash -lc 'nvidia-smi --query-gpu=name --format=csv,noheader | head -2 >/dev/null' </dev/null; then
+        PARTITION="${candidate}"
+        MEM_MB="${candidate_mem_mb}"
+        NODELIST_OPT="--nodelist=${FAST_NODES}"
+        break
+      fi
+    done
+    [[ -n "${PARTITION}" ]] || { echo "no five-node GPU probe succeeded" >&2; exit 3; }
+    printf 'probe=passed\npartition=%s\nprobe_finished=%s\nmem_mb=%s\n' \
+      "${PARTITION}" "$(date -Is)" "${MEM_MB}" >>"${BATCH_ROOT}/LIVE_STATUS.txt"
+    ;;
+  *) echo "unsupported RESOURCE_MODE=${RESOURCE_MODE}; use wait or immediate" >&2; exit 2 ;;
+esac
 
 umask 077
 for worker_id in 0 1 2 3 4; do
@@ -87,10 +102,10 @@ RUNNER_Q="$(printf '%q' "${VERSION_DIR}/run_multinode_worker.sh")"
 ENV_DIR_Q="$(printf '%q' "${RUNTIME_ENV_DIR}")"
 LOG_Q="$(printf '%q' "${BATCH_ROOT}/submit.log")"
 TASK_LOG="${BATCH_ROOT}/slurm-%t.log"
-INNER="set -o pipefail; srun -p ${PARTITION} --nodelist=${FAST_NODES} --nodes=5 --ntasks=5 --ntasks-per-node=1 --gres=gpu:2 -c${CPUS_PER_TASK} --mem=${MEM_MB}M --time=02:00:00 --job-name=${JOB_NAME} --output=${TASK_LOG} bash ${RUNNER_Q} ${ENV_DIR_Q} 2>&1 | tee -a ${LOG_Q}; rc=\${PIPESTATUS[0]}; echo \"[TMUX_EXIT] status=\${rc}\"; exit \${rc}"
+INNER="set -o pipefail; srun -p ${PARTITION} ${NODELIST_OPT} --nodes=5 --ntasks=5 --ntasks-per-node=1 --gres=gpu:2 -c${CPUS_PER_TASK} --mem=${MEM_MB}M --time=02:00:00 --job-name=${JOB_NAME} --output=${TASK_LOG} bash ${RUNNER_Q} ${ENV_DIR_Q} 2>&1 | tee -a ${LOG_Q}; rc=\${PIPESTATUS[0]}; echo \"[TMUX_EXIT] status=\${rc}\"; exit \${rc}"
 tmux -f /dev/null -L hlei573borrow new-session -d -s "${SESSION}" \
   "bash -lc $(printf '%q' "${INNER}")"
 
-printf 'status=submitted\nsession=%s\njob_name=%s\npartition=%s\nrequested_nodes=5\nfast_nodes=%s\nsubmitted_at=%s\n' \
-  "${SESSION}" "${JOB_NAME}" "${PARTITION}" "${FAST_NODES}" "$(date -Is)" >>"${BATCH_ROOT}/LIVE_STATUS.txt"
+printf 'status=submitted\nsession=%s\njob_name=%s\npartition=%s\nrequested_nodes=5\nresource_mode=%s\nnode_constraint=%s\nsubmitted_at=%s\n' \
+  "${SESSION}" "${JOB_NAME}" "${PARTITION}" "${RESOURCE_MODE}" "${NODELIST_OPT:-scheduler_any}" "$(date -Is)" >>"${BATCH_ROOT}/LIVE_STATUS.txt"
 printf '%s\n' "${BATCH_ROOT}"
