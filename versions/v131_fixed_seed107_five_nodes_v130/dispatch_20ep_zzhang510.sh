@@ -19,8 +19,9 @@ BATCH_ROOT="${OUTPUT_ROOT}/task21_v131_fixedseed107_fivenodes_repeat20_${STAMP}"
 RUNTIME_ENV_DIR="${BATCH_ROOT}/runtime_env"
 mkdir -p "${RUNTIME_ENV_DIR}"
 cp -p "${VERSION_DIR}/PRE_RUN.md" "${VERSION_DIR}/run_multinode_worker.sh" \
-  "${VERSION_DIR}/dispatch_20ep_zzhang510.sh" "${V130_DIR}/PRE_RUN.md" \
-  "${V130_DIR}/run_worker.sh" "${V130_DIR}/validate_episode.py" \
+  "${VERSION_DIR}/dispatch_20ep_zzhang510.sh" "${BATCH_ROOT}/"
+cp -p "${V130_DIR}/PRE_RUN.md" "${BATCH_ROOT}/V130_PRE_RUN.md"
+cp -p "${V130_DIR}/run_worker.sh" "${V130_DIR}/validate_episode.py" \
   "${V130_DIR}/aggregate_fixedseed20.py" "${BATCH_ROOT}/"
 printf 'status=started\nstarted_at=%s\nfixed_seed=%s\nworkers=5\nrepeats_per_worker=%s\nrequested_nodes=5\n' \
   "$(date -Is)" "${FIXED_SEED}" "${REPEATS}" >"${BATCH_ROOT}/LIVE_STATUS.txt"
