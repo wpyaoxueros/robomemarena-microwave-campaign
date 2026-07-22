@@ -7,6 +7,9 @@ RUNTIME_ENV="$1"
 
 # shellcheck disable=SC1090
 source "${RUNTIME_ENV}"
+# Private runtime inputs were read above; worker outputs should remain available
+# to the shared irpn group without exposing them to unrelated users.
+umask 007
 VERSION_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 : "${PRIVATE_INPUTS_FILE:?}"
