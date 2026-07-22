@@ -33,6 +33,7 @@ WORKERS=5
 EPISODES_PER_WORKER=4
 CPUS_PER_TASK="${CPUS_PER_TASK:-8}"
 MEM_MB="${MEM_MB:-160000}"
+WALLTIME="${WALLTIME:-01:00:00}"
 SLURM_PARTITION="${SLURM_PARTITION:-acd_ue}"
 [[ "${SLURM_PARTITION}" =~ ^(acd_u|acd_ue|emergency_acd)$ ]] || {
   echo "unsupported partition: ${SLURM_PARTITION}" >&2
@@ -47,9 +48,9 @@ mkdir -p "${RUNTIME_ENV_DIR}"
 }
 FROZEN_COMMIT="$(git -C "${REPO_DIR}" rev-parse HEAD)"
 cp -a "${VERSION_DIR}" "${BATCH_ROOT}/code_snapshot_v135"
-printf 'status=started\nstarted_at=%s\nfixed_seed=%s\nworkers=%s\nepisodes_per_worker=%s\ntotal_attempts=%s\npartition=%s\nmem_mb_per_node=%s\nfrozen_commit=%s\n' \
+printf 'status=started\nstarted_at=%s\nfixed_seed=%s\nworkers=%s\nepisodes_per_worker=%s\ntotal_attempts=%s\npartition=%s\nmem_mb_per_node=%s\nwalltime=%s\nfrozen_commit=%s\n' \
   "$(date -Is)" "${FIXED_SEED}" "${WORKERS}" "${EPISODES_PER_WORKER}" "$((WORKERS * EPISODES_PER_WORKER))" \
-  "${SLURM_PARTITION}" "${MEM_MB}" "${FROZEN_COMMIT}" >"${BATCH_ROOT}/LIVE_STATUS.txt"
+  "${SLURM_PARTITION}" "${MEM_MB}" "${WALLTIME}" "${FROZEN_COMMIT}" >"${BATCH_ROOT}/LIVE_STATUS.txt"
 
 umask 077
 for worker_id in 0 1 2 3 4; do
@@ -71,7 +72,7 @@ RUNNER_Q="$(printf '%q' "${VERSION_DIR}/run_multinode_worker.sh")"
 ENV_DIR_Q="$(printf '%q' "${RUNTIME_ENV_DIR}")"
 LOG_Q="$(printf '%q' "${BATCH_ROOT}/submit.log")"
 TASK_LOG="${BATCH_ROOT}/slurm-%t.log"
-INNER="set -o pipefail; srun -p ${SLURM_PARTITION} --nodes=${WORKERS} --ntasks=${WORKERS} --ntasks-per-node=1 --gres=gpu:2 -c${CPUS_PER_TASK} --mem=${MEM_MB}M --time=04:00:00 --kill-on-bad-exit=0 --job-name=${JOB_NAME} --output=${TASK_LOG} bash ${RUNNER_Q} ${ENV_DIR_Q} 2>&1 | tee -a ${LOG_Q}; rc=\${PIPESTATUS[0]}; echo \"[TMUX_EXIT] status=\${rc}\"; exit \${rc}"
+INNER="set -o pipefail; srun -p ${SLURM_PARTITION} --nodes=${WORKERS} --ntasks=${WORKERS} --ntasks-per-node=1 --gres=gpu:2 -c${CPUS_PER_TASK} --mem=${MEM_MB}M --time=${WALLTIME} --kill-on-bad-exit=0 --job-name=${JOB_NAME} --output=${TASK_LOG} bash ${RUNNER_Q} ${ENV_DIR_Q} 2>&1 | tee -a ${LOG_Q}; rc=\${PIPESTATUS[0]}; echo \"[TMUX_EXIT] status=\${rc}\"; exit \${rc}"
 tmux -f /dev/null -L hlei573borrow new-session -d -s "${SESSION}" \
   "bash -lc $(printf '%q' "${INNER}")"
 
