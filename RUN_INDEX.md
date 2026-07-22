@@ -12,7 +12,7 @@ committed here.
 | 21 | v124_latest622_multiseed_smoke_preserve_minhold | `robomemarena-task21-v121-repro` | `80e0496` | 104, 107 | seed107 valid success: 3/3 stages; seed104 valid 2/3-stage failure |
 | 21 | v125_pickchocolate_tol050_seed104_smoke | `robomemarena-task21-v121-repro` | `8bb9390` | 104 | running: only pick-chocolate EEF hold tolerance is 0.050 m instead of 0.045 m |
 | 22 | v1_latest622_baseline_smoke | `robomemarena-task22-autonomous-repro` | `aede542` | 104, 105 | seed104 valid 1/3 stage; seed105 invalid process abort, excluded |
-| 23 | v156_fixedseed105_repeat20_replay | `robomemarena-task23-v155-fixedseed105-repeat20` | `a1f54ae` | 105 x 20 | running, five workers x four episodes |
+| 23 | v156_fixedseed105_repeat20_replay | `robomemarena-task23-v155-fixedseed105-repeat20` | `a1f54ae` | 105 x 20 | incomplete: 4 valid episodes (1 stage-only success); 8 rc=134 evaluator aborts excluded; remaining workers cancelled |
 | 24 | v123_latest622_seed107_108_smoke | `robomemarena-task24-v123-autonomous-repro` | `7235d5e` | 107, 108 | seed107 valid 1/3 stage; seed108 invalid process abort, excluded |
 
 All listed runs require remote scorer commit `62214036103ee8d5fef9b475dd8b344b6e2cfc03`, VLM-generated prompts, no `ORACLE_*` prompt injection, and stage-only scoring with `Close_Microwave` optional.
