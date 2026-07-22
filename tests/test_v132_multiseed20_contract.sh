@@ -38,6 +38,7 @@ rg -F 'task2_26_reference_stage.py' "${RUNTIME_DIR}/scripts/launch_one_sync_hold
 rg -F -- '--nodes=5' "${VERSION_DIR}/dispatch_20ep_zzhang510.sh" >/dev/null
 rg -F 'SEED_START=104' "${VERSION_DIR}/dispatch_20ep_zzhang510.sh" >/dev/null
 rg -F 'safe.directory' "${VERSION_DIR}/dispatch_20ep_zzhang510.sh" >/dev/null
+rg -F -- '--nodes=5 --ntasks=5 --ntasks-per-node=1' "${VERSION_DIR}/dispatch_20ep_zzhang510.sh" >/dev/null
 rg -F 'seed=$((SEED_START + global_episode))' "${VERSION_DIR}/run_worker.sh" >/dev/null
 version_dir_line="$(rg -n -F 'VERSION_DIR=' "${VERSION_DIR}/dispatch_20ep_zzhang510.sh" | head -1 | cut -d: -f1)"
 safe_dir_line="$(rg -n -F 'safe.directory "${REPO_DIR}"' "${VERSION_DIR}/dispatch_20ep_zzhang510.sh" | head -1 | cut -d: -f1)"

@@ -50,16 +50,20 @@ printf 'status=started\nstarted_at=%s\nseed_start=%s\nseed_end=%s\nworkers=5\nep
   "$(date -Is)" "${SEED_START}" "$((SEED_START + 19))" "${EPISODES_PER_WORKER}" "${FAST_NODES}" "${FROZEN_COMMIT}" >"${BATCH_ROOT}/LIVE_STATUS.txt"
 
 PARTITION=""
+REQUESTED_MEM_MB="${MEM_MB:-}"
+MEM_MB=""
 for candidate in "${PARTITIONS[@]}"; do
-  if srun --immediate=20 -p "${candidate}" --nodelist="${FAST_NODES}" --gres=gpu:1 -c1 --mem=1024M --time=00:01:00 \
-    --job-name="task24v132probe_${STAMP}" bash -lc 'nvidia-smi --query-gpu=name --format=csv,noheader | head -1 >/dev/null' </dev/null; then
+  MAX_MEM_PER_CPU_MB="$(scontrol show partition "${candidate}" | sed -n 's/.*MaxMemPerCPU=\([0-9][0-9]*\).*/\1/p' | head -1)"
+  candidate_mem_mb="${REQUESTED_MEM_MB:-$((CPUS_PER_TASK * ${MAX_MEM_PER_CPU_MB:-20480}))}"
+  if srun --immediate=20 -p "${candidate}" --nodelist="${FAST_NODES}" --nodes=5 --ntasks=5 --ntasks-per-node=1 \
+    --gres=gpu:2 -c"${CPUS_PER_TASK}" --mem="${candidate_mem_mb}M" --time=00:01:00 \
+    --job-name="task24v132probe_${STAMP}" bash -lc 'nvidia-smi --query-gpu=name --format=csv,noheader | head -2 >/dev/null' </dev/null; then
     PARTITION="${candidate}"
+    MEM_MB="${candidate_mem_mb}"
     break
   fi
 done
 [[ -n "${PARTITION}" ]] || { echo "no five-node GPU probe succeeded" >&2; exit 3; }
-MAX_MEM_PER_CPU_MB="$(scontrol show partition "${PARTITION}" | sed -n 's/.*MaxMemPerCPU=\([0-9][0-9]*\).*/\1/p' | head -1)"
-MEM_MB="${MEM_MB:-$((CPUS_PER_TASK * ${MAX_MEM_PER_CPU_MB:-20480}))}"
 printf 'probe=passed\npartition=%s\nprobe_finished=%s\nmem_mb=%s\n' \
   "${PARTITION}" "$(date -Is)" "${MEM_MB}" >>"${BATCH_ROOT}/LIVE_STATUS.txt"
 
