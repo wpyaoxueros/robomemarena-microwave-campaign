@@ -39,6 +39,9 @@ rg -F -- '--nodes=5' "${VERSION_DIR}/dispatch_20ep_zzhang510.sh" >/dev/null
 rg -F 'SEED_START=104' "${VERSION_DIR}/dispatch_20ep_zzhang510.sh" >/dev/null
 rg -F 'safe.directory' "${VERSION_DIR}/dispatch_20ep_zzhang510.sh" >/dev/null
 rg -F 'seed=$((SEED_START + global_episode))' "${VERSION_DIR}/run_worker.sh" >/dev/null
+version_dir_line="$(rg -n -F 'VERSION_DIR=' "${VERSION_DIR}/dispatch_20ep_zzhang510.sh" | head -1 | cut -d: -f1)"
+safe_dir_line="$(rg -n -F 'safe.directory "${REPO_DIR}"' "${VERSION_DIR}/dispatch_20ep_zzhang510.sh" | head -1 | cut -d: -f1)"
+(( version_dir_line < safe_dir_line )) || { echo 'REPO_DIR is referenced before initialization' >&2; exit 1; }
 
 if rg -n '/data/user|/home/' "${VERSION_DIR}" --glob '!runtime_source_sha256.tsv'; then
   echo "private filesystem path leaked into public version" >&2

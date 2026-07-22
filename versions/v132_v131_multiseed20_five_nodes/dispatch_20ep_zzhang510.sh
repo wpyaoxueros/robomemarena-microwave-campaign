@@ -2,6 +2,9 @@
 set -euo pipefail
 
 [[ "${USER:-}" == "zzhang510" ]] || { echo "run from the zzhang510 shell" >&2; exit 2; }
+VERSION_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_DIR="$(cd "${VERSION_DIR}/../.." && pwd)"
+REL_VERSION="${VERSION_DIR#${REPO_DIR}/}"
 : "${PRIVATE_INPUTS_FILE:?set PRIVATE_INPUTS_FILE}"
 : "${OUTPUT_ROOT:?set OUTPUT_ROOT}"
 [[ -r "${PRIVATE_INPUTS_FILE}" ]] || { echo "private inputs are unreadable" >&2; exit 2; }
@@ -27,9 +30,6 @@ ACTUAL_OFFICIAL_COMMIT="$(git -C "${ROBOMEMARENA_REMOTE_ROOT}" rev-parse HEAD)"
   exit 2
 }
 
-VERSION_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_DIR="$(cd "${VERSION_DIR}/../.." && pwd)"
-REL_VERSION="${VERSION_DIR#${REPO_DIR}/}"
 STAMP="${STAMP:-$(date +%Y%m%d_%H%M%S)}"
 SEED_START=104
 EPISODES_PER_WORKER=4
