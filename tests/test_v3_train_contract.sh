@@ -12,6 +12,8 @@ rg -q 'VLM_INPUT_CHECKPOINT=.*VLM_CKPT' "${VERSION}/run_train.sh"
 rg -q -- '--freeze_vision_tower' "${VERSION}/run_train.sh"
 rg -q -- '--predictive_coding_head' "${VERSION}/run_train.sh"
 rg -q -- '--max_steps "\$\{MAX_STEPS\}"' "${VERSION}/run_train.sh"
+rg -F -q '"${OPENPI_PYTHON}" -m torch.distributed.run' "${VERSION}/run_train.sh"
+! rg -q '^torchrun ' "${VERSION}/run_train.sh"
 rg -q 'run_probe 4' "${VERSION}/dispatch_train_after_probe_zzhang510.sh"
 rg -q 'run_probe 2' "${VERSION}/dispatch_train_after_probe_zzhang510.sh"
 rg -q 'ORACLE' "${VERSION}/PRE_TRAIN.md" && { echo 'PRE_TRAIN may not add oracle behavior' >&2; exit 1; } || true

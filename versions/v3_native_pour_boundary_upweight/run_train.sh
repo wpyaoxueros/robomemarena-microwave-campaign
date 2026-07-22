@@ -53,7 +53,7 @@ export TOKENIZERS_PARALLELISM=false
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
 cd "${OPENPI_ROOT}"
-torchrun --nproc_per_node=2 --master_port="${MASTER_PORT}" "${TRAIN_SCRIPT}" \
+"${OPENPI_PYTHON}" -m torch.distributed.run --nproc_per_node=2 --master_port="${MASTER_PORT}" "${TRAIN_SCRIPT}" \
   --dataset "${TASK22_V3_DATASET}" \
   --model "${VLM_INPUT_CHECKPOINT}" \
   --output_dir "${CHECKPOINT_DIR}" \
