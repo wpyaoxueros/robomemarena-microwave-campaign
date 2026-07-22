@@ -14,6 +14,7 @@ PRE_RUN="${REPO}/versions/v124_pick2place_robotonly_smoke/PRE_RUN.md"
 }
 rg -q 'STRICT_HOLD_RELEASE_NEXT=1' "${RUNNER}"
 rg -q 'release_anchors_t24_add_pick2place_robotonly_20260722.json' "${RUNNER}"
+rg -q 'private inputs are missing or unreadable' "${REPO}/versions/v124_pick2place_robotonly_smoke/run_one.sh"
 rg -q 'ORACLE_HOLD_RELEASE_NEXT=0' "${REPO}/scripts/run_task23_24_v112_historicalvlm_eef_pickfinish50_latest622_1ep.sh"
 rg -q '"object_anchor": false' "${ANCHORS}"
 rg -q '"oracle_prompt": false' "${ANCHORS}"

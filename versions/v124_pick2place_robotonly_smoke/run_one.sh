@@ -7,7 +7,10 @@ PACK_DIR="$(cd "${VERSION_DIR}/../.." && pwd)"
 : "${SEED:?set SEED}"
 : "${PORT:?set PORT}"
 : "${OUTPUT_ROOT:?set OUTPUT_ROOT}"
-[[ -f "${PRIVATE_INPUTS_FILE}" ]] || { echo "missing private inputs" >&2; exit 2; }
+[[ -r "${PRIVATE_INPUTS_FILE}" ]] || {
+  echo "private inputs are missing or unreadable by $(id -un): ${PRIVATE_INPUTS_FILE}" >&2
+  exit 2
+}
 # shellcheck disable=SC1090
 source "${PRIVATE_INPUTS_FILE}"
 for required in OPENPI_ROOT INFER_ROOT TARGET_LIBERO_PATH ROBOMEMARENA_REMOTE_ROOT VLA_POLICY VLA_CONFIG VLA_REPO_ID VLM_CKPT; do
