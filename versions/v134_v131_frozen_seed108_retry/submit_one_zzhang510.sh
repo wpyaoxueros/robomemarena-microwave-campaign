@@ -15,7 +15,14 @@ SESSION="${SESSION:-task24_v131frozen_${STAMP}_s${SEED}}"
 JOB_NAME="${JOB_NAME:-task24v131f_${STAMP}_s${SEED}}"
 CPUS_PER_TASK="${CPUS_PER_TASK:-8}"
 MAX_MEM_PER_CPU_MB="$(scontrol show partition acd_u | sed -n 's/.*MaxMemPerCPU=\([0-9][0-9]*\).*/\1/p')"
-MEM_MB="${MEM_MB:-$((CPUS_PER_TASK * MAX_MEM_PER_CPU_MB))}"
+if [[ "${MAX_MEM_PER_CPU_MB}" =~ ^[0-9]+$ ]]; then
+  DEFAULT_MEM_MB="$((CPUS_PER_TASK * MAX_MEM_PER_CPU_MB))"
+else
+  # acd_u does not always expose MaxMemPerCPU through scontrol; retain the
+  # validated 8-CPU evaluation allocation instead of emitting --mem=0.
+  DEFAULT_MEM_MB=160000
+fi
+MEM_MB="${MEM_MB:-${DEFAULT_MEM_MB}}"
 
 mkdir -p "${OUT_ROOT}"
 cp -p "${VERSION_DIR}/PRE_RUN.md" "${VERSION_DIR}/run_one.sh" "${VERSION_DIR}/submit_one_zzhang510.sh" "${OUT_ROOT}/"
