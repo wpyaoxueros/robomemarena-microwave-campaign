@@ -32,5 +32,4 @@ result under the current remote stage scorer.
 1. Create an untracked `inputs.env` from `inputs.example.env`.
 2. Run `bash verify_snapshot.sh`.
 3. From a validated `zzhang510` shell, run `bash probe_2gpu.sh`.
-4. Launch `bash submit_zzhang510.sh /absolute/path/to/inputs.env`.
-
+4. Launch `bash launch_after_probes_zzhang510.sh /absolute/path/to/inputs.env`.
