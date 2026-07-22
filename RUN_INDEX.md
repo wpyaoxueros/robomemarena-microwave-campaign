@@ -13,7 +13,7 @@ committed here.
 | 21 | v125_pickchocolate_tol050_seed104_smoke | `robomemarena-task21-v121-repro` | `8bb9390` | 104 | incomplete diagnostic: VLM reached `place butter`, but pick-forward direction guard blocked handoff at 1.14cm; does not assess the changed pick-chocolate tolerance |
 | 22 | v1_latest622_baseline_smoke | `robomemarena-task22-autonomous-repro` | `aede542` | 104, 105 | seed104 valid 1/3 stage; seed105 invalid process abort, excluded |
 | 23 | v156_fixedseed105_repeat20_replay | `robomemarena-task23-v155-fixedseed105-repeat20` | `a1f54ae` | 105 x 20 | incomplete: 4 valid episodes (1 stage-only success); 8 rc=134 evaluator aborts excluded; remaining workers cancelled |
-| 23 | v157_acd1_1_serial20_replay | `robomemarena-task23-v155-fixedseed105-repeat20` | `9da6466` | 105 x 20 | pre-run pushed: same v155 rollout, scheduling-only ACD1-1 serial replay with fail-fast nonzero exit |
+| 23 | v157_acd1_1_serial20_replay | `robomemarena-task23-v155-fixedseed105-repeat20` | `9da6466` | 105 x 20 | running: job 428591 on ACD1-1 after successful same-shell probe 428590; scheduling-only serial replay, fail-fast nonzero exit |
 | 24 | v123_latest622_seed107_108_smoke | `robomemarena-task24-v123-autonomous-repro` | `7235d5e` | 107, 108 | seed107 valid 1/3 stage; seed108 invalid process abort, excluded |
 
 All listed runs require remote scorer commit `62214036103ee8d5fef9b475dd8b344b6e2cfc03`, VLM-generated prompts, no `ORACLE_*` prompt injection, and stage-only scoring with `Close_Microwave` optional.
