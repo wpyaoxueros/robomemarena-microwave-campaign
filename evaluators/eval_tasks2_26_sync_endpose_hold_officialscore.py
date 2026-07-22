@@ -22,7 +22,7 @@ from PIL import Image, ImageDraw, ImageFont
 from microwave_debug import microwave_joint_angle
 from eef_direction_guard import evaluate_eef_direction_gate
 from eef_release_guard import should_keep_place_gripper_closed
-from forward_hold_guard import should_block_pick_forward
+from forward_hold_guard import should_block_forward_until_hold, should_block_pick_forward
 from runtime_hint import should_inject_hold_state_hint
 
 
@@ -1276,6 +1276,12 @@ def run_episode_sync_endpose_hold(
     pick_forward_hold_subtasks = {
         normalize_subtask(item, labels)
         for item in os.environ.get("REQUIRE_HOLD_RELEASE_FOR_PICK_FORWARD_SUBTASKS", "").split(",")
+        if item.strip()
+    }
+    require_hold_release_for_forward = env_bool("REQUIRE_HOLD_RELEASE_FOR_FORWARD", False)
+    forward_hold_subtasks = {
+        normalize_subtask(item, labels)
+        for item in os.environ.get("REQUIRE_HOLD_RELEASE_FOR_FORWARD_SUBTASKS", "").split(",")
         if item.strip()
     }
     require_hold_release_for_place_forward = env_bool("REQUIRE_HOLD_RELEASE_FOR_PLACE_FORWARD", False)
@@ -2577,7 +2583,8 @@ def run_episode_sync_endpose_hold(
         "strict_hold_release_next=%s prevent_regression=%s "
         "guard_after_hold=%s regression_guard_mode=hold_majority_prompt disable_output_normalize=%s "
         "forward_switch_block_previous=%s require_hold_release_for_pick_forward=%s "
-        "pick_forward_hold_subtasks=%s "
+        "pick_forward_hold_subtasks=%s require_hold_release_for_forward=%s "
+        "forward_hold_subtasks=%s "
         "require_hold_release_for_place_forward=%s block_forward_before_first_stage_done=%s "
         "microwave_forward_require_prior_hold=%s microwave_forward_gap_fill_next=%s "
         "microwave_stage_lock_until_done=%s "
@@ -2621,6 +2628,8 @@ def run_episode_sync_endpose_hold(
         forward_switch_block_previous,
         require_hold_release_for_pick_forward,
         sorted(pick_forward_hold_subtasks),
+        require_hold_release_for_forward,
+        sorted(forward_hold_subtasks),
         require_hold_release_for_place_forward,
         block_forward_before_first_stage_done,
         microwave_forward_require_prior_hold,
@@ -3118,6 +3127,33 @@ def run_episode_sync_endpose_hold(
                         latest_idx,
                         current_idx,
                         stage_name,
+                    )
+                    latest_subtask = current_subtask_prompt
+
+            if require_hold_release_for_forward and current_subtask_prompt and latest_subtask:
+                current_idx = order_index(current_subtask_prompt, labels)
+                latest_idx = order_index(latest_subtask, labels)
+                current_hold_started = has_started_endpose_hold(current_subtask_prompt)
+                if should_block_forward_until_hold(
+                    enabled=True,
+                    hold_active=hold_active,
+                    current_subtask=current_subtask_prompt,
+                    next_subtask=latest_subtask,
+                    current_index=current_idx,
+                    next_index=latest_idx,
+                    selected_subtasks=forward_hold_subtasks,
+                    hold_started_before=current_hold_started,
+                ):
+                    logger.info(
+                        "[FORWARD_HOLD_RELEASE_REQUIRED] t=%s task=%s raw_subtask=%s "
+                        "current_subtask=%s raw_idx=%s current_idx=%s selected_subtasks=%s",
+                        t,
+                        planner.task_info.task_id,
+                        latest_subtask,
+                        current_subtask_prompt,
+                        latest_idx,
+                        current_idx,
+                        sorted(forward_hold_subtasks),
                     )
                     latest_subtask = current_subtask_prompt
 
