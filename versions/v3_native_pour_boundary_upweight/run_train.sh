@@ -17,6 +17,7 @@ source "${PRIVATE_INPUTS_FILE}"
 : "${OPENPI_ROOT:?private inputs must define OPENPI_ROOT}"
 VLM_INPUT_CHECKPOINT="${VLM_INPUT_CHECKPOINT:-${VLM_CKPT:-}}"
 [[ -n "${VLM_INPUT_CHECKPOINT}" ]] || { echo "private inputs must define VLM_INPUT_CHECKPOINT or VLM_CKPT" >&2; exit 2; }
+[[ -r "${VLM_INPUT_CHECKPOINT}/tokenizer_config.json" ]] || { echo "model tokenizer config is unreadable" >&2; exit 2; }
 
 OPENPI_PYTHON="${OPENPI_PYTHON:-$(dirname "${OPENPI_ROOT}")/conda_envs/openpi/bin/python}"
 TRAIN_SCRIPT="${TRAIN_SCRIPT:-${OPENPI_ROOT}/examples/train_task1_qwen3_vl_lfp_fullft_hf.py}"
@@ -38,6 +39,11 @@ SAVE_STEPS="${SAVE_STEPS:-250}"
 
 mkdir -p "${RUN_ROOT}"
 cp -p "${VERSION_DIR}/PRE_TRAIN.md" "${VERSION_DIR}/run_train.sh" "${RUN_ROOT}/"
+TOKENIZER_COMPAT_OVERLAY=false
+if [[ -r "${VLM_INPUT_CHECKPOINT}/compat_manifest.json" ]]; then
+  TOKENIZER_COMPAT_OVERLAY=true
+  cp -p "${VLM_INPUT_CHECKPOINT}/compat_manifest.json" "${RUN_ROOT}/tokenizer_compat_manifest.json"
+fi
 {
   printf 'git_commit=%s\n' "$(git -C "${REPO_DIR}" rev-parse HEAD)"
   printf 'dataset_sha256=%s\n' "$(sha256sum "${TASK22_V3_DATASET}" | awk '{print $1}')"
@@ -46,6 +52,8 @@ cp -p "${VERSION_DIR}/PRE_TRAIN.md" "${VERSION_DIR}/run_train.sh" "${RUN_ROOT}/"
     "${PER_DEVICE_BS}" "${GRAD_ACC}" "${MAX_STEPS}" "${SAVE_STEPS}"
   printf 'optimizer_resume=false\n'
   printf 'oracle_prompt_injection=false\n'
+  printf 'tokenizer_compat_overlay=%s\n' "${TOKENIZER_COMPAT_OVERLAY}"
+  printf 'model_tokenizer_config_sha256=%s\n' "$(sha256sum "${VLM_INPUT_CHECKPOINT}/tokenizer_config.json" | awk '{print $1}')"
 } >"${RUN_ROOT}/RUN_MANIFEST.txt"
 
 export PYTHONNOUSERSITE=1

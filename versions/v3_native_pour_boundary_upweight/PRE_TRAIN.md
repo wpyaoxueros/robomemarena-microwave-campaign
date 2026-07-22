@@ -47,3 +47,17 @@ two GPUs, frozen vision tower, predictive-coding head enabled, learning rate
 recorded before the 500-step run; the largest passing batch is used.  Optimizer
 state is not resumed, so the only intended model-input change is the accepted
 v3 dataset frequency adjustment.
+
+## Tokenizer Compatibility Gate
+
+The historical checkpoint stores `extra_special_tokens` as a list, while the
+current training environment expects a mapping. Before training, a private
+overlay is materialized with `scripts/materialize_tokenizer_compat_overlay.py`.
+It symlinks every checkpoint artifact and changes only the overlay tokenizer
+config after verifying that every listed multimodal token is retained in
+`tokenizer.json`.
+
+The overlay must pass `probe_processor_compat.sh` on a GPU before the 2-GPU
+batch probe. The dispatcher requires `COMPAT_MODEL_DIR`, records its manifest
+hash, and trains only from that overlay. The original checkpoint remains
+untouched.
