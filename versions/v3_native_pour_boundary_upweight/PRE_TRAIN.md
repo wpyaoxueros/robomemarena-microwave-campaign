@@ -22,6 +22,10 @@ The image paths and label are preserved.  No generated image, relabelled
 example, eval video, runtime prompt override, scorer change, or object anchor
 is included.
 
+The initial controlled build uses four extra copies per selected row.  This
+keeps the added rows below the size of the original full dataset rather than
+allowing the boundary samples to dominate it.
+
 ## Reproducibility Contract
 
 - The builder records source/output SHA-256 hashes, selected source QIDs, and

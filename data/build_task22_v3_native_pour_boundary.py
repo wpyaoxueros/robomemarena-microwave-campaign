@@ -25,7 +25,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--source", type=Path, required=True, help="Original Task22 JSONL")
     parser.add_argument("--output", type=Path, required=True, help="Augmented JSONL output")
     parser.add_argument("--manifest", type=Path, required=True, help="JSON provenance output")
-    parser.add_argument("--copies", type=int, default=32, help="Extra copies per canonical boundary row")
+    parser.add_argument("--copies", type=int, default=4, help="Extra copies per canonical boundary row")
     parser.add_argument("--task-id", type=int, default=22)
     parser.add_argument("--primitive-stem", default="pour_first")
     parser.add_argument("--current-primitive", default="pour first")
