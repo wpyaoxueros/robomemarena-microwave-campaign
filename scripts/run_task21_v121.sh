@@ -33,7 +33,9 @@ export ORACLE_STAGE_LOCK_UNTIL_DONE=0
 # from TASK21_DATA_ROOT locally; the policy values are unchanged.
 export RUN_VERSION=v121_nopick2place_upward
 export ENDPOSE_HOLD_TARGETS_JSON=${PACK_DIR}/config/task21_v121_eef_targets.json
-export ENDPOSE_HOLD_POS_TOL_BY_SUBTASK_FILE=${PACK_DIR}/config/task21_v121_eef_tolerances.json
+# Keep the frozen v121 tolerance file as the default.  A versioned experiment
+# may opt in to a separately tracked file without mutating the frozen default.
+export ENDPOSE_HOLD_POS_TOL_BY_SUBTASK_FILE=${TASK21_HOLD_TOLERANCES:-${PACK_DIR}/config/task21_v121_eef_tolerances.json}
 export ENDPOSE_TARGET_PASSAGE_COUNTS_JSON=${PACK_DIR}/config/task21_v121_passages.json
 export ENDPOSE_HOLD_DIRECTION_SIGNATURES_JSON=${PACK_DIR}/config/task21_v121_pick_directions.json
 export ENDPOSE_HOLD_DIRECTION_COS_MIN=0.50
