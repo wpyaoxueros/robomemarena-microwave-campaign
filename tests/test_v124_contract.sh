@@ -8,6 +8,10 @@ PRE_RUN="${REPO}/versions/v124_pick2place_robotonly_smoke/PRE_RUN.md"
 
 [[ -x "${RUNNER}" ]] || { echo "runner must be executable" >&2; exit 1; }
 [[ -f "${PRE_RUN}" ]] || { echo "missing pre-run record" >&2; exit 1; }
+[[ -x "${REPO}/versions/v124_pick2place_robotonly_smoke/submit_one_zzhang510.sh" ]] || {
+  echo "missing reproducible Slurm/tmux submitter" >&2
+  exit 1
+}
 rg -q 'STRICT_HOLD_RELEASE_NEXT=1' "${RUNNER}"
 rg -q 'release_anchors_t24_add_pick2place_robotonly_20260722.json' "${RUNNER}"
 rg -q 'ORACLE_HOLD_RELEASE_NEXT=0' "${REPO}/scripts/run_task23_24_v112_historicalvlm_eef_pickfinish50_latest622_1ep.sh"
