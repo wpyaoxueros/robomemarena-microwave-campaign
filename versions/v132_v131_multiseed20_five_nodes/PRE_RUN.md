@@ -27,6 +27,9 @@ each on five physical nodes.
 is never committed. The runner checks the scorer commit and refuses to run if
 `task2_26_reference_stage.py` is unavailable.
 
+The submitted five-node allocation is `ACD1-25,ACD1-2,ACD1-3,ACD1-6,ACD1-9`.
+This exact resource shape was allocation-probed before the formal submission.
+
 `run_worker.sh` assigns seed `104 + global_episode`, so worker 0 covers
 104--107 and worker 4 covers 120--123. Every attempt validates its own
 manifest, scorer snapshot, seed, and all oracle flags before aggregation.
