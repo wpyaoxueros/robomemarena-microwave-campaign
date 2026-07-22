@@ -18,13 +18,14 @@ source "${PRIVATE_INPUTS_FILE}"
 export VLA_CONFIG="${VLA_CONFIG:-pi05_libero_robomemarena_fullvlm_v2_noflip_dataset}"
 for required in \
   OPENPI_ROOT INFER_ROOT TARGET_LIBERO_PATH ROBOMEMARENA_REMOTE_ROOT \
-  ROBOMEMARENA_FULLVLM_DATA_ROOT VLA_POLICY VLA_CONFIG VLA_REPO_ID \
+  ROBOMEMARENA_FULLVLM_DATA_ROOT VLA_POLICY VLA_REPO_ID \
   VLM_CKPT_TASK24; do
   [[ -n "${!required:-}" && -e "${!required}" ]] || {
     echo "missing required private input ${required}" >&2
     exit 2
   }
 done
+[[ -n "${VLA_CONFIG}" ]] || { echo "missing required VLA_CONFIG" >&2; exit 2; }
 
 if [[ -d "${ROBOMEMARENA_REMOTE_ROOT}/.git" ]]; then
   actual_commit="$(git -C "${ROBOMEMARENA_REMOTE_ROOT}" rev-parse HEAD)"

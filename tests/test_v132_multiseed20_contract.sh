@@ -32,6 +32,11 @@ PY
 
 rg -F 'export MODE=vlm_free' "${VERSION_DIR}/run_one.sh" >/dev/null
 rg -F 'pi05_libero_robomemarena_fullvlm_v2_noflip_dataset' "${VERSION_DIR}/run_one.sh" >/dev/null
+rg -F '[[ -n "${VLA_CONFIG}" ]]' "${VERSION_DIR}/run_one.sh" >/dev/null
+if sed -n '/for required in/,/done/p' "${VERSION_DIR}/run_one.sh" | rg -F 'VLA_CONFIG'; then
+  echo 'VLA_CONFIG must not be validated as a filesystem path' >&2
+  exit 1
+fi
 rg -F 'ORACLE_HOLD_RELEASE_NEXT=0' "${RUNTIME_DIR}/scripts/run_task23_24_v112_historicalvlm_eef_pickfinish50_latest622_1ep.sh" >/dev/null
 rg -F 'ENDPOSE_PLACE_OBJECT_GATE_JSON=' "${RUNTIME_DIR}/scripts/run_task23_24_v112_historicalvlm_eef_pickfinish50_latest622_1ep.sh" >/dev/null
 rg -F '"object_anchor": false' "${RUNTIME_DIR}/config/release_anchors_t21_t23_t24_no_pick2place_robotonly_20260718.json" >/dev/null
