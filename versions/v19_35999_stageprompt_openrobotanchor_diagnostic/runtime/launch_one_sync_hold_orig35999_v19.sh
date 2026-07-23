@@ -422,6 +422,9 @@ export DRIVER_LOG="${OUT_ROOT}/logs/driver.log"
   echo "started_at=$(date -Is)"
 } > "${OUT_ROOT}/LIVE_STATUS.txt"
 
+nvidia-smi --query-gpu=index,name,uuid,driver_version,memory.total --format=csv,noheader \
+  > "${OUT_ROOT}/logs/gpu_inventory.csv" 2>&1 || true
+
 bash "${PACK_DIR}/evaluators/run_tasks2_26_sync_hold_eval.sh"
 
 {

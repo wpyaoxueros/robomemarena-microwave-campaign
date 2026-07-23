@@ -17,13 +17,17 @@ export ROBOMEMARENA_REMOTE_ROOT_OVERRIDE
 STAMP="$(date +%Y%m%d_%H%M%S)"
 PROBE_DIR="${VERSION_DIR}/outputs/probes/${STAMP}"
 mkdir -p "${PROBE_DIR}"
+EXCLUDE_ARGS=()
+if [[ -n "${SLURM_EXCLUDE_NODES:-}" ]]; then
+  EXCLUDE_ARGS+=("--exclude=${SLURM_EXCLUDE_NODES}")
+fi
 
 selected_partition=""
 for partition in acd_u acd_ue emergency_acd; do
-  if srun --immediate=20 -p "${partition}" --gres=gpu:1 -c1 --mem=1024M --time=00:01:00 \
+  if srun --immediate=20 -p "${partition}" "${EXCLUDE_ARGS[@]}" --gres=gpu:1 -c1 --mem=1024M --time=00:01:00 \
     --job-name="task22v19_1gpu_${STAMP}" bash -lc 'whoami; hostname; nvidia-smi -L' \
     >"${PROBE_DIR}/${partition}_1gpu.log" 2>&1; then
-    if srun --immediate=20 -p "${partition}" --gres=gpu:2 -c8 --mem=163840M --time=00:01:00 \
+    if srun --immediate=20 -p "${partition}" "${EXCLUDE_ARGS[@]}" --gres=gpu:2 -c8 --mem=163840M --time=00:01:00 \
       --job-name="task22v19_2gpu_${STAMP}" bash -lc 'whoami; hostname; nvidia-smi -L' \
       >"${PROBE_DIR}/${partition}_2gpu.log" 2>&1; then
       selected_partition="${partition}"
@@ -40,5 +44,6 @@ fi
 
 printf 'selected_partition=%s\n' "${selected_partition}" >"${PROBE_DIR}/selected_partition.tsv"
 PARTITION="${selected_partition}" \
+  SLURM_EXCLUDE_NODES="${SLURM_EXCLUDE_NODES:-}" \
   ROBOMEMARENA_REMOTE_ROOT_OVERRIDE="${REMOTE_ROOT_OVERRIDE}" \
   bash "${VERSION_DIR}/launch_1ep_zzhang510.sh" "${PRIVATE_INPUTS_FILE}"
