@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "purpose": "Task22 v19 diagnostic robot/gripper-only anchor at the open-microwave boundary.",
+    "oracle_prompt": false,
+    "object_anchor": false,
+    "stage_prompt_override": true,
+    "robot_only": true
+  },
+  "tasks": {
+    "22": [
+      {
+        "subtask": "open microwave",
+        "anchor_hdf5": "/data/user/hlei573/data/fullvlm_v2/22_pour_tomato_cookies_microwave_dataset/subtask_data/open_microwave_4_seed104_task22.hdf5",
+        "frame_idx": 0,
+        "tag": "t22_place_tomato_aside_to_open_microwave_robotonly_seed104_f0"
+      }
+    ]
+  }
+}
