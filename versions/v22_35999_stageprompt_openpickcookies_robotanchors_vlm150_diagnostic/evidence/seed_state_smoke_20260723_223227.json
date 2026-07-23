@@ -1,0 +1,585 @@
+{
+  "bddl": "/data/user/hlei573/vla_memory_experiments/robomemarena_task22_remote_fix/evaluation_benchmark/bddl/22_pour_tomato_cookies_microwave.bddl",
+  "first": {
+    "image_keys": [
+      "agentview_image",
+      "robot0_eye_in_hand_image"
+    ],
+    "observation": {
+      "agentview_image": {
+        "dtype": "uint8",
+        "sha256": "c3b7a08b793732c36a25c1a8d186a89bef1b8b4c367cda762185de687cb10574",
+        "shape": [
+          480,
+          640,
+          3
+        ]
+      },
+      "cookies_1_pos": {
+        "dtype": "float64",
+        "sha256": "1baa36f5fbf43f80f8fe69a7075adb5a9a39e0993818476f3cb10e9fe30c06be",
+        "shape": [
+          3
+        ]
+      },
+      "cookies_1_quat": {
+        "dtype": "float64",
+        "sha256": "78b24170ed58fb8b1c95abb988a3e49ae2082ebc2c2db7c874a4804fa7174c6b",
+        "shape": [
+          4
+        ]
+      },
+      "cookies_1_to_robot0_eef_pos": {
+        "dtype": "float64",
+        "sha256": "81e618cb6e640714d1e46796bfc29a46ca2e9e5963be9f1d8ca0082a92158f94",
+        "shape": [
+          3
+        ]
+      },
+      "cookies_1_to_robot0_eef_quat": {
+        "dtype": "float32",
+        "sha256": "382713f47fc04b04131a4afe8630bcd6798df9ab25b1a088517ec979043a2aaa",
+        "shape": [
+          4
+        ]
+      },
+      "object-state": {
+        "dtype": "float64",
+        "sha256": "e39ae9b406438edf6b340b978d417bb66b1558925bc9119bcca2d9f9d131681a",
+        "shape": [
+          28
+        ]
+      },
+      "robot0_eef_pos": {
+        "dtype": "float64",
+        "sha256": "93f1910336080897d66fc3f8bdb179b73d68c41d46b4e1a65d755264f76a44d1",
+        "shape": [
+          3
+        ]
+      },
+      "robot0_eef_quat": {
+        "dtype": "float64",
+        "sha256": "c63f9baf263f5735dfd05b934b80ed6da6006187a5f2806d3aae25907c736463",
+        "shape": [
+          4
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "dtype": "uint8",
+        "sha256": "7b27e155813a26995ae022ad826bb55f4776ba8a36a73f2673ee3967d28f491f",
+        "shape": [
+          480,
+          640,
+          3
+        ]
+      },
+      "robot0_gripper_qpos": {
+        "dtype": "float64",
+        "sha256": "591a016959091449fb88352814d9735e02f385a55292c254d4e1250233b3ea56",
+        "shape": [
+          2
+        ]
+      },
+      "robot0_gripper_qvel": {
+        "dtype": "float64",
+        "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb",
+        "shape": [
+          2
+        ]
+      },
+      "robot0_joint_pos": {
+        "dtype": "float64",
+        "sha256": "fec7cdc1a91c75e43084124f81a22f257a3903ddfa69e862b13713b36691ee2b",
+        "shape": [
+          7
+        ]
+      },
+      "robot0_joint_pos_cos": {
+        "dtype": "float64",
+        "sha256": "d7f2550e7aff5fab1c737a866d98a6c918d1b35ae6b67868b0019fb403c351f9",
+        "shape": [
+          7
+        ]
+      },
+      "robot0_joint_pos_sin": {
+        "dtype": "float64",
+        "sha256": "9b4cc7b05d7a1fedafc758970aa632156912d0f5470e4298db6a2e622d3f9472",
+        "shape": [
+          7
+        ]
+      },
+      "robot0_joint_vel": {
+        "dtype": "float64",
+        "sha256": "d4817aa5497628e7c77e6b606107042bbba3130888c5f47a375e6179be789fbb",
+        "shape": [
+          7
+        ]
+      },
+      "robot0_proprio-state": {
+        "dtype": "float64",
+        "sha256": "2205774c6119b36f05b0962d4bc4736d868de2e5804dcea54a2ba7a03f0c3fcd",
+        "shape": [
+          39
+        ]
+      },
+      "tomato_sauce_1_pos": {
+        "dtype": "float64",
+        "sha256": "d29029da5bb6313fd941805064da8d1922bfafdcbb44fed6587e3cdbcb57e9e5",
+        "shape": [
+          3
+        ]
+      },
+      "tomato_sauce_1_quat": {
+        "dtype": "float64",
+        "sha256": "9a192aefd7e07197e7f3f452c4de433d1cdfe8a4e8b1c3c34179124b5004a7e1",
+        "shape": [
+          4
+        ]
+      },
+      "tomato_sauce_1_to_robot0_eef_pos": {
+        "dtype": "float64",
+        "sha256": "a648dc7e9b43ef9c257ca3bf468128ac3c524e57eb9d04fc2476d25324081a40",
+        "shape": [
+          3
+        ]
+      },
+      "tomato_sauce_1_to_robot0_eef_quat": {
+        "dtype": "float32",
+        "sha256": "8ea518785d25f8d26fa4128727a3f68c4010e8a5fef0647b8c882a88ae5fb822",
+        "shape": [
+          4
+        ]
+      }
+    },
+    "physical": {
+      "body_xpos": {
+        "dtype": "float64",
+        "sha256": "95d8581ccdebb84a3362ff1eb879c50a9e5223daebbefbf87593a93feb417887",
+        "shape": [
+          24,
+          3
+        ]
+      },
+      "body_xquat": {
+        "dtype": "float64",
+        "sha256": "3cb142732b121bf31ee05d51251b6dff96313e1ae22ace410a51108ad7399521",
+        "shape": [
+          24,
+          4
+        ]
+      },
+      "qpos": {
+        "dtype": "float64",
+        "sha256": "3408082fd89bcefcf004cfbf0e0a5700c166720df849c02c9341e79e2317d1f2",
+        "shape": [
+          24
+        ]
+      },
+      "qvel": {
+        "dtype": "float64",
+        "sha256": "86d2cf5b090f43ee54d8f7c1dcf746a853951191457ff6dac96269a9d24860b9",
+        "shape": [
+          22
+        ]
+      },
+      "site_xpos": {
+        "dtype": "float64",
+        "sha256": "062c8558a3faa93f69714456f71bd9d954b9a901e6b098958391e50d5a56b84e",
+        "shape": [
+          15,
+          3
+        ]
+      }
+    }
+  },
+  "fresh": {
+    "image_keys": [
+      "agentview_image",
+      "robot0_eye_in_hand_image"
+    ],
+    "observation": {
+      "agentview_image": {
+        "dtype": "uint8",
+        "sha256": "c3b7a08b793732c36a25c1a8d186a89bef1b8b4c367cda762185de687cb10574",
+        "shape": [
+          480,
+          640,
+          3
+        ]
+      },
+      "cookies_1_pos": {
+        "dtype": "float64",
+        "sha256": "1baa36f5fbf43f80f8fe69a7075adb5a9a39e0993818476f3cb10e9fe30c06be",
+        "shape": [
+          3
+        ]
+      },
+      "cookies_1_quat": {
+        "dtype": "float64",
+        "sha256": "78b24170ed58fb8b1c95abb988a3e49ae2082ebc2c2db7c874a4804fa7174c6b",
+        "shape": [
+          4
+        ]
+      },
+      "cookies_1_to_robot0_eef_pos": {
+        "dtype": "float64",
+        "sha256": "81e618cb6e640714d1e46796bfc29a46ca2e9e5963be9f1d8ca0082a92158f94",
+        "shape": [
+          3
+        ]
+      },
+      "cookies_1_to_robot0_eef_quat": {
+        "dtype": "float32",
+        "sha256": "382713f47fc04b04131a4afe8630bcd6798df9ab25b1a088517ec979043a2aaa",
+        "shape": [
+          4
+        ]
+      },
+      "object-state": {
+        "dtype": "float64",
+        "sha256": "e39ae9b406438edf6b340b978d417bb66b1558925bc9119bcca2d9f9d131681a",
+        "shape": [
+          28
+        ]
+      },
+      "robot0_eef_pos": {
+        "dtype": "float64",
+        "sha256": "93f1910336080897d66fc3f8bdb179b73d68c41d46b4e1a65d755264f76a44d1",
+        "shape": [
+          3
+        ]
+      },
+      "robot0_eef_quat": {
+        "dtype": "float64",
+        "sha256": "c63f9baf263f5735dfd05b934b80ed6da6006187a5f2806d3aae25907c736463",
+        "shape": [
+          4
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "dtype": "uint8",
+        "sha256": "7b27e155813a26995ae022ad826bb55f4776ba8a36a73f2673ee3967d28f491f",
+        "shape": [
+          480,
+          640,
+          3
+        ]
+      },
+      "robot0_gripper_qpos": {
+        "dtype": "float64",
+        "sha256": "591a016959091449fb88352814d9735e02f385a55292c254d4e1250233b3ea56",
+        "shape": [
+          2
+        ]
+      },
+      "robot0_gripper_qvel": {
+        "dtype": "float64",
+        "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb",
+        "shape": [
+          2
+        ]
+      },
+      "robot0_joint_pos": {
+        "dtype": "float64",
+        "sha256": "fec7cdc1a91c75e43084124f81a22f257a3903ddfa69e862b13713b36691ee2b",
+        "shape": [
+          7
+        ]
+      },
+      "robot0_joint_pos_cos": {
+        "dtype": "float64",
+        "sha256": "d7f2550e7aff5fab1c737a866d98a6c918d1b35ae6b67868b0019fb403c351f9",
+        "shape": [
+          7
+        ]
+      },
+      "robot0_joint_pos_sin": {
+        "dtype": "float64",
+        "sha256": "9b4cc7b05d7a1fedafc758970aa632156912d0f5470e4298db6a2e622d3f9472",
+        "shape": [
+          7
+        ]
+      },
+      "robot0_joint_vel": {
+        "dtype": "float64",
+        "sha256": "d4817aa5497628e7c77e6b606107042bbba3130888c5f47a375e6179be789fbb",
+        "shape": [
+          7
+        ]
+      },
+      "robot0_proprio-state": {
+        "dtype": "float64",
+        "sha256": "2205774c6119b36f05b0962d4bc4736d868de2e5804dcea54a2ba7a03f0c3fcd",
+        "shape": [
+          39
+        ]
+      },
+      "tomato_sauce_1_pos": {
+        "dtype": "float64",
+        "sha256": "d29029da5bb6313fd941805064da8d1922bfafdcbb44fed6587e3cdbcb57e9e5",
+        "shape": [
+          3
+        ]
+      },
+      "tomato_sauce_1_quat": {
+        "dtype": "float64",
+        "sha256": "9a192aefd7e07197e7f3f452c4de433d1cdfe8a4e8b1c3c34179124b5004a7e1",
+        "shape": [
+          4
+        ]
+      },
+      "tomato_sauce_1_to_robot0_eef_pos": {
+        "dtype": "float64",
+        "sha256": "a648dc7e9b43ef9c257ca3bf468128ac3c524e57eb9d04fc2476d25324081a40",
+        "shape": [
+          3
+        ]
+      },
+      "tomato_sauce_1_to_robot0_eef_quat": {
+        "dtype": "float32",
+        "sha256": "8ea518785d25f8d26fa4128727a3f68c4010e8a5fef0647b8c882a88ae5fb822",
+        "shape": [
+          4
+        ]
+      }
+    },
+    "physical": {
+      "body_xpos": {
+        "dtype": "float64",
+        "sha256": "95d8581ccdebb84a3362ff1eb879c50a9e5223daebbefbf87593a93feb417887",
+        "shape": [
+          24,
+          3
+        ]
+      },
+      "body_xquat": {
+        "dtype": "float64",
+        "sha256": "3cb142732b121bf31ee05d51251b6dff96313e1ae22ace410a51108ad7399521",
+        "shape": [
+          24,
+          4
+        ]
+      },
+      "qpos": {
+        "dtype": "float64",
+        "sha256": "3408082fd89bcefcf004cfbf0e0a5700c166720df849c02c9341e79e2317d1f2",
+        "shape": [
+          24
+        ]
+      },
+      "qvel": {
+        "dtype": "float64",
+        "sha256": "86d2cf5b090f43ee54d8f7c1dcf746a853951191457ff6dac96269a9d24860b9",
+        "shape": [
+          22
+        ]
+      },
+      "site_xpos": {
+        "dtype": "float64",
+        "sha256": "062c8558a3faa93f69714456f71bd9d954b9a901e6b098958391e50d5a56b84e",
+        "shape": [
+          15,
+          3
+        ]
+      }
+    }
+  },
+  "fresh_env_observation_equal": true,
+  "fresh_env_physical_equal": true,
+  "remote_commit": "8b7710924f862ab1c8dea69adada62e8c462de40",
+  "same_env_observation_equal": true,
+  "same_env_physical_equal": true,
+  "second_same_env": {
+    "image_keys": [
+      "agentview_image",
+      "robot0_eye_in_hand_image"
+    ],
+    "observation": {
+      "agentview_image": {
+        "dtype": "uint8",
+        "sha256": "c3b7a08b793732c36a25c1a8d186a89bef1b8b4c367cda762185de687cb10574",
+        "shape": [
+          480,
+          640,
+          3
+        ]
+      },
+      "cookies_1_pos": {
+        "dtype": "float64",
+        "sha256": "1baa36f5fbf43f80f8fe69a7075adb5a9a39e0993818476f3cb10e9fe30c06be",
+        "shape": [
+          3
+        ]
+      },
+      "cookies_1_quat": {
+        "dtype": "float64",
+        "sha256": "78b24170ed58fb8b1c95abb988a3e49ae2082ebc2c2db7c874a4804fa7174c6b",
+        "shape": [
+          4
+        ]
+      },
+      "cookies_1_to_robot0_eef_pos": {
+        "dtype": "float64",
+        "sha256": "81e618cb6e640714d1e46796bfc29a46ca2e9e5963be9f1d8ca0082a92158f94",
+        "shape": [
+          3
+        ]
+      },
+      "cookies_1_to_robot0_eef_quat": {
+        "dtype": "float32",
+        "sha256": "382713f47fc04b04131a4afe8630bcd6798df9ab25b1a088517ec979043a2aaa",
+        "shape": [
+          4
+        ]
+      },
+      "object-state": {
+        "dtype": "float64",
+        "sha256": "e39ae9b406438edf6b340b978d417bb66b1558925bc9119bcca2d9f9d131681a",
+        "shape": [
+          28
+        ]
+      },
+      "robot0_eef_pos": {
+        "dtype": "float64",
+        "sha256": "93f1910336080897d66fc3f8bdb179b73d68c41d46b4e1a65d755264f76a44d1",
+        "shape": [
+          3
+        ]
+      },
+      "robot0_eef_quat": {
+        "dtype": "float64",
+        "sha256": "c63f9baf263f5735dfd05b934b80ed6da6006187a5f2806d3aae25907c736463",
+        "shape": [
+          4
+        ]
+      },
+      "robot0_eye_in_hand_image": {
+        "dtype": "uint8",
+        "sha256": "7b27e155813a26995ae022ad826bb55f4776ba8a36a73f2673ee3967d28f491f",
+        "shape": [
+          480,
+          640,
+          3
+        ]
+      },
+      "robot0_gripper_qpos": {
+        "dtype": "float64",
+        "sha256": "591a016959091449fb88352814d9735e02f385a55292c254d4e1250233b3ea56",
+        "shape": [
+          2
+        ]
+      },
+      "robot0_gripper_qvel": {
+        "dtype": "float64",
+        "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb",
+        "shape": [
+          2
+        ]
+      },
+      "robot0_joint_pos": {
+        "dtype": "float64",
+        "sha256": "fec7cdc1a91c75e43084124f81a22f257a3903ddfa69e862b13713b36691ee2b",
+        "shape": [
+          7
+        ]
+      },
+      "robot0_joint_pos_cos": {
+        "dtype": "float64",
+        "sha256": "d7f2550e7aff5fab1c737a866d98a6c918d1b35ae6b67868b0019fb403c351f9",
+        "shape": [
+          7
+        ]
+      },
+      "robot0_joint_pos_sin": {
+        "dtype": "float64",
+        "sha256": "9b4cc7b05d7a1fedafc758970aa632156912d0f5470e4298db6a2e622d3f9472",
+        "shape": [
+          7
+        ]
+      },
+      "robot0_joint_vel": {
+        "dtype": "float64",
+        "sha256": "d4817aa5497628e7c77e6b606107042bbba3130888c5f47a375e6179be789fbb",
+        "shape": [
+          7
+        ]
+      },
+      "robot0_proprio-state": {
+        "dtype": "float64",
+        "sha256": "2205774c6119b36f05b0962d4bc4736d868de2e5804dcea54a2ba7a03f0c3fcd",
+        "shape": [
+          39
+        ]
+      },
+      "tomato_sauce_1_pos": {
+        "dtype": "float64",
+        "sha256": "d29029da5bb6313fd941805064da8d1922bfafdcbb44fed6587e3cdbcb57e9e5",
+        "shape": [
+          3
+        ]
+      },
+      "tomato_sauce_1_quat": {
+        "dtype": "float64",
+        "sha256": "9a192aefd7e07197e7f3f452c4de433d1cdfe8a4e8b1c3c34179124b5004a7e1",
+        "shape": [
+          4
+        ]
+      },
+      "tomato_sauce_1_to_robot0_eef_pos": {
+        "dtype": "float64",
+        "sha256": "a648dc7e9b43ef9c257ca3bf468128ac3c524e57eb9d04fc2476d25324081a40",
+        "shape": [
+          3
+        ]
+      },
+      "tomato_sauce_1_to_robot0_eef_quat": {
+        "dtype": "float32",
+        "sha256": "8ea518785d25f8d26fa4128727a3f68c4010e8a5fef0647b8c882a88ae5fb822",
+        "shape": [
+          4
+        ]
+      }
+    },
+    "physical": {
+      "body_xpos": {
+        "dtype": "float64",
+        "sha256": "95d8581ccdebb84a3362ff1eb879c50a9e5223daebbefbf87593a93feb417887",
+        "shape": [
+          24,
+          3
+        ]
+      },
+      "body_xquat": {
+        "dtype": "float64",
+        "sha256": "3cb142732b121bf31ee05d51251b6dff96313e1ae22ace410a51108ad7399521",
+        "shape": [
+          24,
+          4
+        ]
+      },
+      "qpos": {
+        "dtype": "float64",
+        "sha256": "3408082fd89bcefcf004cfbf0e0a5700c166720df849c02c9341e79e2317d1f2",
+        "shape": [
+          24
+        ]
+      },
+      "qvel": {
+        "dtype": "float64",
+        "sha256": "86d2cf5b090f43ee54d8f7c1dcf746a853951191457ff6dac96269a9d24860b9",
+        "shape": [
+          22
+        ]
+      },
+      "site_xpos": {
+        "dtype": "float64",
+        "sha256": "062c8558a3faa93f69714456f71bd9d954b9a901e6b098958391e50d5a56b84e",
+        "shape": [
+          15,
+          3
+        ]
+      }
+    }
+  },
+  "seed": 104
+}

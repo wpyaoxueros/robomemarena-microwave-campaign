@@ -5,6 +5,8 @@ anchors. Its sole rollout behavior change is raw VLM sampling from every 50
 environment steps to every 150 steps. VLA inference and execution remain every
 10 environment steps.
 
+`RESULTS.md` records the completed seed-104 initial-state determinism smoke.
+
 ## Evidence Behind The Change
 
 v21 reached the `pick cookies` EEF-ready boundary after both robot-only anchors,
