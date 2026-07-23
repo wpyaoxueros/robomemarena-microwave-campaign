@@ -33,7 +33,7 @@ export ROBOMEMARENA_OFFICIAL_BDDL_DIR="${ROBOMEMARENA_REMOTE_ROOT}/evaluation_be
 export ROBOMEMARENA_ROOT_BDDL_DIR="${ROBOMEMARENA_REMOTE_ROOT}/bddl"
 export TASKS2_26_BASE_EVAL_PY="${ROBOMEMARENA_REMOTE_ROOT}/evaluation_benchmark/reference_evaluation/tasks2_26_vlm5_reference/eval_tasks2_26_vlm_vla.py"
 export TASK_CONFIG="${ROBOMEMARENA_REMOTE_ROOT}/evaluation_benchmark/reference_evaluation/tasks2_26_vlm5_reference/fullvlm_v2_26_memory_tasks.json"
-export EVAL_PY="${VERSION_DIR}/runtime/eval_tasks2_26_task22_stageprompt_diagnostic.py"
+export EVAL_PY_OVERRIDE="${VERSION_DIR}/runtime/eval_tasks2_26_task22_stageprompt_diagnostic.py"
 
 export MODE=vlm_free
 export NUM_TRIALS=1
@@ -87,4 +87,6 @@ export REPRO_ENTRY_LAUNCHER="${BASH_SOURCE[0]}"
 "${VERSION_DIR}/verify_vla35999_inputs.sh" "${PRIVATE_INPUTS_FILE}"
 "${VERSION_DIR}/verify_stageprompt_diagnostic.sh" "${TASK22_STAGEPROMPT_PICK_COOKIES_TARGET_JSON}"
 "${VERSION_DIR}/verify_remote_patch.sh"
-exec bash "${PACK_DIR}/scripts/launch_one_sync_hold_orig35999.sh" 22
+"${VERSION_DIR}/verify_runtime_wiring.sh"
+export TASK22_V18_PACK_DIR_OVERRIDE="${PACK_DIR}"
+exec bash "${VERSION_DIR}/runtime/launch_one_sync_hold_orig35999_v18.sh" 22
