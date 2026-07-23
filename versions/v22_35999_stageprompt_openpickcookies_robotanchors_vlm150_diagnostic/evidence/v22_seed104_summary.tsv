@@ -1,0 +1,2 @@
+task_id	status	error	stage_score_pct	stage_success_rate	goal_success_rate	video_dir	duration_sec
+22	completed		16.7	0.0000	0.1667	/data/user/hlei573/vla_memory_experiments/repro_eval_packs/task22_autonomous_github_repo/versions/v22_35999_stageprompt_openpickcookies_robotanchors_vlm150_diagnostic/outputs/task22_v22_35999_stageprompt_openpickcookies_robotanchors_vlm150_seed104_20260723_223756/videos/task22	571.02
