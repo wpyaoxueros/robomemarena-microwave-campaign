@@ -8,7 +8,7 @@ case "${TASK_ID}" in
 esac
 
 PACK_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-EXPECTED_OFFICIAL_COMMIT=62214036103ee8d5fef9b475dd8b344b6e2cfc03
+EXPECTED_OFFICIAL_COMMIT=${EXPECTED_OFFICIAL_COMMIT:-62214036103ee8d5fef9b475dd8b344b6e2cfc03}
 REMOTE_ROOT=${ROBOMEMARENA_REMOTE_ROOT:-${PACK_DIR}/official_snapshot_6221403/RoboMemArena}
 REMOTE_EVAL_ROOT="${REMOTE_ROOT}/evaluation_benchmark"
 REFERENCE_DIR="${REMOTE_EVAL_ROOT}/reference_evaluation/tasks2_26_vlm5_reference"
