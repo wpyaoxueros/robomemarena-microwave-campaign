@@ -3,3 +3,7 @@ outputs/
 task14/**/outputs/
 task14/**/__pycache__/
 task14/**/*.pyc
+
+# Generated Python bytecode
+__pycache__/
+*.pyc
