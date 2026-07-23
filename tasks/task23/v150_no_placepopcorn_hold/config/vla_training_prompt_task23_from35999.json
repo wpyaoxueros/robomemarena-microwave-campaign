@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "task_id": 23,
+  "source": {
+    "repo": "robomemarena_fullvlm_v2_noflip_dataset_v2",
+    "meta_tasks_sha256": "0d32104b0409798f0404d4ed1472d5398f4250c7f2f901ea12f4b0a02306e8c7",
+    "task_indices": {
+      "open microwave": 131,
+      "pick cream": 132,
+      "place cream": 133,
+      "pick popcorn": 134,
+      "place popcorn": 135,
+      "close microwave": 136
+    }
+  },
+  "allowed_subtasks": [
+    "open microwave",
+    "pick cream",
+    "place cream",
+    "pick popcorn",
+    "place popcorn",
+    "close microwave"
+  ],
+  "template": "Task name: Put Cream Popcorn into Microwave\nBrief objective: Put cream into the microwave and then put popcorn into the location where the cream was placed.\nTask objective: This is an occluded-location memory task: open the microwave, place cream into the microwave first, then place popcorn at the location where the cream was placed, and finally close the microwave. Remember the historical placement location of the cream.\nScene description: The scene is a light wooden tabletop. A black microwave is on the right, and when the door is open its interior is the target location. The cream is a small bottle-like or cylindrical object, and the popcorn is a small cup-like or box-like object. First place cream into the microwave, then place popcorn at the location where the cream was placed, and finally close the microwave.\nPrimitive order: open microwave -> pick cream -> place cream -> pick popcorn -> place popcorn -> close microwave\nCurrent subtask: {current_subtask}"
+}

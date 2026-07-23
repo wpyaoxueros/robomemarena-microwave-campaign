@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+INPUTS_FILE="${INPUTS_FILE:-${ROOT}/inputs.env}"
+if [[ ! -f "${INPUTS_FILE}" ]]; then
+  echo "missing ${INPUTS_FILE}; copy inputs.env.example and fill all paths" >&2
+  exit 2
+fi
+# shellcheck disable=SC1090
+source "${INPUTS_FILE}"
+
+for required in OPENPI_ROOT INFER_ROOT TARGET_LIBERO_PATH ROBOMEMARENA_REMOTE_ROOT VLA_POLICY VLM_CKPT; do
+  [[ -n "${!required:-}" ]] || { echo "missing ${required} in ${INPUTS_FILE}" >&2; exit 2; }
+done
+
+export PACK_DIR="${ROOT}"
+export WORKSPACE_ROOT="${WORKSPACE_ROOT:-${ROOT}}"
+export MODE=vlm_free
+export VLA_REPO_ID="${VLA_REPO_ID:-${ROOT}/runtime_assets/robomemarena_fullvlm_v2_noflip_dataset_v2}"
+[[ -r "${VLA_REPO_ID}/norm_stats.json" ]] || {
+  echo "missing package norm stats: ${VLA_REPO_ID}/norm_stats.json" >&2
+  exit 2
+}
+export VLA_TRAINING_PROMPT_TEMPLATE_FILE="${VLA_TRAINING_PROMPT_TEMPLATE_FILE:-${ROOT}/config/vla_training_prompt_task23_from35999.json}"
+[[ -s "${VLA_TRAINING_PROMPT_TEMPLATE_FILE}" ]] || {
+  echo "missing VLA training prompt template: ${VLA_TRAINING_PROMPT_TEMPLATE_FILE}" >&2
+  exit 2
+}
+export RUN_ID="${RUN_ID:-task23_v150_no_placepopcorn_hold}"
+export OUT_ROOT="${OUT_ROOT:-${OUT_BASE:?OUT_BASE is required when OUT_ROOT is unset}/${RUN_ID}}"
+export NUM_TRIALS="${NUM_TRIALS:-1}"
+export SEED="${SEED:-104}"
+export MAX_STEPS="${MAX_STEPS:-2000}"
+export REPLAN_STEPS="${REPLAN_STEPS:-5}"
+export PORT="${PORT:-9725}"
+
+# VLM supplies every prompt. These controls only hold/release actions and
+# prevent an already released primitive from becoming the active prompt again.
+export VLM_COMPLETED_SUBTASKS_MODE=completed_struct
+export COMPLETED_UPDATE_FROM_OFFICIAL_STAGE=1
+export VLM_HOLD_STATE_HINT=1
+export VLM_HOLD_STATE_HINT_PHASE=active
+export PREVENT_COMPLETED_STAGE_REGRESSION=1
+export PREVENT_HELD_SUBTASK_REGRESSION=1
+export REQUIRE_HOLD_RELEASE_FOR_PICK_FORWARD=1
+export REQUIRE_HOLD_RELEASE_FOR_PICK_FORWARD_SUBTASKS='pick cream,pick popcorn'
+export REQUIRE_HOLD_RELEASE_FOR_PLACE_FORWARD=1
+export BLOCK_FORWARD_BEFORE_FIRST_STAGE_DONE=1
+export STOP_ON_STAGE_SUCCESS=1
+export MICROWAVE_STAGE_LOCK_UNTIL_DONE=0
+export MICROWAVE_FORWARD_REQUIRE_PRIOR_HOLD=0
+export MICROWAVE_FORWARD_GAP_FILL_NEXT=0
+export MICROWAVE_FORWARD_BLOCKED_NO_CURRENT_ACTION=default_vla
+export PREVENT_SUBTASK_REGRESSION=0
+export PREVENT_RELEASED_HOLD_REGRESSION=0
+export REGRESSION_GUARD_AFTER_HOLD_RELEASE=0
+export HOLD_RELEASE_BLOCK_PAST_SUBTASKS=0
+
+export ORACLE_HOLD_RELEASE_NEXT=0
+export ORACLE_FORCE_INITIAL_PROMPT=0
+export ORACLE_INITIAL_STAGE_LOCK=0
+export ORACLE_STAGE_ADVANCE_NEXT=0
+export ORACLE_MONOTONIC_SEQUENCE_LOCK=0
+export ORACLE_STAGE_LOCK_UNTIL_DONE=0
+export SUBTASK_RELEASE_ANCHORS_JSON="${ROOT}/config/release_anchors_task23_v145_remove_cream_place_anchor.json"
+export ENDPOSE_HOLD_TARGETS_JSON="${ROOT}/config/tasks2_26_endpose_targets_seed100_199_no_task23_placepopcorn.json"
+export ENDPOSE_TARGET_PASSAGE_COUNTS_JSON="${ROOT}/config/tasks2_26_target_passage_counts_seed100_199_alltasks_tol045_20260624_074452.json"
+export ENDPOSE_HOLD_POS_TOL_BY_SUBTASK_FILE="${ROOT}/config/task23_eef_open105_pick060_place060_tol_20260718.json"
+export ENDPOSE_HOLD_RELEASE_MIN_STEPS_BY_SUBTASK_FILE="${ROOT}/config/task23_24_eef_runtime_pickplace_hold30_20260718.json"
+export ENDPOSE_HOLD_CONSECUTIVE_BY_SUBTASK_JSON='{"open microwave":1,"place cream":3,"place cookies":3}'
+export ENDPOSE_HOLD_START_AFTER_RELEASE_ANCHOR=1
+export ENDPOSE_HOLD_START_AFTER_RELEASE_ANCHOR_SUBTASKS='pick cream,pick popcorn'
+export ENDPOSE_PLACE_OBJECT_GATE_JSON=
+export ENDPOSE_PICK_OBJECT_LIFT_GATE=0
+export ENDPOSE_PICK_OBJECT_LIFT_GATE_BY_SUBTASK_JSON='{}'
+export ENDPOSE_PICK_HEIGHT_REQUIRE_EEF_NEAR=0
+export ENDPOSE_PICK_GRIPPER_GATE=0
+export ENDPOSE_PICK_DEFERRED_GRIPPER_RELEASE=0
+export POST_HOLD_RELEASE_VLA_STEPS=50
+export POST_PICK_HOLD_RELEASE_SAME_PROMPT_STEPS=50
+export INITIAL_SUBTASK_ANCHORS_JSON=
+export ALLOW_STAGE_DONE_RELEASE_ANCHOR=0
+export ALLOW_AUTONOMOUS_FORWARD_RELEASE_ANCHOR=0
+export REQUIRE_OPEN_MICROWAVE_ENDPOSE_HOLD_BEFORE_RELEASE=1
+export MICROWAVE_REQUIRE_OPEN_EEF_HOLD_FOR_SUCCESS=1
+export MICROWAVE_DEBUG_SAVE_VLM_FRAMES=1
+export REPRO_ENTRY_LAUNCHER="${BASH_SOURCE[0]}"
+
+exec bash "${ROOT}/scripts/run_microwave_eefonly_no_object_gate.sh" 23
