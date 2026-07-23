@@ -27,6 +27,10 @@ but is excluded from stage success and stage score.
 The launcher fails before rollout unless the supplied checkout is exactly the
 repair commit and the Task22 stage contract passes.
 
+Set `ROBOMEMARENA_REMOTE_ROOT_OVERRIDE` for the repaired checkout at launch.
+This deliberately overrides any older default remote root in the ignored
+private input file.
+
 ## Rollout Contract
 
 - One episode, seed 104, 2000 maximum steps, replan interval 10.

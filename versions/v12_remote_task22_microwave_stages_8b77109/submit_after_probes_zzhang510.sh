@@ -6,10 +6,12 @@ set -euo pipefail
 VERSION_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PACK_DIR="$(cd "${VERSION_DIR}/../.." && pwd)"
 PRIVATE_INPUTS_FILE="${1:-${PACK_DIR}/inputs.env}"
+REMOTE_ROOT_OVERRIDE="${ROBOMEMARENA_REMOTE_ROOT_OVERRIDE:?set ROBOMEMARENA_REMOTE_ROOT_OVERRIDE before submitting}"
 [[ -r "${PRIVATE_INPUTS_FILE}" ]] || { echo "missing private inputs" >&2; exit 2; }
 # shellcheck disable=SC1090
 source "${PRIVATE_INPUTS_FILE}"
-: "${ROBOMEMARENA_REMOTE_ROOT:?set ROBOMEMARENA_REMOTE_ROOT before submitting}"
+export ROBOMEMARENA_REMOTE_ROOT="${REMOTE_ROOT_OVERRIDE}"
+export ROBOMEMARENA_REMOTE_ROOT_OVERRIDE
 
 STAMP="$(date +%Y%m%d_%H%M%S)"
 PROBE_DIR="${VERSION_DIR}/outputs/probes/${STAMP}"
