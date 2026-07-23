@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+.env
+outputs/
+policy_records/
+*.mp4
+*.hdf5
+
