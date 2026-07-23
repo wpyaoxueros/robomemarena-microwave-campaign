@@ -3,9 +3,10 @@ set -euo pipefail
 
 VERSION_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TARGET_JSON="${1:?usage: $0 /path/to/tasks2_26_endpose_targets_seed100_199.json}"
+VERIFY_PYTHON="${ROBOMEMARENA_VERIFY_PYTHON:-python3}"
 
-python3 "${VERSION_DIR}/tests/test_task22_stageprompt.py"
-python3 - "${TARGET_JSON}" <<'PY'
+"${VERIFY_PYTHON}" "${VERSION_DIR}/tests/test_task22_stageprompt.py"
+"${VERIFY_PYTHON}" - "${TARGET_JSON}" <<'PY'
 import json
 import sys
 from pathlib import Path
