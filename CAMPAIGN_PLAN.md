@@ -5,7 +5,8 @@
 Run isolated, reproducible microwave-task evaluations for Task20, Task21,
 Task22, Task23, and Task24. The working target is at least about 10 stage-only
 successes in 20 valid episodes for each task. Task23's existing v155 15/20
-record is the reference to preserve and reproduce.
+record is the reference to preserve and reproduce. Task14 is also retained in
+this monorepo under the same immutable version and publication discipline.
 
 ## Common Rules
 
@@ -51,7 +52,6 @@ Every test, including a failed smoke test, follows this immutable sequence:
    or success evidence. Commit and push the outcome.
 4. Never rewrite an old test directory or amend a published result commit.
 
-Task20, Task21, and Task23 use their existing task repositories. Task22 and
-Task24 receive separate repositories before their next evaluation. The campaign
-index records the Git repository URL and both pre-run and result commit hashes
-for every lane.
+All new versions are committed to this monorepo. The original per-task
+repositories are imported under `tasks/` with their histories preserved, but
+they are historical sources rather than new publication destinations.

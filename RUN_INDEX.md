@@ -19,5 +19,6 @@ committed here.
 | 23 | v157_acd1_1_serial20_replay | `robomemarena-task23-v155-fixedseed105-repeat20` | `9da6466` | 105 x 20 | invalid infrastructure attempt: repeat0 core-dumped before any Episode summary; `0/20` valid episodes, result record pushed |
 | 24 | v123_latest622_seed107_108_smoke | `robomemarena-task24-v123-autonomous-repro` | `7235d5e` | 107, 108 | seed107 valid 1/3 stage; seed108 invalid process abort, excluded |
 | 24 | v124_pick2place_robotonly_smoke | `robomemarena-task24-v123-autonomous-repro` | `f595373` | 107, 108 | seed108 valid 1/3-stage failure; seed107 rc=134 after partial rollout, excluded |
+| 14 | v1_latestscore_35999_20ep | this monorepo: `task14/versions/v1_latestscore_35999_20ep` | recorded in monorepo history | 104--123 | completed baseline: 2/20 full stage/goal, average stage score 42.0% |
 
 All listed runs require remote scorer commit `62214036103ee8d5fef9b475dd8b344b6e2cfc03`, VLM-generated prompts, no `ORACLE_*` prompt injection, and stage-only scoring with `Close_Microwave` optional.

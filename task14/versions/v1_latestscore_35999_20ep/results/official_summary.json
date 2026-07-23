@@ -1,0 +1,355 @@
+{
+  "episodes": [
+    {
+      "task_id": 14,
+      "ep": 0,
+      "seed": 104,
+      "score_pct": 60,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": true,
+        "03_Close_Top_Drawer": true,
+        "04_Open_Middle_Drawer": false,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 1,
+      "seed": 105,
+      "score_pct": 0,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": false,
+        "02_Place_Cookies_Top_Drawer": false,
+        "03_Close_Top_Drawer": false,
+        "04_Open_Middle_Drawer": false,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 2,
+      "seed": 106,
+      "score_pct": 100,
+      "tsr_success": true,
+      "stage_success": true,
+      "goal_success": true,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": true,
+        "03_Close_Top_Drawer": true,
+        "04_Open_Middle_Drawer": true,
+        "05_Place_Chocolate_Middle_Drawer": true,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 3,
+      "seed": 107,
+      "score_pct": 20,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": false,
+        "03_Close_Top_Drawer": false,
+        "04_Open_Middle_Drawer": false,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 4,
+      "seed": 108,
+      "score_pct": 80,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": true,
+        "03_Close_Top_Drawer": true,
+        "04_Open_Middle_Drawer": true,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 5,
+      "seed": 109,
+      "score_pct": 20,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": false,
+        "03_Close_Top_Drawer": false,
+        "04_Open_Middle_Drawer": false,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 6,
+      "seed": 110,
+      "score_pct": 60,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": true,
+        "03_Close_Top_Drawer": true,
+        "04_Open_Middle_Drawer": false,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 7,
+      "seed": 111,
+      "score_pct": 100,
+      "tsr_success": true,
+      "stage_success": true,
+      "goal_success": true,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": true,
+        "03_Close_Top_Drawer": true,
+        "04_Open_Middle_Drawer": true,
+        "05_Place_Chocolate_Middle_Drawer": true,
+        "06_Close_Middle_Drawer": true
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 8,
+      "seed": 112,
+      "score_pct": 20,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": false,
+        "03_Close_Top_Drawer": false,
+        "04_Open_Middle_Drawer": false,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 9,
+      "seed": 113,
+      "score_pct": 0,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": false,
+        "02_Place_Cookies_Top_Drawer": false,
+        "03_Close_Top_Drawer": false,
+        "04_Open_Middle_Drawer": false,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 10,
+      "seed": 114,
+      "score_pct": 60,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": true,
+        "03_Close_Top_Drawer": true,
+        "04_Open_Middle_Drawer": false,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 11,
+      "seed": 115,
+      "score_pct": 20,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": false,
+        "03_Close_Top_Drawer": false,
+        "04_Open_Middle_Drawer": false,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 12,
+      "seed": 116,
+      "score_pct": 0,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": false,
+        "02_Place_Cookies_Top_Drawer": false,
+        "03_Close_Top_Drawer": false,
+        "04_Open_Middle_Drawer": false,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 13,
+      "seed": 117,
+      "score_pct": 20,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": false,
+        "03_Close_Top_Drawer": false,
+        "04_Open_Middle_Drawer": false,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 14,
+      "seed": 118,
+      "score_pct": 80,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": true,
+        "03_Close_Top_Drawer": true,
+        "04_Open_Middle_Drawer": true,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 15,
+      "seed": 119,
+      "score_pct": 80,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": true,
+        "03_Close_Top_Drawer": true,
+        "04_Open_Middle_Drawer": true,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 16,
+      "seed": 120,
+      "score_pct": 80,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": true,
+        "03_Close_Top_Drawer": true,
+        "04_Open_Middle_Drawer": true,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 17,
+      "seed": 121,
+      "score_pct": 0,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": false,
+        "02_Place_Cookies_Top_Drawer": false,
+        "03_Close_Top_Drawer": false,
+        "04_Open_Middle_Drawer": false,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 18,
+      "seed": 122,
+      "score_pct": 20,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": false,
+        "03_Close_Top_Drawer": false,
+        "04_Open_Middle_Drawer": false,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    },
+    {
+      "task_id": 14,
+      "ep": 19,
+      "seed": 123,
+      "score_pct": 20,
+      "tsr_success": false,
+      "stage_success": false,
+      "goal_success": false,
+      "stage_done": {
+        "01_Open_Top_Drawer": true,
+        "02_Place_Cookies_Top_Drawer": false,
+        "03_Close_Top_Drawer": false,
+        "04_Open_Middle_Drawer": false,
+        "05_Place_Chocolate_Middle_Drawer": false,
+        "06_Close_Middle_Drawer": false
+      }
+    }
+  ],
+  "tasks": [
+    {
+      "task_id": 14,
+      "num_trials": 20,
+      "seed_start": 104,
+      "average_score_pct": 42,
+      "tsr_success_rate_pct": 10,
+      "stage_success_rate_pct": 10,
+      "goal_success_rate_pct": 10
+    }
+  ]
+}
