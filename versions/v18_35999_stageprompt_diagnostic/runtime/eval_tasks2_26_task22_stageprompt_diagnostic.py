@@ -19,6 +19,14 @@ from typing import Any
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
+# This version is executed from its own runtime directory. The shared guards
+# remain owned by the frozen package evaluator directory, so make that import
+# boundary explicit.
+PACK_DIR = Path(__file__).resolve().parents[3]
+SHARED_EVALUATOR_DIR = PACK_DIR / "evaluators"
+if str(SHARED_EVALUATOR_DIR) not in sys.path:
+    sys.path.insert(0, str(SHARED_EVALUATOR_DIR))
+
 from microwave_debug import microwave_joint_angle
 from eef_direction_guard import evaluate_eef_direction_gate
 from eef_release_guard import should_keep_place_gripper_closed

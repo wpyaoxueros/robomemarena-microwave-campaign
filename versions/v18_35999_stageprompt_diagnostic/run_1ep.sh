@@ -88,5 +88,6 @@ export REPRO_ENTRY_LAUNCHER="${BASH_SOURCE[0]}"
 "${VERSION_DIR}/verify_stageprompt_diagnostic.sh" "${TASK22_STAGEPROMPT_PICK_COOKIES_TARGET_JSON}"
 "${VERSION_DIR}/verify_remote_patch.sh"
 "${VERSION_DIR}/verify_runtime_wiring.sh"
+"${VERSION_DIR}/verify_evaluator_import.sh" "${EVAL_PY_OVERRIDE}"
 export TASK22_V18_PACK_DIR_OVERRIDE="${PACK_DIR}"
 exec bash "${VERSION_DIR}/runtime/launch_one_sync_hold_orig35999_v18.sh" 22
