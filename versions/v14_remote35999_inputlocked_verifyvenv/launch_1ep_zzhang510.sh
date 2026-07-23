@@ -7,6 +7,7 @@ VERSION_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PACK_DIR="$(cd "${VERSION_DIR}/../.." && pwd)"
 PRIVATE_INPUTS_FILE="${1:-${VERSION_DIR}/inputs.env}"
 [[ -r "${PRIVATE_INPUTS_FILE}" ]] || { echo "missing private inputs" >&2; exit 2; }
+PRIVATE_INPUTS_FILE="$(readlink -f "${PRIVATE_INPUTS_FILE}")"
 
 STAMP="$(date +%Y%m%d_%H%M%S)"
 RUN_ID="task22_v14_remote35999_seed104_${STAMP}"
