@@ -63,6 +63,14 @@ After the two-GPU checks, a no-account five-GPU probe also passed on `acd_u`:
 Any formal batch launched from this allocation still keeps separate two-GPU
 VLM+VLA workers; no idle GPU will be represented as a completed evaluation.
 
+## `xiangqim` three-GPU fallback check
+
+At launch time, `xiangqim` already had 13 GPUs in running jobs, so the formal
+five-GPU request was correctly rejected by `QOSMaxGRESPerUser`. A same-shell
+three-GPU request passed on `acd_u` and exposed `CUDA_VISIBLE_DEVICES=0,1,2`
+on an H100 80 GB node (`ACD1-29`). The campaign may therefore use a 2-GPU
+formal worker plus a 1-GPU colocation preflight while it waits for more quota.
+
 ## Existing `prtroas0003` allocation check
 
 The current `prtroas0003` allocation `434516` is an 8-GPU job on `ACD1-2`.

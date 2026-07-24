@@ -21,3 +21,8 @@ formal archived reproductions and one isolated colocation compatibility check:
   task results.
 - The batch manifest records actual Unix user, Slurm job, GPU assignment,
   remote commit, and seeds in the private artifact root.
+
+When the account has only three free GPUs, the same layout degrades without
+changing any worker: Task12 retains its two-GPU formal worker and the final
+GPU runs the isolated preflight. Task13 is not started until another two GPUs
+are actually available.
