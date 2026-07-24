@@ -35,6 +35,8 @@ def main() -> int:
     assert 'CUDA_VISIBLE_DEVICES="${VLA_CUDA_VISIBLE_DEVICES:-0}"' in text
     assert 'CUDA_VISIBLE_DEVICES="${VLM_CUDA_VISIBLE_DEVICES:-0}"' in text
     assert 'MUJOCO_EGL_DEVICE_ID="${MUJOCO_EGL_DEVICE_ID:-0}"' in text
+    assert 'git -C "${PACKAGE_GIT_DIR:-${PACK_DIR}}" rev-parse HEAD' in text
+    assert 'git -C "${PACKAGE_GIT_DIR:-${PACK_DIR}}" status --short' in text
     assert "overlay_sha256=" in completed.stdout
     print("PASS counting single-GPU overlay contract")
     return 0
