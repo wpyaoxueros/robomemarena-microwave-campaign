@@ -26,4 +26,5 @@ change. The local run manifest records the resolved Slurm node, GPU ids and
 CPU binding.
 
 Model locations are supplied through local environment variables only and are
-not stored in this repository.
+recorded in [LOCAL_RUNTIME_MANIFEST.md](LOCAL_RUNTIME_MANIFEST.md) so this
+version remains fully recoverable.
