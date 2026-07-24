@@ -1,0 +1,12 @@
+[
+  {
+    "task_id": 16,
+    "status": "completed",
+    "error": "",
+    "stage_score_pct": 100.0,
+    "stage_success_rate": 1.0,
+    "goal_success_rate": 1.0,
+    "video_dir": "/data/user/zzhang510/hlei573_borrow_outputs/task16_official_d9f83ac_smoke_20260725_005450/videos/task16",
+    "duration_sec": 420.95
+  }
+]

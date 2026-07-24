@@ -1,0 +1,2 @@
+task_id	trial	seed	vlm_ckpt	vla_prompt_last	stage_success	goal_success	stage_score_pct	extra_pour_detected	failure_reason
+16	0	100	/data/user/hlei573/vla_memory_experiments/repro_eval_packs/counting_vlm35999_latest_d9f83ac_2ep_20260723/runs_stageprompt/training_task16_pick_postlift_balanced_vlm_20260724_201612_emergency_acd/checkpoint-100		1	1.0000	100.0	0	None

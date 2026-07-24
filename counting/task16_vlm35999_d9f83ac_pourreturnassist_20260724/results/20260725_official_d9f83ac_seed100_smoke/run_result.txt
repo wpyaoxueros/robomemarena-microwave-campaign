@@ -1,0 +1,4 @@
+exit_code=0
+finished_at=2026-07-25T01:06:15+08:00
+summary_tsv=/data/user/zzhang510/hlei573_borrow_outputs/task16_official_d9f83ac_smoke_20260725_005450/summary.tsv
+video_dir=/data/user/zzhang510/hlei573_borrow_outputs/task16_official_d9f83ac_smoke_20260725_005450/videos

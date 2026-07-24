@@ -30,6 +30,16 @@ VLA execution. This repository stores portable code and the per-episode result
 table; the source repository commit above stores the logs, videos, and a
 SHA256 manifest for the complete raw evidence directory.
 
+## Latest Official Smoke
+
+The independently submitted 2026-07-25 seed-100 replay also completed with
+`100.0%` official stage score and `goal_success=1.0` under the same frozen
+OpenHelix scorer commit. Its portable result record, copied manifest, prompt
+trace, summaries, and checksums are in
+[`results/20260725_official_d9f83ac_seed100_smoke`](results/20260725_official_d9f83ac_seed100_smoke/RESULT.md).
+The raw main/wrist videos remain in the recorded local evidence root and are
+not added to Git.
+
 ## Reproduction
 
 Set these paths to local assets, then run the entrypoint inside a valid 2-GPU
