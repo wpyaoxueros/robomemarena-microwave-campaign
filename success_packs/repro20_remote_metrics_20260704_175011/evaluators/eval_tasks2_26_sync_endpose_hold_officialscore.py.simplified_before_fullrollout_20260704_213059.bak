@@ -1,0 +1,819 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import importlib.util
+import dataclasses
+import json
+import logging
+import os
+import re
+import sys
+from collections import deque
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+import numpy as np
+
+
+BASE_EVAL_PY = Path(
+    os.environ.get(
+        "TASKS2_26_BASE_EVAL_PY",
+        "/data/user/hlei573/tmp/rma_refeval_fresh_20260513_052445/RoboMemArena/"
+        "evaluation_benchmark/reference_evaluation/tasks2_26_vlm5_reference/eval_tasks2_26_vlm_vla.py",
+    )
+)
+
+spec = importlib.util.spec_from_file_location("_tasks2_26_base_eval", BASE_EVAL_PY)
+if spec is None or spec.loader is None:
+    raise RuntimeError(f"Cannot load base eval from {BASE_EVAL_PY}")
+base = importlib.util.module_from_spec(spec)
+sys.modules[spec.name] = base
+spec.loader.exec_module(base)
+
+_ORIG_FULLVLM26_BUILD_MESSAGES = base.FullVlm26MemoryPlanner._build_messages
+
+OFFICIAL_SCRIPTS_DIR = Path(
+    os.environ.get(
+        "ROBOMEMARENA_OFFICIAL_SCRIPTS_DIR",
+        str(Path(__file__).resolve().parents[1] / "official_remote_66e7894/evaluation_benchmark/scripts"),
+    )
+)
+if str(OFFICIAL_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(OFFICIAL_SCRIPTS_DIR))
+
+
+def _load_official_module(name: str, path: Path):
+    module_spec = importlib.util.spec_from_file_location(name, path)
+    if module_spec is None or module_spec.loader is None:
+        raise RuntimeError(f"Cannot load official module from {path}")
+    module = importlib.util.module_from_spec(module_spec)
+    sys.modules[name] = module
+    module_spec.loader.exec_module(module)
+    return module
+
+
+official_ec = _load_official_module(
+    "_robomemarena_official_eval_common", OFFICIAL_SCRIPTS_DIR / "eval_common.py"
+)
+_previous_eval_common = sys.modules.get("eval_common")
+sys.modules["eval_common"] = official_ec
+try:
+    official_stage = _load_official_module(
+        "_robomemarena_official_task2_26_stage",
+        OFFICIAL_SCRIPTS_DIR / "task2_26_reference_stage.py",
+    )
+finally:
+    if _previous_eval_common is None:
+        sys.modules.pop("eval_common", None)
+    else:
+        sys.modules["eval_common"] = _previous_eval_common
+
+
+def _completed_subtasks_mode() -> str:
+    raw = os.environ.get("VLM_COMPLETED_SUBTASKS_MODE", "auto").strip().lower()
+    if raw in {"0", "false", "no", "none", "off", ""}:
+        return ""
+    if raw in {"completed_text", "text"}:
+        return "completed_text"
+    if raw in {"completed_struct", "struct", "json"}:
+        return "completed_struct"
+    if raw != "auto":
+        return ""
+
+    haystack = " ".join(
+        os.environ.get(name, "")
+        for name in (
+            "EVAL_TAG",
+            "WATCH_TAG",
+            "RUN_STAMP",
+            "ARTIFACT_ROOT",
+            "SOURCE_CHECKPOINT",
+            "TRAIN_OUTDIR",
+        )
+    ).lower()
+    if "completed_struct" in haystack:
+        return "completed_struct"
+    if "completed_text" in haystack:
+        return "completed_text"
+    return ""
+
+
+def _completed_subtasks_block(completed: list[str], mode: str) -> str:
+    clean = [str(item).strip() for item in completed if str(item).strip()]
+    if mode == "completed_text":
+        return "Completed subtasks: " + ("; ".join(clean) if clean else "none") + "."
+    if mode == "completed_struct":
+        payload = {"type": "completed_subtasks", "count": len(clean), "items": clean}
+        return "Completed-subtasks feature JSON: " + json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+    return ""
+
+
+def _inject_runtime_completed_subtasks(messages: list[dict[str, Any]], completed: list[str], mode: str) -> None:
+    block = _completed_subtasks_block(completed, mode)
+    if not block:
+        return
+    for msg in messages:
+        if msg.get("role") != "user":
+            continue
+        content = msg.get("content")
+        if not isinstance(content, list):
+            continue
+        for item in content:
+            if not (isinstance(item, dict) and item.get("type") == "text"):
+                continue
+            text = str(item.get("text", ""))
+            marker = "\nCurrent observation:"
+            if marker in text:
+                item["text"] = text.replace(marker, "\n" + block + "\n" + marker.lstrip(), 1)
+            else:
+                item["text"] = text + "\n" + block
+            return
+
+
+def _build_messages_runtime_progress(self, *args, **kwargs):
+    mode = os.environ.get("VLM_TASK_TEXT_MODE", "default").strip().lower()
+    if mode in {"no_label_no_order", "scene_only"}:
+        original_info = self.task_info
+        scene_text = original_info.scene_description or original_info.brief_description
+        safe_task_block = (
+            "High-level objective: infer the next executable low-level robot action from visual evidence only. "
+            "Do not rely on a provided primitive list or a fixed task order; use the historical keyframes and "
+            "the current visual context to decide what action should be run now."
+        )
+        self.task_info = dataclasses.replace(
+            original_info,
+            task_block=safe_task_block,
+            brief_description=scene_text,
+            scene_description=scene_text,
+        )
+        try:
+            messages = _ORIG_FULLVLM26_BUILD_MESSAGES(self, *args, **kwargs)
+        finally:
+            self.task_info = original_info
+    else:
+        messages = _ORIG_FULLVLM26_BUILD_MESSAGES(self, *args, **kwargs)
+
+    completed_mode = _completed_subtasks_mode()
+    if completed_mode:
+        completed = list(getattr(self, "_runtime_completed_subtasks", []))
+        _inject_runtime_completed_subtasks(messages, completed, completed_mode)
+    return messages
+
+
+DEFAULT_TARGET_JSON = (
+    "/data/user/hlei573/openpi_inference/tmp/tasks2_26_holdstatic_general/"
+    "tasks2_26_endpose_targets_seed100_199.json"
+)
+
+
+@dataclass(frozen=True)
+class HoldConfig:
+    enabled: bool
+    targets_json: Path
+    pos_tol: float
+    min_active_steps: int
+    consecutive: int
+    disable_final: bool
+    post_release_vla_steps: int
+    strict_hold_release_next: bool
+    prevent_regression: bool
+    regression_guard_after_hold_release: bool
+    distance_log_interval: int
+
+
+def env_bool(name: str, default: bool) -> bool:
+    raw = os.environ.get(name)
+    if raw is None:
+        return default
+    return raw.strip().lower() in {"1", "true", "yes", "y"}
+
+
+def hold_config() -> HoldConfig:
+    return HoldConfig(
+        enabled=env_bool("ENABLE_ENDPOSE_HOLD", True),
+        targets_json=Path(os.environ.get("ENDPOSE_HOLD_TARGETS_JSON", DEFAULT_TARGET_JSON)),
+        pos_tol=float(os.environ.get("ENDPOSE_HOLD_POS_TOL", "0.04")),
+        min_active_steps=int(os.environ.get("ENDPOSE_HOLD_MIN_ACTIVE_STEPS", "20")),
+        consecutive=int(os.environ.get("ENDPOSE_HOLD_CONSECUTIVE", "2")),
+        disable_final=env_bool("ENDPOSE_HOLD_DISABLE_FINAL", True),
+        post_release_vla_steps=int(os.environ.get("POST_HOLD_RELEASE_VLA_STEPS", "30")),
+        strict_hold_release_next=env_bool("STRICT_HOLD_RELEASE_NEXT", True),
+        prevent_regression=env_bool("PREVENT_SUBTASK_REGRESSION", True),
+        regression_guard_after_hold_release=env_bool("REGRESSION_GUARD_AFTER_HOLD_RELEASE", True),
+        distance_log_interval=int(os.environ.get("ENDPOSE_DISTANCE_LOG_INTERVAL", "0")),
+    )
+
+
+def normalize_subtask(subtask: str, labels: list[str]) -> str:
+    raw = " ".join(str(subtask).strip().lower().replace("_", " ").split())
+    try:
+        norm = base._normalize_primitive(subtask, allowed_subtasks=labels)
+        if norm:
+            return norm
+    except Exception:
+        pass
+
+    label_norms = [" ".join(label.strip().lower().split()) for label in labels]
+    if raw in label_norms:
+        return raw
+
+    # Some checkpoints output a shortened object/action phrase such as
+    # "place butter". Map it only when it uniquely identifies one legal label.
+    raw_tokens = set(re.findall(r"[a-z0-9]+", raw))
+    if raw_tokens:
+        matches = [
+            label
+            for label, label_norm in zip(labels, label_norms, strict=True)
+            if raw_tokens.issubset(set(re.findall(r"[a-z0-9]+", label_norm)))
+        ]
+        if len(matches) == 1:
+            return matches[0]
+    return raw
+
+
+def order_index(subtask: str, labels: list[str]) -> int | None:
+    norm = normalize_subtask(subtask, labels)
+    try:
+        return labels.index(norm)
+    except ValueError:
+        return None
+
+
+def get_eef_pos(obs: dict[str, Any]) -> np.ndarray:
+    for key in ("robot0_eef_pos", "ee_pos"):
+        if key in obs:
+            value = np.asarray(obs[key], dtype=np.float64).reshape(-1)
+            if value.size >= 3:
+                return value[:3]
+    raise KeyError(f"Cannot find EEF position in obs keys={sorted(obs.keys())}")
+
+
+def load_task_targets(cfg: HoldConfig, task_id: int, labels: list[str]) -> dict[str, dict[str, Any]]:
+    if not cfg.enabled:
+        return {}
+    if not cfg.targets_json.exists():
+        raise FileNotFoundError(
+            f"End-pose target JSON does not exist: {cfg.targets_json}. "
+            "Run compute_task_endpose_targets.py first."
+        )
+    raw = json.loads(cfg.targets_json.read_text(encoding="utf-8"))
+    if "tasks" in raw:
+        task_payload = raw["tasks"].get(str(task_id), {})
+        raw_subtasks = task_payload.get("subtasks", {})
+    else:
+        raw_subtasks = raw.get("subtasks", raw)
+    targets: dict[str, dict[str, Any]] = {}
+    for name, payload in raw_subtasks.items():
+        subtask = normalize_subtask(name, labels)
+        pos = payload.get("target_ee_pos") or payload.get("ee_pos") or payload.get("median_ee_pos")
+        if pos is None:
+            raise ValueError(f"{cfg.targets_json}: missing target_ee_pos for task{task_id} {name}")
+        pos_arr = np.asarray(pos, dtype=np.float64).reshape(-1)
+        if pos_arr.size < 3:
+            raise ValueError(f"{cfg.targets_json}: invalid target_ee_pos for task{task_id} {name}: {pos}")
+        hold_gripper = float(payload.get("hold_gripper", -1.0))
+        targets[subtask] = {
+            "target_ee_pos": pos_arr[:3],
+            "hold_gripper": 1.0 if hold_gripper >= 0.0 else -1.0,
+        }
+    return targets
+
+
+def distance_to_target(obs: dict[str, Any], target: dict[str, Any]) -> float:
+    return float(np.linalg.norm(get_eef_pos(obs) - target["target_ee_pos"]))
+
+
+def run_episode_sync_endpose_hold(
+    *,
+    env: Any,
+    client: Any,
+    planner: Any,
+    args: Any,
+    stage_specs: list[Any],
+    goal_monitor_dict: dict[str, list[tuple[str, str]]],
+    goal_check_override,
+    vlm_camera_pose: dict | None,
+    logger: logging.Logger,
+) -> tuple[float, dict[str, bool], bool, list[np.ndarray], list[np.ndarray]]:
+    if args.async_vlm:
+        raise ValueError("eval_tasks2_26_sync_endpose_hold.py is sync-only; set ASYNC_VLM=0.")
+
+    cfg = hold_config()
+    labels = list(planner.task_info.primitive_labels)
+    final_subtask = labels[-1] if labels else ""
+    targets = load_task_targets(cfg, int(planner.task_info.task_id), labels)
+    disable_output_normalize = env_bool("DISABLE_OUTPUT_NORMALIZE", False)
+
+    obs = env.reset()
+    replay: list[np.ndarray] = []
+    replay_wrist: list[np.ndarray] = []
+    recent_vlm_frames: deque[tuple[np.ndarray, np.ndarray | None]] = deque(maxlen=args.n_recent)
+    stage_done = {spec.name: False for spec in stage_specs}
+    stage_idx = 0
+    all_stages_logged = False
+    state: dict[str, Any] | None = None
+    current_stage_start = 0
+    task_id = int(planner.task_info.task_id)
+    official_stage_specs = official_stage._task_specs(task_id)
+    official_stage_done = {spec.name: False for spec in official_stage_specs}
+    official_stage_idx = 0
+    official_all_stages_logged = False
+    official_state: dict[str, Any] | None = None
+    official_current_stage_start = 0
+    current_subtask_prompt = ""
+    current_subtask_start_t = 0
+    endpose_streak = 0
+    hold_active = False
+    hold_subtask = ""
+    min_endpose_dist: dict[str, float] = {}
+    min_endpose_t: dict[str, int] = {}
+    regression_guard_active = not cfg.regression_guard_after_hold_release
+    blocked_after_hold_prompts: set[str] = set()
+    hold_prompt_counts: dict[str, int] = {}
+    runtime_completed_subtasks: list[str] = []
+    setattr(planner, "_runtime_completed_subtasks", runtime_completed_subtasks)
+    ever_goal_success = False
+    t = 0
+
+    def clone_recent_frames() -> list[tuple[np.ndarray, np.ndarray | None]]:
+        return [(m.copy(), w.copy() if w is not None else None) for m, w in recent_vlm_frames]
+
+    def append_vlm_frame() -> None:
+        recent_vlm_frames.append(base._extract_vlm_frame(env, obs, args, vlm_camera_pose))
+
+    def can_hold(subtask: str) -> bool:
+        if not cfg.enabled or not subtask or subtask not in targets:
+            return False
+        if cfg.disable_final and subtask == final_subtask:
+            return False
+        return True
+
+    def most_common_hold_prompt() -> str:
+        if not hold_prompt_counts:
+            return hold_subtask
+        return max(
+            hold_prompt_counts.items(),
+            key=lambda item: (item[1], 1 if item[0] == hold_subtask else 0, item[0]),
+        )[0]
+
+    def record_completed_subtask(subtask: str, source: str) -> None:
+        if not subtask or subtask in runtime_completed_subtasks:
+            return
+        runtime_completed_subtasks.append(subtask)
+        setattr(planner, "_runtime_completed_subtasks", runtime_completed_subtasks)
+        logger.info(
+            "[COMPLETED_SUBTASKS_UPDATE] t=%s task=%s completed=%s mode=%s source=%s subtask=%s",
+            t,
+            planner.task_info.task_id,
+            runtime_completed_subtasks,
+            _completed_subtasks_mode() or "off",
+            source,
+            subtask,
+        )
+
+    def check_goal(done: bool) -> bool:
+        nonlocal ever_goal_success
+        goal_success = (
+            bool(goal_check_override(env, stage_done))
+            if goal_check_override is not None
+            else bool(base.ec.check_goal_success(env, goal_monitor_dict) if goal_monitor_dict else False)
+        )
+        if goal_success and not ever_goal_success:
+            logger.info("[t=%s] goal success", t)
+        ever_goal_success = ever_goal_success or goal_success
+        if done:
+            logger.info("[DONE] t=%s, task done", t)
+            return True
+        return False
+
+    def update_stage_and_goal(done: bool) -> bool:
+        nonlocal stage_idx, current_stage_start, all_stages_logged, state
+        nonlocal official_stage_idx, official_current_stage_start, official_all_stages_logged, official_state
+        if state is not None:
+            base.stage_eval._update_state(obs, state)
+            if stage_idx < len(stage_specs):
+                spec = stage_specs[stage_idx]
+                if spec.check_fn(env, state, current_stage_start):
+                    stage_done[spec.name] = True
+                    logger.info("[t=%s] stage done: %s", t, spec.name)
+                    stage_idx += 1
+                    current_stage_start = state["step_idx"]
+            if stage_idx >= len(stage_specs) and not all_stages_logged:
+                logger.info("[t=%s] all stages done", t)
+                all_stages_logged = True
+        if official_state is not None:
+            official_stage._update_state(obs, official_state)
+            if official_stage_idx < len(official_stage_specs):
+                spec = official_stage_specs[official_stage_idx]
+                if spec.check_fn(env, official_state, official_current_stage_start):
+                    official_stage_done[spec.name] = True
+                    logger.info("[t=%s] official stage done: %s", t, spec.name)
+                    official_stage_idx += 1
+                    official_current_stage_start = official_state["step_idx"]
+            if official_stage_idx >= len(official_stage_specs) and not official_all_stages_logged:
+                logger.info("[t=%s] all official stages done", t)
+                official_all_stages_logged = True
+        return check_goal(done)
+
+    def maybe_update_endpose_streak(subtask: str, phase: str, t_now: int) -> bool:
+        nonlocal endpose_streak
+        if subtask not in targets:
+            return False
+        dist = distance_to_target(obs, targets[subtask])
+        prev_min = min_endpose_dist.get(subtask)
+        if prev_min is None or dist < prev_min:
+            min_endpose_dist[subtask] = dist
+            min_endpose_t[subtask] = t_now
+        active_steps = max(0, t_now - current_subtask_start_t)
+        final_no_hold = cfg.disable_final and subtask == final_subtask
+        should_count = can_hold(subtask) and active_steps >= cfg.min_active_steps and dist <= cfg.pos_tol
+        endpose_streak = endpose_streak + 1 if should_count else 0
+        if final_no_hold:
+            logger.info(
+                "[ENDPOSE_FINAL_LOG] t=%s task=%s subtask=%s dist=%.5f tol=%.5f phase=%s",
+                t_now,
+                planner.task_info.task_id,
+                subtask,
+                dist,
+                cfg.pos_tol,
+                phase,
+            )
+        elif should_count or dist <= cfg.pos_tol:
+            logger.info(
+                "[ENDPOSE_NEAR] t=%s task=%s subtask=%s dist=%.5f tol=%.5f active_steps=%s streak=%s/%s phase=%s",
+                t_now,
+                planner.task_info.task_id,
+                subtask,
+                dist,
+                cfg.pos_tol,
+                active_steps,
+                endpose_streak,
+                cfg.consecutive,
+                phase,
+            )
+        elif cfg.distance_log_interval > 0 and t_now % cfg.distance_log_interval == 0:
+            logger.info(
+                "[ENDPOSE_DISTANCE] t=%s task=%s subtask=%s dist=%.5f tol=%.5f active_steps=%s "
+                "min_dist=%.5f min_t=%s phase=%s",
+                t_now,
+                planner.task_info.task_id,
+                subtask,
+                dist,
+                cfg.pos_tol,
+                active_steps,
+                min_endpose_dist[subtask],
+                min_endpose_t[subtask],
+                phase,
+            )
+        return can_hold(subtask) and endpose_streak >= cfg.consecutive
+
+    def step_env(action: list[float] | np.ndarray, prompt_for_vla: str) -> bool:
+        nonlocal obs, t
+        element_step = base.obs_to_pi_element(obs, resize_size=args.resize_size, prompt=prompt_for_vla)
+        replay.append(element_step["observation/image"])
+        wrist = element_step.get("observation/wrist_image")
+        if wrist is not None:
+            replay_wrist.append(wrist)
+        obs, _, done, _ = env.step(action.tolist() if hasattr(action, "tolist") else action)
+        append_vlm_frame()
+        t += 1
+        return update_stage_and_goal(bool(done))
+
+    def run_vla_without_vlm(step_budget: int, phase: str) -> bool:
+        remaining = max(0, int(step_budget))
+        if remaining <= 0:
+            return False
+        logger.info(
+            "[POST_HOLD_RELEASE_VLA_START] t=%s task=%s subtask=%s steps=%s phase=%s",
+            t,
+            planner.task_info.task_id,
+            current_subtask_prompt,
+            remaining,
+            phase,
+        )
+        while remaining > 0 and t < args.max_steps + args.num_steps_wait:
+            prompt_for_vla = current_subtask_prompt or planner.default_subtask_prompt
+            element = base.obs_to_pi_element(obs, resize_size=args.resize_size, prompt=prompt_for_vla)
+            out = client.infer(element)
+            actions = np.asarray(out["actions"])
+            if len(actions) <= 0:
+                raise RuntimeError("VLA returned an empty action chunk")
+            chunk_len = min(len(actions), remaining, args.max_steps + args.num_steps_wait - t)
+            logger.info(
+                "[POST_HOLD_RELEASE_VLA_CHUNK] t=%s task=%s subtask=%s chunk_steps=%s remaining_before=%s",
+                t,
+                planner.task_info.task_id,
+                current_subtask_prompt,
+                chunk_len,
+                remaining,
+            )
+            for action in actions[:chunk_len]:
+                if step_env(action, prompt_for_vla):
+                    return True
+                remaining -= 1
+                if t >= args.max_steps + args.num_steps_wait:
+                    break
+        logger.info("[POST_HOLD_RELEASE_VLA_END] t=%s task=%s phase=%s", t, planner.task_info.task_id, phase)
+        return False
+
+    logger.info(
+        "sync endpose-hold rollout: task=%s replan_steps=%s hold=%s tol=%.5f min_active_steps=%s "
+        "consecutive=%s post_hold_release_vla_steps=%s strict_hold_release_next=%s prevent_regression=%s "
+        "guard_after_hold=%s regression_guard_mode=hold_majority_prompt disable_output_normalize=%s "
+        "vlm_task_text_mode=%s targets=%s",
+        planner.task_info.task_id,
+        args.replan_steps,
+        cfg.enabled,
+        cfg.pos_tol,
+        cfg.min_active_steps,
+        cfg.consecutive,
+        cfg.post_release_vla_steps,
+        cfg.strict_hold_release_next,
+        cfg.prevent_regression,
+        cfg.regression_guard_after_hold_release,
+        disable_output_normalize,
+        os.environ.get("VLM_TASK_TEXT_MODE", "default"),
+        sorted(targets.keys()),
+    )
+
+    try:
+        while t < args.max_steps + args.num_steps_wait:
+            if t < args.num_steps_wait:
+                obs, _, done, _ = env.step(base.ec.LIBERO_DUMMY_ACTION)
+                append_vlm_frame()
+                t += 1
+                if check_goal(bool(done)):
+                    break
+                continue
+
+            if state is None:
+                state = base.stage_eval._build_initial_state(env)
+                current_stage_start = state["step_idx"]
+                official_state = official_stage._build_initial_state(env)
+                official_current_stage_start = official_state["step_idx"]
+
+            if len(recent_vlm_frames) < args.n_recent:
+                obs, _, done, _ = env.step(base.ec.LIBERO_DUMMY_ACTION)
+                append_vlm_frame()
+                t += 1
+                if update_stage_and_goal(bool(done)):
+                    break
+                continue
+
+            effective_t = t - args.num_steps_wait
+            latest_subtask = planner.infer_sync(effective_t, clone_recent_frames())
+            if disable_output_normalize:
+                latest_subtask = " ".join(str(latest_subtask).strip().lower().replace("_", " ").split())
+            else:
+                latest_subtask = normalize_subtask(latest_subtask, labels)
+
+            if hold_active and cfg.strict_hold_release_next and latest_subtask and latest_subtask != current_subtask_prompt:
+                hold_idx = order_index(hold_subtask, labels)
+                latest_idx = order_index(latest_subtask, labels)
+                expected_idx = None if hold_idx is None else hold_idx + 1
+                if hold_idx is None or latest_idx is None or latest_idx != expected_idx:
+                    logger.info(
+                        "[ENDPOSE_HOLD_RELEASE_BLOCKED] t=%s task=%s hold_subtask=%s raw_subtask=%s "
+                        "hold_idx=%s raw_idx=%s expected_next_idx=%s",
+                        t,
+                        planner.task_info.task_id,
+                        hold_subtask,
+                        latest_subtask,
+                        hold_idx,
+                        latest_idx,
+                        expected_idx,
+                    )
+                    latest_subtask = current_subtask_prompt
+
+            if cfg.prevent_regression and regression_guard_active and current_subtask_prompt and latest_subtask:
+                if latest_subtask != current_subtask_prompt and latest_subtask in blocked_after_hold_prompts:
+                    logger.info(
+                        "[SUBTASK_REGRESSION_BLOCKED] t=%s task=%s raw_subtask=%s current_subtask=%s "
+                        "guard_mode=hold_majority_prompt blocked_prompts=%s",
+                        t,
+                        planner.task_info.task_id,
+                        latest_subtask,
+                        current_subtask_prompt,
+                        sorted(blocked_after_hold_prompts),
+                    )
+                    latest_subtask = current_subtask_prompt
+
+            if hold_active and latest_subtask:
+                hold_prompt_counts[latest_subtask] = hold_prompt_counts.get(latest_subtask, 0) + 1
+
+            if latest_subtask and latest_subtask != current_subtask_prompt:
+                previous = current_subtask_prompt
+                released_from_hold = hold_active
+                released_hold_subtask = hold_subtask
+                current_subtask_prompt = latest_subtask
+                current_subtask_start_t = t
+                endpose_streak = 0
+                if released_from_hold:
+                    record_completed_subtask(released_hold_subtask, "hold_release")
+                    block_prompt = most_common_hold_prompt()
+                    # Keep the regression block local to the immediately-following
+                    # stage. Repeated-action tasks such as drawer open/close/open-again
+                    # need the older prompt to become legal again after the next hold.
+                    blocked_after_hold_prompts.clear()
+                    if block_prompt:
+                        blocked_after_hold_prompts.add(block_prompt)
+                    logger.info(
+                        "[ENDPOSE_HOLD_RELEASE] t=%s task=%s old_subtask=%s new_subtask=%s "
+                        "blocked_after_release=%s hold_prompt_counts=%s",
+                        t,
+                        planner.task_info.task_id,
+                        released_hold_subtask,
+                        current_subtask_prompt,
+                        block_prompt,
+                        dict(sorted(hold_prompt_counts.items())),
+                    )
+                hold_active = False
+                hold_subtask = ""
+                hold_prompt_counts.clear()
+                if released_from_hold and cfg.regression_guard_after_hold_release:
+                    regression_guard_active = True
+                    logger.info(
+                        "[SUBTASK_REGRESSION_GUARD_ON] t=%s task=%s trigger=hold_release subtask=%s",
+                        t,
+                        planner.task_info.task_id,
+                        current_subtask_prompt,
+                    )
+                logger.info("[t=%s] VLM sync subtask update: %s -> %s", t, previous or "<none>", current_subtask_prompt)
+                if current_subtask_prompt == final_subtask:
+                    logger.info("[FINAL_HINT] t=%s task=%s VLM reached final subtask.", t, planner.task_info.task_id)
+                if released_from_hold and cfg.post_release_vla_steps > 0:
+                    if run_vla_without_vlm(cfg.post_release_vla_steps, phase="after_hold_release"):
+                        break
+                    continue
+
+            if hold_active:
+                target = targets.get(hold_subtask)
+                hold_gripper = float(target["hold_gripper"]) if target else -1.0
+                hold_action = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, hold_gripper]
+                logger.info(
+                    "[ENDPOSE_HOLD_STEP] t=%s task=%s subtask=%s hold_steps=%s gripper=%+.0f",
+                    t,
+                    planner.task_info.task_id,
+                    hold_subtask,
+                    args.replan_steps,
+                    hold_gripper,
+                )
+                for _ in range(args.replan_steps):
+                    if step_env(hold_action, current_subtask_prompt or planner.default_subtask_prompt):
+                        raise StopIteration
+                    if t >= args.max_steps + args.num_steps_wait:
+                        break
+                continue
+
+            if maybe_update_endpose_streak(current_subtask_prompt, "before_vla", t):
+                hold_active = True
+                hold_subtask = current_subtask_prompt
+                hold_prompt_counts.clear()
+                if hold_subtask:
+                    hold_prompt_counts[hold_subtask] = 1
+                record_completed_subtask(hold_subtask, "hold_start_before_vla")
+                logger.info("[ENDPOSE_HOLD_START] t=%s task=%s subtask=%s source=before_vla", t, planner.task_info.task_id, hold_subtask)
+                continue
+
+            prompt_for_vla = current_subtask_prompt or planner.default_subtask_prompt
+            element = base.obs_to_pi_element(obs, resize_size=args.resize_size, prompt=prompt_for_vla)
+            out = client.infer(element)
+            actions = np.asarray(out["actions"])
+            if len(actions) < args.replan_steps:
+                raise RuntimeError(f"VLA returned {len(actions)} actions, need at least {args.replan_steps}")
+            logger.info("[t=%s] VLA sync chunk: %s steps | prompt=%s", t, args.replan_steps, prompt_for_vla)
+            for chunk_idx, action in enumerate(actions[: args.replan_steps], start=1):
+                if step_env(action, prompt_for_vla):
+                    raise StopIteration
+                if maybe_update_endpose_streak(current_subtask_prompt, f"after_vla_chunk{chunk_idx}", t):
+                    hold_active = True
+                    hold_subtask = current_subtask_prompt
+                    hold_prompt_counts.clear()
+                    if hold_subtask:
+                        hold_prompt_counts[hold_subtask] = 1
+                    record_completed_subtask(hold_subtask, "hold_start_after_vla")
+                    logger.info(
+                        "[ENDPOSE_HOLD_START] t=%s task=%s subtask=%s source=after_vla_chunk%s",
+                        t,
+                        planner.task_info.task_id,
+                        hold_subtask,
+                        chunk_idx,
+                    )
+                    break
+                if t >= args.max_steps + args.num_steps_wait:
+                    break
+    except StopIteration:
+        pass
+    except Exception:
+        logger.exception("episode failed")
+
+    stage_pct = official_stage._stage_score_pct(task_id, official_stage_done)
+    stage_success = official_stage._stage_success_from_stage_done(task_id, official_stage_done)
+    official_goal_override = official_stage._goal_override_check(task_id)
+    if official_goal_override is not None:
+        official_goal_success = bool(official_goal_override(env, official_stage_done))
+    else:
+        official_goal_success = ever_goal_success
+    if min_endpose_dist:
+        for subtask in sorted(min_endpose_dist):
+            logger.info(
+                "[ENDPOSE_MIN_DISTANCE] task=%s subtask=%s min_dist=%.5f tol=%.5f min_t=%s",
+                planner.task_info.task_id,
+                subtask,
+                min_endpose_dist[subtask],
+                cfg.pos_tol,
+                min_endpose_t[subtask],
+            )
+    logger.info(
+        "[OFFICIAL_SCORE] task=%s average_score_pct=%.6f stage_success=%s goal_success=%s stage_done_json=%s",
+        task_id,
+        stage_pct,
+        int(stage_success),
+        int(official_goal_success),
+        json.dumps(official_stage_done, ensure_ascii=False, separators=(",", ":")),
+    )
+    return stage_pct, official_stage_done, official_goal_success, replay, replay_wrist
+
+
+def _write_official_summaries() -> None:
+    out_root = Path(os.environ["OUT_ROOT"])
+    pattern = re.compile(
+        r"\[OFFICIAL_SCORE\] task=(\d+) average_score_pct=([0-9.]+) "
+        r"stage_success=([01]) goal_success=([01]) stage_done_json=(\{.*\})"
+    )
+    rows: list[dict[str, Any]] = []
+    for log_path in sorted(out_root.glob("task*/ep*/sync_vlm.log")):
+        matches = pattern.findall(log_path.read_text(encoding="utf-8", errors="ignore"))
+        if not matches:
+            continue
+        task, score, stage_success, goal_success, stage_json = matches[-1]
+        ep_match = re.search(r"ep(\d+)$", log_path.parent.name)
+        ep = int(ep_match.group(1)) if ep_match else len(rows)
+        seed = int(os.environ.get("SEED", "104")) + ep
+        rows.append(
+            {
+                "task_id": int(task),
+                "ep": ep,
+                "seed": seed,
+                "score_pct": float(score),
+                "tsr_success": bool(int(stage_success)),
+                "stage_success": bool(int(stage_success)),
+                "goal_success": bool(int(goal_success)),
+                "stage_done": json.loads(stage_json),
+                "log": str(log_path),
+            }
+        )
+    rows.sort(key=lambda row: (row["task_id"], row["ep"]))
+    episodes_tsv = out_root / "official_episodes.tsv"
+    with episodes_tsv.open("w", encoding="utf-8") as handle:
+        handle.write("task_id\tep\tseed\tscore_pct\ttsr_success\tstage_success\tgoal_success\tlog\n")
+        for row in rows:
+            handle.write(
+                f'{row["task_id"]}\t{row["ep"]}\t{row["seed"]}\t{row["score_pct"]:.1f}\t'
+                f'{"Y" if row["tsr_success"] else "N"}\t{"Y" if row["stage_success"] else "N"}\t'
+                f'{"Y" if row["goal_success"] else "N"}\t{row["log"]}\n'
+            )
+    grouped: dict[int, list[dict[str, Any]]] = {}
+    for row in rows:
+        grouped.setdefault(row["task_id"], []).append(row)
+    summaries: list[dict[str, Any]] = []
+    for task_id, task_rows in sorted(grouped.items()):
+        n = len(task_rows)
+        summaries.append(
+            {
+                "task_id": task_id,
+                "num_trials": n,
+                "seed_start": int(os.environ.get("SEED", "104")),
+                "average_score_pct": sum(row["score_pct"] for row in task_rows) / max(1, n),
+                "tsr_success_rate_pct": 100.0 * sum(row["tsr_success"] for row in task_rows) / max(1, n),
+                "stage_success_rate_pct": 100.0 * sum(row["stage_success"] for row in task_rows) / max(1, n),
+                "goal_success_rate_pct": 100.0 * sum(row["goal_success"] for row in task_rows) / max(1, n),
+            }
+        )
+    (out_root / "official_summary.json").write_text(
+        json.dumps({"episodes": rows, "tasks": summaries}, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    with (out_root / "official_task_summary.tsv").open("w", encoding="utf-8") as handle:
+        handle.write(
+            "task_id\tnum_trials\tseed_start\taverage_score_pct\ttsr_success_rate_pct\t"
+            "stage_success_rate_pct\tgoal_success_rate_pct\n"
+        )
+        for row in summaries:
+            handle.write(
+                f'{row["task_id"]}\t{row["num_trials"]}\t{row["seed_start"]}\t'
+                f'{row["average_score_pct"]:.1f}\t{row["tsr_success_rate_pct"]:.1f}\t'
+                f'{row["stage_success_rate_pct"]:.1f}\t{row["goal_success_rate_pct"]:.1f}\n'
+            )
+
+
+def main() -> None:
+    os.environ["ASYNC_VLM"] = "0"
+    base.FullVlm26MemoryPlanner._build_messages = _build_messages_runtime_progress
+    base.run_episode_async_stateful = run_episode_sync_endpose_hold
+    base.main()
+    _write_official_summaries()
+
+
+if __name__ == "__main__":
+    main()
