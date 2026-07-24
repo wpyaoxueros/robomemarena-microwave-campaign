@@ -36,6 +36,22 @@ performed from the `zzhang510` shell:
 The formal Task1/Task3 submissions below therefore use the verified
 `emergency_acd`, 2-GPU, 480-GB shape. They remain no-explicit-account jobs.
 
+## `xiangqim` Task12 capacity and access check
+
+`xiangqim` is a member of `irpn`. Before allocating GPUs, the account verified
+read access to Task12's private runtime environment, frozen rollout scripts,
+official scorer, original VLA35999 and matching norm, VLM checkpoint, and all
+required runtime roots. Its own output root was created with group `irpn` and
+setgid permissions.
+
+| Partition | Shape | Result |
+| --- | --- | --- |
+| `emergency_acd` | 1 GPU, 240 GB | PASS on `ACD1-1` |
+| `emergency_acd` | 2 GPU, 480 GB, 16 CPU | PASS on `ACD1-1` |
+
+Task12 may therefore run as a no-explicit-account, two-GPU job from this
+account without changing rollout or scoring code.
+
 ## Existing `prtroas0003` allocation check
 
 The current `prtroas0003` allocation `434516` is an 8-GPU job on `ACD1-2`.
