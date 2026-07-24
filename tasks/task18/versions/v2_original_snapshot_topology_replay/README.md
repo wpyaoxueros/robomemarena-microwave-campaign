@@ -28,3 +28,9 @@ CPU binding.
 Model locations are supplied through local environment variables only and are
 recorded in [LOCAL_RUNTIME_MANIFEST.md](LOCAL_RUNTIME_MANIFEST.md) so this
 version remains fully recoverable.
+
+## Recorded result
+
+The first controlled replay completed 5/5 successfully. See
+[RESULTS_20260725.md](results/RESULTS_20260725.md) for the Slurm record,
+per-episode result table, local evidence location and SHA256 checksums.
