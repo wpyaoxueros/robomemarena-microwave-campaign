@@ -37,8 +37,9 @@ The independently submitted 2026-07-25 seed-100 replay also completed with
 OpenHelix scorer commit. Its portable result record, copied manifest, prompt
 trace, summaries, and checksums are in
 [`results/20260725_official_d9f83ac_seed100_smoke`](results/20260725_official_d9f83ac_seed100_smoke/RESULT.md).
-The raw main/wrist videos remain in the recorded local evidence root and are
-not added to Git.
+Its main/wrist videos and VLM/tilt traces are also retained in that Git result
+record; only the large model checkpoints and raw environment data remain
+external.
 
 ## Reproduction
 

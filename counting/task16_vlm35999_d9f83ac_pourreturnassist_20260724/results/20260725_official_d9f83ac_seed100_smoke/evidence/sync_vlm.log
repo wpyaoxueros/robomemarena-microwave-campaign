@@ -1,0 +1,861 @@
+2026-07-25 00:59:16,953 | INFO | task_id=16 bddl=/data/user/hlei573/vla_memory_experiments/repro_eval_packs/counting_vlm35999_latest_d9f83ac_2ep_20260723/source/RoboMemArena_d9f83ac/evaluation_benchmark/bddl/16_pour_milk_in_red_coffee_mug_twice_and_place_milk_in_bowl_drainer.bddl vlm_ckpt=/data/user/hlei573/vla_memory_experiments/repro_eval_packs/counting_vlm35999_latest_d9f83ac_2ep_20260723/runs_stageprompt/training_task16_pick_postlift_balanced_vlm_20260724_201612_emergency_acd/checkpoint-100
+2026-07-25 00:59:16,957 | INFO | SyncLoRAPlanner reset: 
+2026-07-25 00:59:17,876 | INFO | [POUR_RETURN_ASSIST_STAGE_RESET] task=16 stage_count=0 prompt=
+2026-07-25 00:59:21,508 | INFO | VLM @t=0 task=16 subtask=pick milk keyframes=[]
+2026-07-25 00:59:21,509 | INFO |   raw={"current_primitive": "pick milk", "keyframe_positions": []}
+2026-07-25 00:59:21,509 | INFO | [AUTONOMOUS_PROMPT_GUARD_ACCEPT] t=0 task=16 raw=pick milk accepted=pick milk reason=accepted stage_count=0
+2026-07-25 00:59:21,509 | INFO | [t=10] VLM prompt update from step=0: pick milk
+2026-07-25 00:59:35,790 | INFO | [t=10] VLA chunk prompt=pick milk
+2026-07-25 00:59:55,187 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=1 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:55,246 | INFO | [t=11] VLA chunk prompt=pick milk
+2026-07-25 00:59:55,270 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=2 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:55,327 | INFO | [t=12] VLA chunk prompt=pick milk
+2026-07-25 00:59:55,364 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=3 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:55,420 | INFO | [t=13] VLA chunk prompt=pick milk
+2026-07-25 00:59:55,442 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=4 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:55,498 | INFO | [t=14] VLA chunk prompt=pick milk
+2026-07-25 00:59:55,520 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=5 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:55,576 | INFO | [t=15] VLA chunk prompt=pick milk
+2026-07-25 00:59:55,598 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=6 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:55,655 | INFO | [t=16] VLA chunk prompt=pick milk
+2026-07-25 00:59:55,677 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=7 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:55,733 | INFO | [t=17] VLA chunk prompt=pick milk
+2026-07-25 00:59:55,756 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=8 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:55,812 | INFO | [t=18] VLA chunk prompt=pick milk
+2026-07-25 00:59:55,835 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=9 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:55,890 | INFO | [t=19] VLA chunk prompt=pick milk
+2026-07-25 00:59:55,912 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=10 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:55,968 | INFO | [t=20] VLA chunk prompt=pick milk
+2026-07-25 00:59:55,990 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=11 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:56,046 | INFO | [t=21] VLA chunk prompt=pick milk
+2026-07-25 00:59:56,069 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=12 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:56,127 | INFO | [t=22] VLA chunk prompt=pick milk
+2026-07-25 00:59:56,149 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=13 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:56,205 | INFO | [t=23] VLA chunk prompt=pick milk
+2026-07-25 00:59:56,226 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=14 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:56,281 | INFO | [t=24] VLA chunk prompt=pick milk
+2026-07-25 00:59:56,303 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=15 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:56,358 | INFO | [t=25] VLA chunk prompt=pick milk
+2026-07-25 00:59:56,381 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=16 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:56,435 | INFO | [t=26] VLA chunk prompt=pick milk
+2026-07-25 00:59:56,458 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=17 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:56,514 | INFO | [t=27] VLA chunk prompt=pick milk
+2026-07-25 00:59:56,538 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=18 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:56,595 | INFO | [t=28] VLA chunk prompt=pick milk
+2026-07-25 00:59:56,618 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=19 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:56,674 | INFO | [t=29] VLA chunk prompt=pick milk
+2026-07-25 00:59:56,696 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=20 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:56,751 | INFO | [t=30] VLA chunk prompt=pick milk
+2026-07-25 00:59:56,773 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=21 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:56,828 | INFO | [t=31] VLA chunk prompt=pick milk
+2026-07-25 00:59:56,853 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=22 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:56,910 | INFO | [t=32] VLA chunk prompt=pick milk
+2026-07-25 00:59:56,935 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=23 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:56,991 | INFO | [t=33] VLA chunk prompt=pick milk
+2026-07-25 00:59:57,016 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=24 task=16 accepted=pick milk last_vlm_t=0 interval=25
+2026-07-25 00:59:57,073 | INFO | [t=34] VLA chunk prompt=pick milk
+2026-07-25 00:59:57,722 | INFO | VLM @t=25 task=16 subtask=pick milk keyframes=[]
+2026-07-25 00:59:57,722 | INFO |   raw={"current_primitive": "pick milk", "keyframe_positions": []}
+2026-07-25 00:59:57,722 | INFO | [AUTONOMOUS_PROMPT_GUARD_ACCEPT] t=25 task=16 raw=pick milk accepted=pick milk reason=accepted stage_count=0
+2026-07-25 00:59:57,782 | INFO | [t=35] VLA chunk prompt=pick milk
+2026-07-25 01:00:17,304 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=26 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:17,360 | INFO | [t=36] VLA chunk prompt=pick milk
+2026-07-25 01:00:17,384 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=27 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:17,438 | INFO | [t=37] VLA chunk prompt=pick milk
+2026-07-25 01:00:17,461 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=28 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:17,514 | INFO | [t=38] VLA chunk prompt=pick milk
+2026-07-25 01:00:17,536 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=29 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:17,591 | INFO | [t=39] VLA chunk prompt=pick milk
+2026-07-25 01:00:17,616 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=30 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:17,671 | INFO | [t=40] VLA chunk prompt=pick milk
+2026-07-25 01:00:17,696 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=31 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:17,751 | INFO | [t=41] VLA chunk prompt=pick milk
+2026-07-25 01:00:17,773 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=32 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:17,826 | INFO | [t=42] VLA chunk prompt=pick milk
+2026-07-25 01:00:17,848 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=33 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:17,901 | INFO | [t=43] VLA chunk prompt=pick milk
+2026-07-25 01:00:17,923 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=34 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:17,976 | INFO | [t=44] VLA chunk prompt=pick milk
+2026-07-25 01:00:17,999 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=35 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:18,053 | INFO | [t=45] VLA chunk prompt=pick milk
+2026-07-25 01:00:18,120 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=36 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:18,173 | INFO | [t=46] VLA chunk prompt=pick milk
+2026-07-25 01:00:18,195 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=37 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:18,248 | INFO | [t=47] VLA chunk prompt=pick milk
+2026-07-25 01:00:18,270 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=38 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:18,324 | INFO | [t=48] VLA chunk prompt=pick milk
+2026-07-25 01:00:18,345 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=39 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:18,399 | INFO | [t=49] VLA chunk prompt=pick milk
+2026-07-25 01:00:18,423 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=40 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:18,478 | INFO | [t=50] VLA chunk prompt=pick milk
+2026-07-25 01:00:18,503 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=41 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:18,559 | INFO | [t=51] VLA chunk prompt=pick milk
+2026-07-25 01:00:18,584 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=42 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:18,639 | INFO | [t=52] VLA chunk prompt=pick milk
+2026-07-25 01:00:18,661 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=43 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:18,716 | INFO | [t=53] VLA chunk prompt=pick milk
+2026-07-25 01:00:18,739 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=44 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:18,792 | INFO | [t=54] VLA chunk prompt=pick milk
+2026-07-25 01:00:18,815 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=45 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:18,867 | INFO | [t=55] VLA chunk prompt=pick milk
+2026-07-25 01:00:18,889 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=46 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:18,942 | INFO | [t=56] VLA chunk prompt=pick milk
+2026-07-25 01:00:18,967 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=47 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:19,022 | INFO | [t=57] VLA chunk prompt=pick milk
+2026-07-25 01:00:19,047 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=48 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:19,102 | INFO | [t=58] VLA chunk prompt=pick milk
+2026-07-25 01:00:19,126 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=49 task=16 accepted=pick milk last_vlm_t=25 interval=25
+2026-07-25 01:00:19,181 | INFO | [t=59] VLA chunk prompt=pick milk
+2026-07-25 01:00:19,792 | INFO | VLM @t=50 task=16 subtask=pick milk keyframes=[]
+2026-07-25 01:00:19,792 | INFO |   raw={"current_primitive": "pick milk", "keyframe_positions": []}
+2026-07-25 01:00:19,792 | INFO | [AUTONOMOUS_PROMPT_GUARD_ACCEPT] t=50 task=16 raw=pick milk accepted=pick milk reason=accepted stage_count=0
+2026-07-25 01:00:19,850 | INFO | [t=60] VLA chunk prompt=pick milk
+2026-07-25 01:00:39,376 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=51 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:40,497 | INFO | [t=61] VLA chunk prompt=pick milk
+2026-07-25 01:00:40,524 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=52 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:40,579 | INFO | [t=62] VLA chunk prompt=pick milk
+2026-07-25 01:00:40,601 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=53 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:40,656 | INFO | [t=63] VLA chunk prompt=pick milk
+2026-07-25 01:00:40,678 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=54 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:40,731 | INFO | [t=64] VLA chunk prompt=pick milk
+2026-07-25 01:00:40,754 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=55 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:40,808 | INFO | [t=65] VLA chunk prompt=pick milk
+2026-07-25 01:00:40,830 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=56 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:40,884 | INFO | [t=66] VLA chunk prompt=pick milk
+2026-07-25 01:00:40,907 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=57 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:40,962 | INFO | [t=67] VLA chunk prompt=pick milk
+2026-07-25 01:00:40,984 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=58 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:41,038 | INFO | [t=68] VLA chunk prompt=pick milk
+2026-07-25 01:00:41,060 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=59 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:41,113 | INFO | [t=69] VLA chunk prompt=pick milk
+2026-07-25 01:00:41,135 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=60 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:41,188 | INFO | [t=70] VLA chunk prompt=pick milk
+2026-07-25 01:00:41,211 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=61 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:41,265 | INFO | [t=71] VLA chunk prompt=pick milk
+2026-07-25 01:00:41,287 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=62 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:41,340 | INFO | [t=72] VLA chunk prompt=pick milk
+2026-07-25 01:00:41,362 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=63 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:41,416 | INFO | [t=73] VLA chunk prompt=pick milk
+2026-07-25 01:00:41,438 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=64 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:41,491 | INFO | [t=74] VLA chunk prompt=pick milk
+2026-07-25 01:00:41,513 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=65 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:41,566 | INFO | [t=75] VLA chunk prompt=pick milk
+2026-07-25 01:00:41,588 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=66 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:41,641 | INFO | [t=76] VLA chunk prompt=pick milk
+2026-07-25 01:00:41,663 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=67 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:41,716 | INFO | [t=77] VLA chunk prompt=pick milk
+2026-07-25 01:00:41,739 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=68 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:41,792 | INFO | [t=78] VLA chunk prompt=pick milk
+2026-07-25 01:00:41,814 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=69 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:41,866 | INFO | [t=79] VLA chunk prompt=pick milk
+2026-07-25 01:00:41,888 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=70 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:41,941 | INFO | [t=80] VLA chunk prompt=pick milk
+2026-07-25 01:00:41,964 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=71 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:42,017 | INFO | [t=81] VLA chunk prompt=pick milk
+2026-07-25 01:00:42,039 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=72 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:42,092 | INFO | [t=82] VLA chunk prompt=pick milk
+2026-07-25 01:00:42,114 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=73 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:42,167 | INFO | [t=83] VLA chunk prompt=pick milk
+2026-07-25 01:00:42,189 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=74 task=16 accepted=pick milk last_vlm_t=50 interval=25
+2026-07-25 01:00:42,242 | INFO | [t=84] VLA chunk prompt=pick milk
+2026-07-25 01:00:43,350 | INFO | VLM @t=75 task=16 subtask=pick milk keyframes=[]
+2026-07-25 01:00:43,350 | INFO |   raw={"current_primitive": "pick milk", "keyframe_positions": []}
+2026-07-25 01:00:43,350 | INFO | [AUTONOMOUS_PROMPT_GUARD_ACCEPT] t=75 task=16 raw=pick milk accepted=pick milk reason=accepted stage_count=0
+2026-07-25 01:00:43,406 | INFO | [t=85] VLA chunk prompt=pick milk
+2026-07-25 01:01:02,808 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=76 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:02,865 | INFO | [t=86] VLA chunk prompt=pick milk
+2026-07-25 01:01:02,888 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=77 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:02,945 | INFO | [t=87] VLA chunk prompt=pick milk
+2026-07-25 01:01:02,967 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=78 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:03,023 | INFO | [t=88] VLA chunk prompt=pick milk
+2026-07-25 01:01:03,045 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=79 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:03,102 | INFO | [t=89] VLA chunk prompt=pick milk
+2026-07-25 01:01:03,125 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=80 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:03,181 | INFO | [t=90] VLA chunk prompt=pick milk
+2026-07-25 01:01:03,204 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=81 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:03,261 | INFO | [t=91] VLA chunk prompt=pick milk
+2026-07-25 01:01:03,282 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=82 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:03,338 | INFO | [t=92] VLA chunk prompt=pick milk
+2026-07-25 01:01:03,361 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=83 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:03,418 | INFO | [t=93] VLA chunk prompt=pick milk
+2026-07-25 01:01:03,443 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=84 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:03,500 | INFO | [t=94] VLA chunk prompt=pick milk
+2026-07-25 01:01:03,528 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=85 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:03,583 | INFO | [t=95] VLA chunk prompt=pick milk
+2026-07-25 01:01:03,605 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=86 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:03,660 | INFO | [t=96] VLA chunk prompt=pick milk
+2026-07-25 01:01:03,682 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=87 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:03,737 | INFO | [t=97] VLA chunk prompt=pick milk
+2026-07-25 01:01:03,760 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=88 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:03,816 | INFO | [t=98] VLA chunk prompt=pick milk
+2026-07-25 01:01:03,838 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=89 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:03,893 | INFO | [t=99] VLA chunk prompt=pick milk
+2026-07-25 01:01:03,915 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=90 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:03,970 | INFO | [t=100] VLA chunk prompt=pick milk
+2026-07-25 01:01:03,992 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=91 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:04,047 | INFO | [t=101] VLA chunk prompt=pick milk
+2026-07-25 01:01:04,069 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=92 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:04,124 | INFO | [t=102] VLA chunk prompt=pick milk
+2026-07-25 01:01:04,149 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=93 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:04,206 | INFO | [t=103] VLA chunk prompt=pick milk
+2026-07-25 01:01:04,231 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=94 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:04,287 | INFO | [t=104] VLA chunk prompt=pick milk
+2026-07-25 01:01:04,309 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=95 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:04,364 | INFO | [t=105] VLA chunk prompt=pick milk
+2026-07-25 01:01:04,386 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=96 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:04,442 | INFO | [t=106] VLA chunk prompt=pick milk
+2026-07-25 01:01:04,463 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=97 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:04,519 | INFO | [t=107] VLA chunk prompt=pick milk
+2026-07-25 01:01:04,543 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=98 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:04,600 | INFO | [t=108] VLA chunk prompt=pick milk
+2026-07-25 01:01:04,622 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=99 task=16 accepted=pick milk last_vlm_t=75 interval=25
+2026-07-25 01:01:04,678 | INFO | [t=109] VLA chunk prompt=pick milk
+2026-07-25 01:01:05,294 | INFO | VLM @t=100 task=16 subtask=pick milk keyframes=[]
+2026-07-25 01:01:05,294 | INFO |   raw={"current_primitive": "pick milk", "keyframe_positions": []}
+2026-07-25 01:01:05,294 | INFO | [AUTONOMOUS_PROMPT_GUARD_ACCEPT] t=100 task=16 raw=pick milk accepted=pick milk reason=accepted stage_count=0
+2026-07-25 01:01:05,353 | INFO | [t=110] VLA chunk prompt=pick milk
+2026-07-25 01:01:24,770 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=101 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:24,827 | INFO | [t=111] VLA chunk prompt=pick milk
+2026-07-25 01:01:24,850 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=102 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:24,904 | INFO | [t=112] VLA chunk prompt=pick milk
+2026-07-25 01:01:24,928 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=103 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:24,983 | INFO | [t=113] VLA chunk prompt=pick milk
+2026-07-25 01:01:25,005 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=104 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:25,059 | INFO | [t=114] VLA chunk prompt=pick milk
+2026-07-25 01:01:25,082 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=105 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:25,135 | INFO | [t=115] VLA chunk prompt=pick milk
+2026-07-25 01:01:25,159 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=106 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:25,214 | INFO | [t=116] VLA chunk prompt=pick milk
+2026-07-25 01:01:25,238 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=107 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:25,292 | INFO | [t=117] VLA chunk prompt=pick milk
+2026-07-25 01:01:25,314 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=108 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:25,367 | INFO | [t=118] VLA chunk prompt=pick milk
+2026-07-25 01:01:25,389 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=109 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:25,443 | INFO | [t=119] VLA chunk prompt=pick milk
+2026-07-25 01:01:25,465 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=110 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:25,520 | INFO | [t=120] VLA chunk prompt=pick milk
+2026-07-25 01:01:25,545 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=111 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:25,600 | INFO | [t=121] VLA chunk prompt=pick milk
+2026-07-25 01:01:25,625 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=112 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:25,683 | INFO | [t=122] VLA chunk prompt=pick milk
+2026-07-25 01:01:25,707 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=113 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:25,763 | INFO | [t=123] VLA chunk prompt=pick milk
+2026-07-25 01:01:25,787 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=114 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:25,842 | INFO | [t=124] VLA chunk prompt=pick milk
+2026-07-25 01:01:25,867 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=115 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:25,923 | INFO | [t=125] VLA chunk prompt=pick milk
+2026-07-25 01:01:25,948 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=116 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:26,003 | INFO | [t=126] VLA chunk prompt=pick milk
+2026-07-25 01:01:26,028 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=117 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:26,083 | INFO | [t=127] VLA chunk prompt=pick milk
+2026-07-25 01:01:26,115 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=118 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:26,170 | INFO | [t=128] VLA chunk prompt=pick milk
+2026-07-25 01:01:26,194 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=119 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:26,249 | INFO | [t=129] VLA chunk prompt=pick milk
+2026-07-25 01:01:26,271 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=120 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:26,324 | INFO | [t=130] VLA chunk prompt=pick milk
+2026-07-25 01:01:26,346 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=121 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:26,399 | INFO | [t=131] VLA chunk prompt=pick milk
+2026-07-25 01:01:26,421 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=122 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:26,475 | INFO | [t=132] VLA chunk prompt=pick milk
+2026-07-25 01:01:26,497 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=123 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:26,550 | INFO | [t=133] VLA chunk prompt=pick milk
+2026-07-25 01:01:26,572 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=124 task=16 accepted=pick milk last_vlm_t=100 interval=25
+2026-07-25 01:01:26,626 | INFO | [t=134] VLA chunk prompt=pick milk
+2026-07-25 01:01:27,259 | INFO | VLM @t=125 task=16 subtask=pick milk keyframes=[]
+2026-07-25 01:01:27,259 | INFO |   raw={"current_primitive": "pick milk", "keyframe_positions": []}
+2026-07-25 01:01:27,260 | INFO | [AUTONOMOUS_PROMPT_GUARD_ACCEPT] t=125 task=16 raw=pick milk accepted=pick milk reason=accepted stage_count=0
+2026-07-25 01:01:27,317 | INFO | [t=135] VLA chunk prompt=pick milk
+2026-07-25 01:01:46,802 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=126 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:46,862 | INFO | [t=136] VLA chunk prompt=pick milk
+2026-07-25 01:01:46,889 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=127 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:46,947 | INFO | [t=137] VLA chunk prompt=pick milk
+2026-07-25 01:01:46,973 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=128 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:47,031 | INFO | [t=138] VLA chunk prompt=pick milk
+2026-07-25 01:01:47,056 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=129 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:47,114 | INFO | [t=139] VLA chunk prompt=pick milk
+2026-07-25 01:01:47,140 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=130 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:47,197 | INFO | [t=140] VLA chunk prompt=pick milk
+2026-07-25 01:01:47,223 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=131 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:47,280 | INFO | [t=141] VLA chunk prompt=pick milk
+2026-07-25 01:01:47,305 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=132 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:47,363 | INFO | [t=142] VLA chunk prompt=pick milk
+2026-07-25 01:01:47,389 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=133 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:47,447 | INFO | [t=143] VLA chunk prompt=pick milk
+2026-07-25 01:01:47,483 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=134 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:47,540 | INFO | [t=144] VLA chunk prompt=pick milk
+2026-07-25 01:01:47,566 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=135 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:47,624 | INFO | [t=145] VLA chunk prompt=pick milk
+2026-07-25 01:01:47,646 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=136 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:47,704 | INFO | [t=146] VLA chunk prompt=pick milk
+2026-07-25 01:01:47,728 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=137 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:47,784 | INFO | [t=147] VLA chunk prompt=pick milk
+2026-07-25 01:01:47,809 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=138 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:47,867 | INFO | [t=148] VLA chunk prompt=pick milk
+2026-07-25 01:01:47,892 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=139 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:47,950 | INFO | [t=149] VLA chunk prompt=pick milk
+2026-07-25 01:01:47,975 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=140 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:48,033 | INFO | [t=150] VLA chunk prompt=pick milk
+2026-07-25 01:01:48,059 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=141 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:48,117 | INFO | [t=151] VLA chunk prompt=pick milk
+2026-07-25 01:01:48,143 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=142 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:48,205 | INFO | [t=152] VLA chunk prompt=pick milk
+2026-07-25 01:01:48,230 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=143 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:48,288 | INFO | [t=153] VLA chunk prompt=pick milk
+2026-07-25 01:01:48,313 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=144 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:48,425 | INFO | [t=154] VLA chunk prompt=pick milk
+2026-07-25 01:01:48,451 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=145 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:48,508 | INFO | [t=155] VLA chunk prompt=pick milk
+2026-07-25 01:01:48,533 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=146 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:48,591 | INFO | [t=156] VLA chunk prompt=pick milk
+2026-07-25 01:01:48,616 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=147 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:48,725 | INFO | [t=157] VLA chunk prompt=pick milk
+2026-07-25 01:01:48,751 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=148 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:48,808 | INFO | [t=158] VLA chunk prompt=pick milk
+2026-07-25 01:01:48,832 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=149 task=16 accepted=pick milk last_vlm_t=125 interval=25
+2026-07-25 01:01:48,888 | INFO | [t=159] VLA chunk prompt=pick milk
+2026-07-25 01:01:49,595 | INFO | VLM @t=150 task=16 subtask=pick milk keyframes=[]
+2026-07-25 01:01:49,595 | INFO |   raw={"current_primitive": "pick milk", "keyframe_positions": []}
+2026-07-25 01:01:49,595 | INFO | [AUTONOMOUS_PROMPT_GUARD_ACCEPT] t=150 task=16 raw=pick milk accepted=pick milk reason=accepted stage_count=0
+2026-07-25 01:01:49,654 | INFO | [t=160] VLA chunk prompt=pick milk
+2026-07-25 01:02:09,011 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=151 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:09,069 | INFO | [t=161] VLA chunk prompt=pick milk
+2026-07-25 01:02:09,094 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=152 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:09,153 | INFO | [t=162] VLA chunk prompt=pick milk
+2026-07-25 01:02:09,177 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=153 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:09,234 | INFO | [t=163] VLA chunk prompt=pick milk
+2026-07-25 01:02:09,258 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=154 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:09,315 | INFO | [t=164] VLA chunk prompt=pick milk
+2026-07-25 01:02:09,338 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=155 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:09,396 | INFO | [t=165] VLA chunk prompt=pick milk
+2026-07-25 01:02:09,420 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=156 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:09,478 | INFO | [t=166] VLA chunk prompt=pick milk
+2026-07-25 01:02:09,503 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=157 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:09,562 | INFO | [t=167] VLA chunk prompt=pick milk
+2026-07-25 01:02:09,587 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=158 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:09,644 | INFO | [t=168] VLA chunk prompt=pick milk
+2026-07-25 01:02:09,667 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=159 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:09,724 | INFO | [t=169] VLA chunk prompt=pick milk
+2026-07-25 01:02:09,749 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=160 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:09,806 | INFO | [t=170] VLA chunk prompt=pick milk
+2026-07-25 01:02:09,830 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=161 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:09,887 | INFO | [t=171] VLA chunk prompt=pick milk
+2026-07-25 01:02:09,911 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=162 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:09,968 | INFO | [t=172] VLA chunk prompt=pick milk
+2026-07-25 01:02:09,991 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=163 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:10,048 | INFO | [t=173] VLA chunk prompt=pick milk
+2026-07-25 01:02:10,073 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=164 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:10,130 | INFO | [t=174] VLA chunk prompt=pick milk
+2026-07-25 01:02:10,153 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=165 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:10,211 | INFO | [t=175] VLA chunk prompt=pick milk
+2026-07-25 01:02:10,234 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=166 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:10,291 | INFO | [t=176] VLA chunk prompt=pick milk
+2026-07-25 01:02:10,317 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=167 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:10,374 | INFO | [t=177] VLA chunk prompt=pick milk
+2026-07-25 01:02:10,398 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=168 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:10,456 | INFO | [t=178] VLA chunk prompt=pick milk
+2026-07-25 01:02:10,479 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=169 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:10,584 | INFO | [t=179] VLA chunk prompt=pick milk
+2026-07-25 01:02:10,610 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=170 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:10,667 | INFO | [t=180] VLA chunk prompt=pick milk
+2026-07-25 01:02:10,692 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=171 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:10,749 | INFO | [t=181] VLA chunk prompt=pick milk
+2026-07-25 01:02:10,773 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=172 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:10,883 | INFO | [t=182] VLA chunk prompt=pick milk
+2026-07-25 01:02:10,908 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=173 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:10,970 | INFO | [t=183] VLA chunk prompt=pick milk
+2026-07-25 01:02:10,993 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=174 task=16 accepted=pick milk last_vlm_t=150 interval=25
+2026-07-25 01:02:11,050 | INFO | [t=184] VLA chunk prompt=pick milk
+2026-07-25 01:02:11,887 | INFO | VLM @t=175 task=16 subtask=pour milk into red coffee mug 1st keyframes=[]
+2026-07-25 01:02:11,887 | INFO |   raw={"current_primitive": "pour milk into red coffee mug 1st", "keyframe_positions": []}
+2026-07-25 01:02:11,887 | INFO | [AUTONOMOUS_PROMPT_GUARD_ACCEPT] t=175 task=16 raw=pour milk into red coffee mug 1st accepted=pour milk into red coffee mug 1st reason=accepted stage_count=0
+2026-07-25 01:02:11,887 | INFO | [t=185] VLM prompt update from step=175: pour milk into red coffee mug 1st
+2026-07-25 01:02:11,945 | INFO | [t=185] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:31,542 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=176 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:31,600 | INFO | [t=186] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:31,627 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=177 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:31,683 | INFO | [t=187] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:31,707 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=178 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:31,762 | INFO | [t=188] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:31,785 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=179 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:31,840 | INFO | [t=189] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:31,865 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=180 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:31,919 | INFO | [t=190] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:31,943 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=181 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:31,999 | INFO | [t=191] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:32,023 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=182 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:32,077 | INFO | [t=192] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:32,103 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=183 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:32,158 | INFO | [t=193] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:32,183 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=184 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:32,239 | INFO | [t=194] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:32,263 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=185 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:32,319 | INFO | [t=195] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:32,343 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=186 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:32,397 | INFO | [t=196] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:32,420 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=187 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:32,475 | INFO | [t=197] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:32,499 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=188 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:32,554 | INFO | [t=198] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:32,578 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=189 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:32,632 | INFO | [t=199] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:32,656 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=190 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:32,710 | INFO | [t=200] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:32,735 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=191 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:32,790 | INFO | [t=201] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:32,815 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=192 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:32,870 | INFO | [t=202] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:32,894 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=193 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:32,950 | INFO | [t=203] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:32,975 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=194 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:33,030 | INFO | [t=204] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:33,054 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=195 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:33,108 | INFO | [t=205] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:33,131 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=196 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:33,186 | INFO | [t=206] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:33,210 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=197 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:33,264 | INFO | [t=207] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:33,288 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=198 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:33,343 | INFO | [t=208] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:33,366 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=199 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=175 interval=25
+2026-07-25 01:02:33,421 | INFO | [t=209] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:02:34,025 | INFO | VLM @t=200 task=16 subtask=pick milk keyframes=[2]
+2026-07-25 01:02:34,025 | INFO |   raw={"current_primitive": "pick milk", "keyframe_positions": [2]}
+2026-07-25 01:02:34,025 | INFO | [AUTONOMOUS_PROMPT_GUARD_ACCEPT] t=200 task=16 raw=pick milk accepted=pick milk reason=accepted stage_count=0
+2026-07-25 01:02:34,025 | INFO | [t=210] VLM prompt update from step=200: pick milk
+2026-07-25 01:02:34,081 | INFO | [t=210] VLA chunk prompt=pick milk
+2026-07-25 01:02:53,740 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=201 task=16 accepted=pick milk last_vlm_t=200 interval=25
+2026-07-25 01:02:53,800 | INFO | [t=211] VLA chunk prompt=pick milk
+2026-07-25 01:02:53,826 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=202 task=16 accepted=pick milk last_vlm_t=200 interval=25
+2026-07-25 01:02:53,884 | INFO | [t=212] VLA chunk prompt=pick milk
+2026-07-25 01:02:53,912 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=203 task=16 accepted=pick milk last_vlm_t=200 interval=25
+2026-07-25 01:02:53,970 | INFO | [t=213] VLA chunk prompt=pick milk
+2026-07-25 01:02:53,995 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=204 task=16 accepted=pick milk last_vlm_t=200 interval=25
+2026-07-25 01:02:54,052 | INFO | [t=214] VLA chunk prompt=pick milk
+2026-07-25 01:02:54,077 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=205 task=16 accepted=pick milk last_vlm_t=200 interval=25
+2026-07-25 01:02:54,135 | INFO | [t=215] VLA chunk prompt=pick milk
+2026-07-25 01:02:54,161 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=206 task=16 accepted=pick milk last_vlm_t=200 interval=25
+2026-07-25 01:02:54,219 | INFO | [t=216] VLA chunk prompt=pick milk
+2026-07-25 01:02:54,244 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=207 task=16 accepted=pick milk last_vlm_t=200 interval=25
+2026-07-25 01:02:54,301 | INFO | [t=217] VLA chunk prompt=pick milk
+2026-07-25 01:02:54,326 | INFO | [AUTONOMOUS_PROMPT_GUARD_STAGE] task=16 stage_index=0 stage=01_Lift_Milk
+2026-07-25 01:02:54,326 | INFO | [t=218] stage done: 01_Lift_Milk
+2026-07-25 01:02:54,945 | INFO | VLM @t=208 task=16 subtask=pick milk keyframes=[]
+2026-07-25 01:02:54,945 | INFO |   raw={"current_primitive": "pick milk", "keyframe_positions": []}
+2026-07-25 01:02:54,945 | INFO | [AUTONOMOUS_PROMPT_GUARD_BLOCK] t=208 task=16 raw=pick milk accepted=pick milk reason=regression stage_count=1
+2026-07-25 01:02:55,005 | INFO | [t=218] VLA chunk prompt=pick milk
+2026-07-25 01:02:55,009 | INFO | [POUR_RETURN_ASSIST_STAGE_RESET] task=16 stage_count=1 prompt=pick milk
+2026-07-25 01:03:14,476 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=209 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:14,535 | INFO | [t=219] VLA chunk prompt=pick milk
+2026-07-25 01:03:14,560 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=210 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:14,616 | INFO | [t=220] VLA chunk prompt=pick milk
+2026-07-25 01:03:14,640 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=211 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:14,695 | INFO | [t=221] VLA chunk prompt=pick milk
+2026-07-25 01:03:14,721 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=212 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:14,775 | INFO | [t=222] VLA chunk prompt=pick milk
+2026-07-25 01:03:14,803 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=213 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:14,859 | INFO | [t=223] VLA chunk prompt=pick milk
+2026-07-25 01:03:14,886 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=214 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:14,941 | INFO | [t=224] VLA chunk prompt=pick milk
+2026-07-25 01:03:14,975 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=215 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:15,029 | INFO | [t=225] VLA chunk prompt=pick milk
+2026-07-25 01:03:15,055 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=216 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:15,110 | INFO | [t=226] VLA chunk prompt=pick milk
+2026-07-25 01:03:15,136 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=217 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:15,191 | INFO | [t=227] VLA chunk prompt=pick milk
+2026-07-25 01:03:15,218 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=218 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:15,274 | INFO | [t=228] VLA chunk prompt=pick milk
+2026-07-25 01:03:15,300 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=219 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:15,356 | INFO | [t=229] VLA chunk prompt=pick milk
+2026-07-25 01:03:15,382 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=220 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:15,438 | INFO | [t=230] VLA chunk prompt=pick milk
+2026-07-25 01:03:15,464 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=221 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:15,520 | INFO | [t=231] VLA chunk prompt=pick milk
+2026-07-25 01:03:15,547 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=222 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:15,602 | INFO | [t=232] VLA chunk prompt=pick milk
+2026-07-25 01:03:15,629 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=223 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:15,684 | INFO | [t=233] VLA chunk prompt=pick milk
+2026-07-25 01:03:15,710 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=224 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:15,766 | INFO | [t=234] VLA chunk prompt=pick milk
+2026-07-25 01:03:15,791 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=225 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:15,845 | INFO | [t=235] VLA chunk prompt=pick milk
+2026-07-25 01:03:15,870 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=226 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:15,924 | INFO | [t=236] VLA chunk prompt=pick milk
+2026-07-25 01:03:15,949 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=227 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:16,003 | INFO | [t=237] VLA chunk prompt=pick milk
+2026-07-25 01:03:16,027 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=228 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:16,082 | INFO | [t=238] VLA chunk prompt=pick milk
+2026-07-25 01:03:16,106 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=229 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:16,158 | INFO | [t=239] VLA chunk prompt=pick milk
+2026-07-25 01:03:16,183 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=230 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:16,236 | INFO | [t=240] VLA chunk prompt=pick milk
+2026-07-25 01:03:16,261 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=231 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:16,315 | INFO | [t=241] VLA chunk prompt=pick milk
+2026-07-25 01:03:16,339 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=232 task=16 accepted=pick milk last_vlm_t=208 interval=25
+2026-07-25 01:03:16,393 | INFO | [t=242] VLA chunk prompt=pick milk
+2026-07-25 01:03:17,327 | INFO | VLM @t=233 task=16 subtask=pour milk into red coffee mug 1st keyframes=[]
+2026-07-25 01:03:17,327 | INFO |   raw={"current_primitive": "pour milk into red coffee mug 1st", "keyframe_positions": []}
+2026-07-25 01:03:17,328 | INFO | [AUTONOMOUS_PROMPT_GUARD_ACCEPT] t=233 task=16 raw=pour milk into red coffee mug 1st accepted=pour milk into red coffee mug 1st reason=accepted stage_count=1
+2026-07-25 01:03:17,328 | INFO | [t=243] VLM prompt update from step=233: pour milk into red coffee mug 1st
+2026-07-25 01:03:17,385 | INFO | [t=243] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:17,390 | INFO | [POUR_RETURN_ASSIST_BASELINE] task=16 stage_count=1 tilt=1.66435 target_xy=0.31105 prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:36,795 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=234 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:36,852 | INFO | [t=244] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:36,880 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=235 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:36,936 | INFO | [t=245] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:36,962 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=236 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:37,018 | INFO | [t=246] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:37,044 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=237 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:37,099 | INFO | [t=247] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:37,126 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=238 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:37,181 | INFO | [t=248] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:37,207 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=239 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:37,263 | INFO | [t=249] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:37,289 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=240 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:37,344 | INFO | [t=250] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:37,370 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=241 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:37,426 | INFO | [t=251] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:37,453 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=242 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:37,508 | INFO | [t=252] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:37,535 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=243 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:37,591 | INFO | [t=253] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:37,617 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=244 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:37,672 | INFO | [t=254] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:37,699 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=245 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:37,755 | INFO | [t=255] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:37,782 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=246 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:37,838 | INFO | [t=256] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:37,865 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=247 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:37,921 | INFO | [t=257] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:37,958 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=248 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:38,013 | INFO | [t=258] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:38,041 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=249 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:38,096 | INFO | [t=259] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:38,123 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=250 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:38,178 | INFO | [t=260] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:38,206 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=251 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:38,261 | INFO | [t=261] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:38,288 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=252 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:38,344 | INFO | [t=262] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:38,371 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=253 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:38,426 | INFO | [t=263] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:38,454 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=254 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:38,509 | INFO | [t=264] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:38,536 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=255 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:38,592 | INFO | [t=265] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:38,619 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=256 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:38,675 | INFO | [t=266] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:38,702 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=257 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=233 interval=25
+2026-07-25 01:03:38,757 | INFO | [t=267] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:03:39,615 | INFO | VLM @t=258 task=16 subtask=pour milk into red coffee mug 2nd keyframes=[]
+2026-07-25 01:03:39,615 | INFO |   raw={"current_primitive": "pour milk into red coffee mug 2nd", "keyframe_positions": []}
+2026-07-25 01:03:39,615 | INFO | [AUTONOMOUS_PROMPT_GUARD_ACCEPT] t=258 task=16 raw=pour milk into red coffee mug 2nd accepted=pour milk into red coffee mug 2nd reason=accepted stage_count=1
+2026-07-25 01:03:39,615 | INFO | [t=268] VLM prompt update from step=258: pour milk into red coffee mug 2nd
+2026-07-25 01:03:39,672 | INFO | [t=268] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:03:59,094 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=259 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:03:59,152 | INFO | [t=269] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:03:59,179 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=260 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:03:59,235 | INFO | [t=270] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:03:59,260 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=261 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:03:59,316 | INFO | [t=271] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:03:59,341 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=262 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:03:59,398 | INFO | [t=272] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:03:59,424 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=263 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:03:59,480 | INFO | [t=273] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:03:59,518 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=264 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:03:59,574 | INFO | [t=274] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:03:59,598 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=265 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:03:59,655 | INFO | [t=275] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:03:59,682 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=266 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:03:59,741 | INFO | [t=276] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:03:59,766 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=267 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:03:59,823 | INFO | [t=277] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:03:59,847 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=268 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:03:59,904 | INFO | [t=278] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:03:59,929 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=269 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:03:59,986 | INFO | [t=279] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:00,012 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=270 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:04:00,069 | INFO | [t=280] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:00,092 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=271 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:04:00,149 | INFO | [t=281] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:00,174 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=272 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:04:00,229 | INFO | [t=282] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:00,253 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=273 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:04:00,310 | INFO | [t=283] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:00,335 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=274 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:04:00,392 | INFO | [t=284] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:00,418 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=275 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:04:00,475 | INFO | [t=285] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:00,499 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=276 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:04:00,556 | INFO | [t=286] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:00,580 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=277 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:04:00,637 | INFO | [t=287] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:00,661 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=278 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:04:00,716 | INFO | [t=288] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:00,741 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=279 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:04:00,797 | INFO | [t=289] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:00,822 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=280 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:04:00,879 | INFO | [t=290] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:00,904 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=281 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:04:00,960 | INFO | [t=291] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:00,987 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=282 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=258 interval=25
+2026-07-25 01:04:01,042 | INFO | [t=292] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:01,827 | INFO | VLM @t=283 task=16 subtask=pour milk into red coffee mug 2nd keyframes=[]
+2026-07-25 01:04:01,827 | INFO |   raw={"current_primitive": "pour milk into red coffee mug 2nd", "keyframe_positions": []}
+2026-07-25 01:04:01,827 | INFO | [AUTONOMOUS_PROMPT_GUARD_ACCEPT] t=283 task=16 raw=pour milk into red coffee mug 2nd accepted=pour milk into red coffee mug 2nd reason=accepted stage_count=1
+2026-07-25 01:04:01,887 | INFO | [t=293] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:21,343 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=284 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:21,401 | INFO | [t=294] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:21,429 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=285 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:21,485 | INFO | [t=295] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:21,513 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=286 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:21,569 | INFO | [t=296] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:21,596 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=287 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:21,652 | INFO | [t=297] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:21,678 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=288 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:21,733 | INFO | [t=298] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:21,761 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=289 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:21,817 | INFO | [t=299] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:21,843 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=290 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:21,898 | INFO | [t=300] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:21,923 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=291 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:21,978 | INFO | [t=301] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:22,003 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=292 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:22,058 | INFO | [t=302] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:22,085 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=293 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:22,140 | INFO | [t=303] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:22,168 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=294 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:22,223 | INFO | [t=304] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:22,250 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=295 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:22,305 | INFO | [t=305] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:22,331 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=296 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:22,386 | INFO | [t=306] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:22,418 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=297 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:22,474 | INFO | [t=307] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:22,502 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=298 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:22,557 | INFO | [t=308] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:22,584 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=299 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:22,639 | INFO | [t=309] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:22,666 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=300 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:22,721 | INFO | [t=310] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:22,749 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=301 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:22,806 | INFO | [t=311] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:22,832 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=302 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:22,886 | INFO | [t=312] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:22,912 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=303 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:22,967 | INFO | [t=313] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:22,993 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=304 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:23,047 | INFO | [t=314] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:23,073 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=305 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:23,127 | INFO | [t=315] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:23,153 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=306 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:23,208 | INFO | [t=316] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:23,233 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=307 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=283 interval=25
+2026-07-25 01:04:23,287 | INFO | [t=317] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:04:24,083 | INFO | VLM @t=308 task=16 subtask=pour milk into red coffee mug 1st keyframes=[]
+2026-07-25 01:04:24,083 | INFO |   raw={"current_primitive": "pour milk into red coffee mug 1st", "keyframe_positions": []}
+2026-07-25 01:04:24,083 | INFO | [AUTONOMOUS_PROMPT_GUARD_ACCEPT] t=308 task=16 raw=pour milk into red coffee mug 1st accepted=pour milk into red coffee mug 1st reason=accepted stage_count=1
+2026-07-25 01:04:24,083 | INFO | [t=318] VLM prompt update from step=308: pour milk into red coffee mug 1st
+2026-07-25 01:04:24,140 | INFO | [t=318] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:43,623 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=309 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:43,680 | INFO | [t=319] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:43,708 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=310 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:43,763 | INFO | [t=320] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:43,789 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=311 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:43,845 | INFO | [t=321] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:43,873 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=312 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:43,928 | INFO | [t=322] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:43,964 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=313 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:44,018 | INFO | [t=323] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:44,044 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=314 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:44,098 | INFO | [t=324] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:44,127 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=315 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:44,181 | INFO | [t=325] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:44,210 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=316 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:44,265 | INFO | [t=326] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:44,291 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=317 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:44,347 | INFO | [t=327] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:44,371 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=318 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:44,426 | INFO | [t=328] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:44,451 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=319 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:44,505 | INFO | [t=329] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:44,530 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=320 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:44,585 | INFO | [t=330] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:44,610 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=321 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:44,666 | INFO | [t=331] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:44,692 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=322 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:44,749 | INFO | [t=332] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:44,774 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=323 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:44,831 | INFO | [t=333] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:44,855 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=324 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:44,912 | INFO | [t=334] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:44,938 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=325 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:44,994 | INFO | [t=335] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:45,021 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=326 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:45,078 | INFO | [t=336] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:45,106 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=327 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:45,164 | INFO | [t=337] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:45,191 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=328 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:45,249 | INFO | [t=338] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:45,276 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=329 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:45,334 | INFO | [t=339] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:45,361 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=330 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:45,418 | INFO | [t=340] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:45,445 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=331 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:45,502 | INFO | [t=341] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:45,529 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=332 task=16 accepted=pour milk into red coffee mug 1st last_vlm_t=308 interval=25
+2026-07-25 01:04:45,586 | INFO | [t=342] VLA chunk prompt=pour milk into red coffee mug 1st
+2026-07-25 01:04:46,420 | INFO | VLM @t=333 task=16 subtask=pour milk into red coffee mug 2nd keyframes=[]
+2026-07-25 01:04:46,420 | INFO |   raw={"current_primitive": "pour milk into red coffee mug 2nd", "keyframe_positions": []}
+2026-07-25 01:04:46,420 | INFO | [AUTONOMOUS_PROMPT_GUARD_ACCEPT] t=333 task=16 raw=pour milk into red coffee mug 2nd accepted=pour milk into red coffee mug 2nd reason=accepted stage_count=1
+2026-07-25 01:04:46,420 | INFO | [t=343] VLM prompt update from step=333: pour milk into red coffee mug 2nd
+2026-07-25 01:04:46,480 | INFO | [t=343] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:06,062 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=334 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=333 interval=25
+2026-07-25 01:05:06,121 | INFO | [t=344] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:06,148 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=335 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=333 interval=25
+2026-07-25 01:05:06,206 | INFO | [t=345] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:06,231 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=336 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=333 interval=25
+2026-07-25 01:05:06,290 | INFO | [t=346] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:06,317 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=337 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=333 interval=25
+2026-07-25 01:05:06,374 | INFO | [t=347] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:06,398 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=338 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=333 interval=25
+2026-07-25 01:05:06,457 | INFO | [t=348] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:06,473 | INFO | [POUR_RETURN_ASSIST_ARM] task=16 cycle=1 baseline=1.66435 tilt=1.49937 deviation=0.16498 target_xy=0.07684 rotation=[-0.0217 -0.8187 -0.0081]
+2026-07-25 01:05:06,482 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=339 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=333 interval=25
+2026-07-25 01:05:06,539 | INFO | [t=349] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:06,544 | INFO | [POUR_RETURN_ASSIST_STEP] task=16 cycle=1 step=1 tilt=1.49937 target_xy=0.07684 raw_rot=[-0.0179 -0.8059 -0.0082] applied_rot=[0.0212 0.7997 0.008 ]
+2026-07-25 01:05:06,564 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=340 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=333 interval=25
+2026-07-25 01:05:06,622 | INFO | [t=350] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:06,648 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=341 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=333 interval=25
+2026-07-25 01:05:06,706 | INFO | [t=351] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:06,733 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=342 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=333 interval=25
+2026-07-25 01:05:06,791 | INFO | [t=352] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:06,809 | INFO | [POUR_RETURN_ASSIST_DONE] task=16 cycle=1 tilt=1.59036 deviation=0.07399 target_xy=0.05041
+2026-07-25 01:05:06,819 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=343 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=333 interval=25
+2026-07-25 01:05:06,876 | INFO | [t=353] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:06,904 | INFO | [AUTONOMOUS_PROMPT_GUARD_STAGE] task=16 stage_index=1 stage=02_Pour_One
+2026-07-25 01:05:06,904 | INFO | [t=354] stage done: 02_Pour_One
+2026-07-25 01:05:07,738 | INFO | VLM @t=344 task=16 subtask=pour milk into red coffee mug 2nd keyframes=[]
+2026-07-25 01:05:07,738 | INFO |   raw={"current_primitive": "pour milk into red coffee mug 2nd", "keyframe_positions": []}
+2026-07-25 01:05:07,738 | INFO | [AUTONOMOUS_PROMPT_GUARD_ACCEPT] t=344 task=16 raw=pour milk into red coffee mug 2nd accepted=pour milk into red coffee mug 2nd reason=accepted stage_count=2
+2026-07-25 01:05:07,798 | INFO | [t=354] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:07,803 | INFO | [POUR_RETURN_ASSIST_STAGE_RESET] task=16 stage_count=2 prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:07,803 | INFO | [POUR_RETURN_ASSIST_BASELINE] task=16 stage_count=2 tilt=1.60890 target_xy=0.04827 prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:27,301 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=345 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:27,360 | INFO | [t=355] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:27,388 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=346 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:27,445 | INFO | [t=356] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:27,473 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=347 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:27,528 | INFO | [t=357] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:27,556 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=348 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:27,611 | INFO | [t=358] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:27,629 | INFO | [POUR_RETURN_ASSIST_ARM] task=16 cycle=2 baseline=1.60890 tilt=1.43333 deviation=0.17556 target_xy=0.08834 rotation=[-0.0254 -0.7998 -0.0044]
+2026-07-25 01:05:27,639 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=349 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:27,694 | INFO | [t=359] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:27,699 | INFO | [POUR_RETURN_ASSIST_STEP] task=16 cycle=2 step=1 tilt=1.43333 target_xy=0.08834 raw_rot=[-0.024  -0.7983 -0.0141] applied_rot=[0.0254 0.7996 0.0044]
+2026-07-25 01:05:27,721 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=350 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:27,777 | INFO | [t=360] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:27,804 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=351 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:27,859 | INFO | [t=361] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:27,886 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=352 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:27,941 | INFO | [t=362] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:27,959 | INFO | [POUR_RETURN_ASSIST_DONE] task=16 cycle=2 tilt=1.53556 deviation=0.07334 target_xy=0.06322
+2026-07-25 01:05:27,969 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=353 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:28,024 | INFO | [t=363] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:28,050 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=354 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:28,104 | INFO | [t=364] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:28,129 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=355 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:28,182 | INFO | [t=365] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:28,209 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=356 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:28,263 | INFO | [t=366] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:28,288 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=357 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:28,342 | INFO | [t=367] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:28,367 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=358 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:28,422 | INFO | [t=368] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:28,446 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=359 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:28,500 | INFO | [t=369] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:28,517 | INFO | [POUR_RETURN_ASSIST_ARM] task=16 cycle=3 baseline=1.53556 tilt=1.33774 deviation=0.19782 target_xy=0.10913 rotation=[-0.0239 -0.8038 -0.0118]
+2026-07-25 01:05:28,526 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=360 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:28,580 | INFO | [t=370] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:28,585 | INFO | [POUR_RETURN_ASSIST_STEP] task=16 cycle=3 step=1 tilt=1.33774 target_xy=0.10913 raw_rot=[-0.0195 -0.7879 -0.0123] applied_rot=[0.0238 0.7996 0.0117]
+2026-07-25 01:05:28,606 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=361 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:28,661 | INFO | [t=371] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:28,717 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=362 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:28,771 | INFO | [t=372] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:28,796 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=363 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:28,850 | INFO | [t=373] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:28,875 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=364 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=344 interval=25
+2026-07-25 01:05:28,929 | INFO | [t=374] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:28,934 | INFO | [POUR_RETURN_ASSIST_STEP] task=16 cycle=3 step=5 tilt=1.43710 target_xy=0.08471 raw_rot=[-0.0166 -0.7856 -0.0104] applied_rot=[0.0238 0.7996 0.0117]
+2026-07-25 01:05:28,947 | INFO | [POUR_RETURN_ASSIST_DONE] task=16 cycle=3 tilt=1.48702 deviation=0.04854 target_xy=0.07596
+2026-07-25 01:05:28,956 | INFO | [AUTONOMOUS_PROMPT_GUARD_STAGE] task=16 stage_index=2 stage=03_Pour_Two
+2026-07-25 01:05:28,956 | INFO | [t=375] stage done: 03_Pour_Two
+2026-07-25 01:05:28,956 | INFO | [t=375] extra-pour monitor started; deadline=405
+2026-07-25 01:05:28,956 | INFO | [t=375] all stages done
+2026-07-25 01:05:29,757 | INFO | VLM @t=365 task=16 subtask=pour milk into red coffee mug 2nd keyframes=[]
+2026-07-25 01:05:29,757 | INFO |   raw={"current_primitive": "pour milk into red coffee mug 2nd", "keyframe_positions": []}
+2026-07-25 01:05:29,757 | INFO | [AUTONOMOUS_PROMPT_GUARD_BLOCK] t=365 task=16 raw=pour milk into red coffee mug 2nd accepted=pour milk into red coffee mug 2nd reason=regression stage_count=3
+2026-07-25 01:05:29,761 | INFO | [AUTONOMOUS_POST_STAGE_HOLD] task=16 official Pour2 complete; issuing zero actions for monitor
+2026-07-25 01:05:29,761 | INFO | [t=375] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:29,766 | INFO | [POUR_RETURN_ASSIST_STAGE_RESET] task=16 stage_count=3 prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,204 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=366 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,209 | INFO | [t=376] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,235 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=367 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,240 | INFO | [t=377] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,266 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=368 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,271 | INFO | [t=378] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,297 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=369 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,302 | INFO | [t=379] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,329 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=370 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,333 | INFO | [t=380] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,360 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=371 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,364 | INFO | [t=381] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,389 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=372 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,393 | INFO | [t=382] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,416 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=373 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,421 | INFO | [t=383] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,445 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=374 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,450 | INFO | [t=384] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,475 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=375 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,479 | INFO | [t=385] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,504 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=376 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,508 | INFO | [t=386] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,533 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=377 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,537 | INFO | [t=387] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,579 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=378 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,584 | INFO | [t=388] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,608 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=379 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,612 | INFO | [t=389] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,636 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=380 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,640 | INFO | [t=390] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,664 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=381 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,668 | INFO | [t=391] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,693 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=382 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,696 | INFO | [t=392] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,720 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=383 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,724 | INFO | [t=393] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,748 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=384 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,753 | INFO | [t=394] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,778 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=385 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,783 | INFO | [t=395] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,809 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=386 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,814 | INFO | [t=396] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,840 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=387 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,844 | INFO | [t=397] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,869 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=388 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,874 | INFO | [t=398] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:49,899 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=389 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=365 interval=25
+2026-07-25 01:05:49,903 | INFO | [t=399] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:05:50,722 | INFO | VLM @t=390 task=16 subtask=pour milk into red coffee mug 2nd keyframes=[]
+2026-07-25 01:05:50,722 | INFO |   raw={"current_primitive": "pour milk into red coffee mug 2nd", "keyframe_positions": []}
+2026-07-25 01:05:50,722 | INFO | [AUTONOMOUS_PROMPT_GUARD_BLOCK] t=390 task=16 raw=pour milk into red coffee mug 2nd accepted=pour milk into red coffee mug 2nd reason=regression stage_count=3
+2026-07-25 01:05:50,727 | INFO | [t=400] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:06:10,194 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=391 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=390 interval=25
+2026-07-25 01:06:10,198 | INFO | [t=401] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:06:10,225 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=392 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=390 interval=25
+2026-07-25 01:06:10,230 | INFO | [t=402] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:06:10,256 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=393 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=390 interval=25
+2026-07-25 01:06:10,261 | INFO | [t=403] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:06:10,287 | INFO | [AUTONOMOUS_PROMPT_GUARD_REUSE] t=394 task=16 accepted=pour milk into red coffee mug 2nd last_vlm_t=390 interval=25
+2026-07-25 01:06:10,291 | INFO | [t=404] VLA chunk prompt=pour milk into red coffee mug 2nd
+2026-07-25 01:06:10,317 | INFO | Episode 0 seed=100 stage_score=100.0 stage_success=1 goal=1.000 failure_reason=None | 01_Lift_Milk=Y | 02_Pour_One=Y | 03_Pour_Two=Y

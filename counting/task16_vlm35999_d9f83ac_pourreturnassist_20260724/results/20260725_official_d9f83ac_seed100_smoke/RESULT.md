@@ -38,11 +38,13 @@ The copied `run_manifest.txt` pins the following implementation hashes:
 - Self-contained policy server: `91b22fc948bcd9d7175ed709a07d31ab1f542a96f3e22af85fbb3bf90e27c9cf`
 
 `summary.tsv`, `summary.json`, `prompt_trace.tsv`, `run_manifest.txt`,
-`run_result.txt`, and `SHA256SUMS.txt` are copied from the completed run.
-Raw evidence remains outside Git:
+`run_result.txt`, `evidence/sync_vlm.log`, `evidence/sync_vlm_trace.jsonl`,
+`evidence/pour_tilt_trace.csv`, both success videos, and `SHA256SUMS.txt` are
+copied from the completed run. The model checkpoints and raw environment data
+remain outside Git at:
 
 `/data/user/zzhang510/hlei573_borrow_outputs/task16_official_d9f83ac_smoke_20260725_005450`
 
-The main video is:
+The committed main video is:
 
-`videos/task16/task16_success_ep0_seed100.mp4`
+`videos/task16_success_ep0_seed100.mp4`
