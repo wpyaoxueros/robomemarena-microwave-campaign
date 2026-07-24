@@ -1,0 +1,2 @@
+# Raw rollout logs, frame dumps and videos stay in the submitter's output root.
+artifacts/

@@ -32,6 +32,11 @@ a new 20-episode reproduction from its registered package.
 - Each run records the actual VLA/VLM/norm/scorer paths, launcher and evaluator
   hashes, submit user, Slurm job, node/GPU, episode summaries and artifact
   paths. No checkpoint path is hidden from the local campaign record.
+- Raw outputs are written under the submitting account's
+  `/data/user/<submit-user>/hlei573_borrow_outputs/` root because the shared
+  NFS mount does not grant reliable cross-account write access even when the
+  accounts share `irpn`. The Git result record stores each resulting absolute
+  output path and summary path.
 - VLM selects prompts. `ORACLE_*` next-prompt injection and object-moving
   anchors are prohibited from a successful result.
 
