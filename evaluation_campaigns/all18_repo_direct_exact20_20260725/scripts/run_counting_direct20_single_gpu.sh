@@ -77,12 +77,18 @@ STAMP=${STAMP:-$(date +%Y%m%d_%H%M%S)}
 RUN_ID=${RUN_ID:-task${TASK_ID}_all18_direct20_single_gpu_${STAMP}}
 OUT_ROOT="${OUTPUT_ROOT}/task${TASK_ID}/${RUN_ID}"
 OVERLAY_RUNNER="${OUT_ROOT}/code_snapshot/run_autonomous_task_single_gpu_overlay.sh"
+EVALUATOR_OVERLAY_ROOT="${OUT_ROOT}/evaluator_overlay"
 mkdir -p "${OUT_ROOT}/code_snapshot"
 python3 "${CAMPAIGN_DIR}/scripts/build_counting_single_gpu_overlay.py" \
   --source "${FROZEN_PACK_DIR}/scripts/run_autonomous_task.sh" \
   --output "${OVERLAY_RUNNER}" | tee "${OUT_ROOT}/overlay_build.txt"
+python3 "${CAMPAIGN_DIR}/scripts/materialize_counting_evaluator_overlay.py" \
+  --frozen-pack "${FROZEN_PACK_DIR}" \
+  --source-root "${SOURCE_ROOT}" \
+  --output "${EVALUATOR_OVERLAY_ROOT}" | tee "${OUT_ROOT}/evaluator_overlay_build.txt"
 cp -p "${CAMPAIGN_DIR}/scripts/run_counting_direct20_single_gpu.sh" "${OUT_ROOT}/code_snapshot/"
 cp -p "${CAMPAIGN_DIR}/scripts/build_counting_single_gpu_overlay.py" "${OUT_ROOT}/code_snapshot/"
+cp -p "${CAMPAIGN_DIR}/scripts/materialize_counting_evaluator_overlay.py" "${OUT_ROOT}/code_snapshot/"
 
 {
   printf 'task_id=%s\n' "${TASK_ID}"
@@ -94,6 +100,8 @@ cp -p "${CAMPAIGN_DIR}/scripts/build_counting_single_gpu_overlay.py" "${OUT_ROOT
   printf 'remote_scorer_sha256=%s\n' "${actual_scorer_sha}"
   printf 'frozen_pack=%s\n' "${FROZEN_PACK_DIR}"
   printf 'frozen_runner_sha256=%s\n' "$(sha256sum "${FROZEN_PACK_DIR}/scripts/run_autonomous_task.sh" | awk '{print $1}')"
+  printf 'evaluator_overlay_root=%s\n' "${EVALUATOR_OVERLAY_ROOT}"
+  printf 'evaluator_overlay_manifest_sha256=%s\n' "$(sha256sum "${EVALUATOR_OVERLAY_ROOT}/overlay_manifest.json" | awk '{print $1}')"
   printf 'overlay_runner=%s\n' "${OVERLAY_RUNNER}"
   printf 'overlay_runner_sha256=%s\n' "$(sha256sum "${OVERLAY_RUNNER}" | awk '{print $1}')"
   printf 'vla_ckpt=%s\n' "${VLA_CKPT}"
@@ -105,6 +113,7 @@ cp -p "${CAMPAIGN_DIR}/scripts/build_counting_single_gpu_overlay.py" "${OUT_ROOT
   printf 'mujoco_egl_device_id=0\n'
 } >"${OUT_ROOT}/direct20_manifest.env"
 
+FROZEN_PACK_DIR="${EVALUATOR_OVERLAY_ROOT}"
 export SOURCE_ROOT OPENPI_ROOT OPENPI_INFERENCE_ROOT TARGET_LIBERO_PATH
 export VLA_CKPT VLM_CKPT FROZEN_PACK_DIR
 export VLA_CUDA_VISIBLE_DEVICES=0
@@ -123,7 +132,7 @@ if [[ "${MODE}" == "fixed-seed-repeat" ]]; then
   RUNS_BASE="${OUT_ROOT}/workers/worker0" \
   LOG_DIR="${OUT_ROOT}/logs" \
   BASE_PORT="${PORT}" \
-  bash "${FROZEN_PACK_DIR}/scripts/run_task6_fixed_seed_repeat_worker.sh"
+  bash "${EVALUATOR_OVERLAY_ROOT}/scripts/run_task6_fixed_seed_repeat_worker.sh"
   exit 0
 fi
 
@@ -131,7 +140,7 @@ case "${TASK_ID}" in
   7)
     TASK_ID=7 NUM_TRIALS=20 SEED="${SEED}" REPLAN_STEPS=5 POST_STAGE_STEPS=30 \
     VLM_INTERVAL=25 HOLD_AFTER_REQUIRED_STAGES=0 \
-    EVALUATOR_FILE_OVERRIDE="${FROZEN_PACK_DIR}/evaluators/eval_counting_autonomous_guarded_d9f83ac.py" \
+    EVALUATOR_FILE_OVERRIDE="${EVALUATOR_OVERLAY_ROOT}/evaluators/eval_counting_autonomous_guarded_d9f83ac.py" \
     PORT="${PORT}" RUN_ID="${RUN_ID}" OUT_ROOT="${OUT_ROOT}" bash "${OVERLAY_RUNNER}"
     ;;
   10)
@@ -144,7 +153,7 @@ case "${TASK_ID}" in
     TASK10_POUR_RETURN_ASSIST_MAX_STEPS=24 \
     ORACLE_FORCE_INITIAL_PROMPT=0 ORACLE_HOLD_RELEASE_NEXT=0 \
     ORACLE_STAGE_ADVANCE_NEXT=0 ORACLE_TASK8_PICK_AFTER_PLACE_STEPS=-1 \
-    EVALUATOR_FILE_OVERRIDE="${FROZEN_PACK_DIR}/evaluators/eval_counting_task10_pour_return_assist_d9f83ac.py" \
+    EVALUATOR_FILE_OVERRIDE="${EVALUATOR_OVERLAY_ROOT}/evaluators/eval_counting_task10_pour_return_assist_d9f83ac.py" \
     PORT="${PORT}" RUN_ID="${RUN_ID}" OUT_ROOT="${OUT_ROOT}" bash "${OVERLAY_RUNNER}"
     ;;
   16)
@@ -155,7 +164,7 @@ case "${TASK_ID}" in
     POUR_RETURN_ASSIST_ROTATION_MAGNITUDE=0.8 POUR_RETURN_ASSIST_MAX_STEPS=24 \
     ORACLE_FORCE_INITIAL_PROMPT=0 ORACLE_HOLD_RELEASE_NEXT=0 \
     ORACLE_STAGE_ADVANCE_NEXT=0 ORACLE_TASK8_PICK_AFTER_PLACE_STEPS=-1 \
-    EVALUATOR_FILE_OVERRIDE="${FROZEN_PACK_DIR}/evaluators/eval_counting_autonomous_pour_return_assist_d9f83ac.py" \
+    EVALUATOR_FILE_OVERRIDE="${EVALUATOR_OVERLAY_ROOT}/evaluators/eval_counting_autonomous_pour_return_assist_d9f83ac.py" \
     PORT="${PORT}" RUN_ID="${RUN_ID}" OUT_ROOT="${OUT_ROOT}" bash "${OVERLAY_RUNNER}"
     ;;
 esac

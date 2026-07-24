@@ -7,5 +7,7 @@ LIBERO_ROOT=/data/user/hlei573/vla_memory_experiments/official_source_archives/R
 
 test -d "${LIBERO_ROOT}"
 grep -F "TARGET_LIBERO_PATH=${LIBERO_ROOT}" "${RUNNER}"
+grep -F 'materialize_counting_evaluator_overlay.py' "${RUNNER}"
+grep -F 'EVALUATOR_OVERLAY_ROOT' "${RUNNER}"
 bash -n "${RUNNER}"
 echo "PASS counting direct20 LIBERO-root contract"
