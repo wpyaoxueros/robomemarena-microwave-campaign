@@ -24,3 +24,11 @@ current remote scoring source.
 - Shape: 2 GPUs, 16 CPUs, 480 GB, 12 hours.
 - Output root: account-owned, `irpn` setgid; the result bundle retains all code
   snapshots, summary files, logs and videos.
+
+## Output-root compatibility
+
+The original private Task12 environment retains the historical producer's
+output directory. The campaign runner accepts `OUTPUT_ROOT_OVERRIDE` so a
+borrowed submit account can redirect only newly generated artifacts to its own
+group-owned output root. This does not alter the VLM, VLA, norm, rollout flags,
+official source or scorer.

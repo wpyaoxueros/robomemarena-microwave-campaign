@@ -11,6 +11,14 @@ if [[ -n "${RUNTIME_ENV:-}" ]]; then
   source "${RUNTIME_ENV}"
 fi
 
+# A private archived environment may carry the output root of the account that
+# produced the original result.  A borrowed submit account may override only
+# this artifact location; checkpoint, norm, rollout and scoring inputs remain
+# entirely sourced from the frozen environment.
+if [[ -n "${OUTPUT_ROOT_OVERRIDE:-}" ]]; then
+  OUTPUT_ROOT="${OUTPUT_ROOT_OVERRIDE}"
+fi
+
 for name in \
   OPENPI_ROOT INFER_ROOT TARGET_LIBERO_PATH OFFICIAL_ROOT OUTPUT_ROOT \
   VLA_POLICY VLA_NORM_FILE VLA_LABEL VLM_CKPT VLM_LABEL \
