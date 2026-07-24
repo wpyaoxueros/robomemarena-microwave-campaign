@@ -14,8 +14,8 @@ result.
   private archived task environment.
 - The evaluator is the d9 callback adapter over remote
   `d9f83ac5182e25ad7f0a301a77a0b667f2392df1`.
-- Exactly one GPU is visible. The generic runner must log
-  `GPU binding: VLA=0 VLM=0`.
+- Exactly one GPU is visible. The generic runner must log the same allocated
+  Slurm GPU value for both processes, for example `GPU binding: VLA=4 VLM=4`.
 - The preflight has exactly one episode. It is excluded from all formal
   20-episode aggregation.
 - The submit account needs only targeted traversal/read access to the existing

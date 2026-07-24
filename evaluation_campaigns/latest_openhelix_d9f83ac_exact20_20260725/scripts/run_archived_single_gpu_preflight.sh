@@ -32,8 +32,10 @@ actual_norm_sha="$(sha256sum "${VLA_NORM_FILE}" | awk '{print $1}')"
 if [[ -n "${CUDA_VISIBLE_DEVICES:-}" ]]; then
   IFS=',' read -r -a visible_gpu_ids <<< "${CUDA_VISIBLE_DEVICES}"
   visible_gpu_count=${#visible_gpu_ids[@]}
+  colocated_gpu_id=${visible_gpu_ids[0]}
 else
   visible_gpu_count="$(nvidia-smi -L | wc -l | tr -d ' ')"
+  colocated_gpu_id=0
 fi
 [[ "${visible_gpu_count}" == "1" ]] || {
   echo "single-GPU preflight requires exactly one visible GPU, got ${visible_gpu_count}" >&2
@@ -84,7 +86,7 @@ norm_sha256=${actual_norm_sha}
 unix_user=$(id -un)
 slurm_job_id=${SLURM_JOB_ID}
 visible_gpu_count=${visible_gpu_count}
-gpu_binding=VLA:0,VLM:0
+gpu_binding=VLA:${colocated_gpu_id},VLM:${colocated_gpu_id}
 num_trials=1
 seed=${SEED}
 EOF
@@ -100,8 +102,8 @@ env \
   VLA_CONFIG=pi05_libero_robomemarena_fullvlm_v2_noflip_dataset \
   VLA_POLICY="${VLA_POLICY}" \
   VLA_REPO_ID="$(dirname "${VLA_NORM_FILE}")" \
-  VLA_CUDA_VISIBLE_DEVICES=0 \
-  VLM_CUDA_VISIBLE_DEVICES=0 \
+  VLA_CUDA_VISIBLE_DEVICES="${colocated_gpu_id}" \
+  VLM_CUDA_VISIBLE_DEVICES="${colocated_gpu_id}" \
   TASKS_JSON="[${TASK_ID}]" \
   NUM_TRIALS=1 \
   SEED="${SEED}" \
