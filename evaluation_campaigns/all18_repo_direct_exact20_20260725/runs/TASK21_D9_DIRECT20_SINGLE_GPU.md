@@ -53,3 +53,11 @@ account's writable output root:
 OUTPUT_ROOT=/data/user/<submit-user>/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725 \
   bash evaluation_campaigns/all18_repo_direct_exact20_20260725/scripts/run_task21_d9_direct20_single_gpu.sh
 ```
+
+## Excluded Infrastructure Attempt
+
+- `20260725_070600` on `xiangqim`, Slurm job `437089`, is excluded before
+  rollout: the generated private input file did not export its path variables,
+  so every child evaluator exited at `OPENPI_ROOT` validation before producing
+  a summary, video, or stage result. The fixed launcher exports the same
+  recorded variables and is covered by the static contract test.

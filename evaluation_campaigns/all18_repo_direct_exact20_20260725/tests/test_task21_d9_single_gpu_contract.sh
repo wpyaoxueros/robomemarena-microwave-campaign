@@ -16,6 +16,8 @@ grep -Fq 'CUDA_VISIBLE_DEVICES=0' "${RUNNER}"
 grep -Fq 'VLA_CUDA_VISIBLE_DEVICES=0' "${RUNNER}"
 grep -Fq 'VLM_CUDA_VISIBLE_DEVICES=0' "${RUNNER}"
 grep -Fq 'd9f83ac5182e25ad7f0a301a77a0b667f2392df1' "${RUNNER}"
+grep -Fq 'export OPENPI_ROOT=${OPENPI_ROOT}' "${RUNNER}"
+grep -Fq 'export VLM_CKPT=${VLM_CKPT}' "${RUNNER}"
 ! grep -Fq '62214036103ee8d5fef9b475dd8b344b6e2cfc03' "${RUNNER}"
 
 echo "PASS Task21 d9 single-GPU direct20 contract"
