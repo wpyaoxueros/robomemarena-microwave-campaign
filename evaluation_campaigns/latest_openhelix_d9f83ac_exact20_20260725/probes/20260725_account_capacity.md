@@ -52,6 +52,17 @@ setgid permissions.
 Task12 may therefore run as a no-explicit-account, two-GPU job from this
 account without changing rollout or scoring code.
 
+## `xiangqim` five-GPU capacity check
+
+After the two-GPU checks, a no-account five-GPU probe also passed on `acd_u`:
+
+| Partition | Shape | Result |
+| --- | --- | --- |
+| `acd_u` | 5 GPU, 40 CPU, 1200 GB | PASS on `ACD1-26` |
+
+Any formal batch launched from this allocation still keeps separate two-GPU
+VLM+VLA workers; no idle GPU will be represented as a completed evaluation.
+
 ## Existing `prtroas0003` allocation check
 
 The current `prtroas0003` allocation `434516` is an 8-GPU job on `ACD1-2`.

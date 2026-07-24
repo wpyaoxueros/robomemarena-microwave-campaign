@@ -18,6 +18,12 @@ fi
 if [[ -n "${OUTPUT_ROOT_OVERRIDE:-}" ]]; then
   OUTPUT_ROOT="${OUTPUT_ROOT_OVERRIDE}"
 fi
+if [[ -n "${ARCHIVED_TASKS_EVAL_OVERRIDE:-}" ]]; then
+  ARCHIVED_TASKS_EVAL="${ARCHIVED_TASKS_EVAL_OVERRIDE}"
+fi
+if [[ -n "${TASK1_EVAL_OVERRIDE:-}" ]]; then
+  TASK1_EVAL="${TASK1_EVAL_OVERRIDE}"
+fi
 
 for name in \
   OPENPI_ROOT INFER_ROOT TARGET_LIBERO_PATH OFFICIAL_ROOT OUTPUT_ROOT \
@@ -81,6 +87,11 @@ TASK_CONFIG="${OFFICIAL_ROOT}/evaluation_benchmark/reference_evaluation/tasks2_2
 OFFICIAL_SCRIPTS="${OFFICIAL_ROOT}/evaluation_benchmark/scripts"
 
 if [[ "${TASK_ID}" == "1" ]]; then
+  TASK1_TARGETS_JSON=${TASK1_ENDPOSE_HOLD_TARGETS_JSON:-"${INFER_ROOT}/task1_eval/task1_subtask_end_poses_successindex_seed100_199.json"}
+  [[ -r "${TASK1_TARGETS_JSON}" ]] || {
+    echo "[ERROR] missing Task1 end-pose target file: ${TASK1_TARGETS_JSON}" >&2
+    exit 5
+  }
   TASK1_RUN_ROOT="${OUT_ROOT}/task1_sync/${RUN_ID}"
   env \
     RUN_ID="${RUN_ID}" \
