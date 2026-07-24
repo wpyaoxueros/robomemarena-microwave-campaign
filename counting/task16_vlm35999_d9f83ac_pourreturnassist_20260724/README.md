@@ -8,7 +8,7 @@ not a microwave result.
 
 - Source counting repository:
   `https://github.com/wpyaoxueros/robomemarena-counting-vlm35999-latest-repro.git`
-- Source package commit: `e61dbf5e8c938810084df62d3bdb9608433dce71`.
+- Source package evidence commit: `8d1b150`.
 - Remote RoboMemArena scorer: `d9f83ac5182e25ad7f0a301a77a0b667f2392df1`.
 - VLA: original fullvlm-v2 `35999`, matched norm SHA256
   `4f71f864b3d34e3b58616d5c01b5efa86e57b317e014a091f62f9ef13ba67a8a`.
@@ -22,11 +22,13 @@ not a microwave result.
 
 ## Recorded Result
 
-The initial valid seed-100 run is `1/1`: stage `100%`, goal `100%`, and no
-extra pour. It is correctly classified as **VLM-prompted controller-assisted**,
-not pure VLA execution. The raw video and full machine-local logs remain in the
-source repository commit above; this shared repository intentionally stores
-only executable code and portable result metadata.
+The full run completed `29/29` episodes over environment seeds `100--128`.
+Stage success is `26/29 = 89.66%`; the first 20 episodes are `18/20 = 90.0%`.
+The mean remote stage score and reported goal-success rate are both `94.25%`.
+It is correctly classified as **VLM-prompted controller-assisted**, not pure
+VLA execution. This repository stores portable code and the per-episode result
+table; the source repository commit above stores the logs, videos, and a
+SHA256 manifest for the complete raw evidence directory.
 
 ## Reproduction
 
