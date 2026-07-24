@@ -36,9 +36,9 @@ actual resolved norm path and SHA256.
 | Task | Protocol | Submit user | Slurm job | Status | Output root |
 | --- | --- | --- | ---: | --- | --- |
 | 6 | seed100 x20 independent episodes | xiangqim | 437037 | running | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/task6/task6_all18_direct20_single_gpu_20260725_062354` |
-| 7 | seeds100--119 | pending | - | pending | - |
-| 10 | seeds100--119 | pending | - | pending | - |
-| 16 | seeds100--119 | pending | - | pending | - |
+| 7 | seeds100--119 | xiangqim | 437040 | running | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/task7/task7_all18_direct20_single_gpu_20260725_062929` |
+| 10 | seeds100--119 | xiangqim | 437039 | running | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/task10/task10_all18_direct20_single_gpu_20260725_062931` |
+| 16 | seeds100--119 | xiangqim | 437038 | running | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/task16/task16_all18_direct20_single_gpu_20260725_062931` |
 
 ## Validity Rule
 
