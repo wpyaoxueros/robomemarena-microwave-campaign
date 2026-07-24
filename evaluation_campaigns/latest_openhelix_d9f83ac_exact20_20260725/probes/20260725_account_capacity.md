@@ -18,6 +18,24 @@ evaluation cannot be launched until one of their GPU quotas is released. The
 pre-run contracts remain valid and can be re-submitted without changing any
 rollout or scoring code.
 
+## 02:25 retry after capacity became available
+
+The scheduler enforces a `240 GB/GPU` memory ceiling. A first direct request
+with `--mem=2000G` was rejected by this scheduler rule before allocation; it
+was not a filesystem or model error. The following no-account probes were then
+performed from the `zzhang510` shell:
+
+| Probe job | Partition | Shape | Result |
+| --- | --- | --- | --- |
+| `436761` | `acd_u` | 1 GPU, 240 GB | busy |
+| `436762` | `acd_ue` | 1 GPU, 240 GB | busy |
+| direct retry | `emergency_acd` | 1 GPU, 240 GB | PASS on `ACD1-20` |
+| direct retry | `emergency_acd` | 2 GPU, 480 GB, 16 CPU | PASS on `ACD1-40` |
+| direct retry | `emergency_acd` | 2 GPU, 480 GB, 16 CPU | PASS again on `ACD1-40` |
+
+The formal Task1/Task3 submissions below therefore use the verified
+`emergency_acd`, 2-GPU, 480-GB shape. They remain no-explicit-account jobs.
+
 ## Existing `prtroas0003` allocation check
 
 The current `prtroas0003` allocation `434516` is an 8-GPU job on `ACD1-2`.
