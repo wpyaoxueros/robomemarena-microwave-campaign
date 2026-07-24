@@ -5,9 +5,9 @@ run manifest. A historical result is not counted as a new campaign result.
 
 | Task | Frozen package | Episodes | Success | Scorer | Status | Result manifest |
 | --- | --- | ---: | ---: | --- | --- | --- |
-| 1 | archived direct-use package | 0/20 | - | pending | pending | - |
+| 1 | archived direct-use package | 0/20 | - | d9f83ac | running, fresh 20ep | `runs/ARCHIVED_DIRECT20_SINGLE_GPU_20260725.md` |
 | 2 | archived special package | 0/20 | - | pending | pending | - |
-| 3 | archived direct-use package | 0/20 | - | pending | pending | - |
+| 3 | archived direct-use package | 0/20 | - | d9f83ac | running, fresh 20ep | `runs/ARCHIVED_DIRECT20_SINGLE_GPU_20260725.md` |
 | 6 | Task6 counting package | 0/20 | - | pending | pending | - |
 | 7 | Task7 counting package | 0/20 | - | pending | pending | - |
 | 10 | Task10 counting package | 0/20 | - | pending | pending | - |
@@ -21,5 +21,5 @@ run manifest. A historical result is not counted as a new campaign result.
 | 22 | Task22 autonomous package | 0/20 | - | d9f83ac | fresh required | - |
 | 23 | Task23 v155 | 0/20 | - | d9 overlay pending | fresh required | - |
 | 24 | Task24 v131 | 0/20 | - | d9 overlay pending | fresh required | - |
-| 25 | archived direct-use package | 0/20 | - | d9f83ac | fresh required | - |
-| 26 | archived direct-use package | 0/20 | - | d9f83ac | fresh required | - |
+| 25 | archived direct-use package | 0/20 | - | d9f83ac | running, fresh 20ep | `runs/ARCHIVED_DIRECT20_SINGLE_GPU_20260725.md` |
+| 26 | archived direct-use package | 0/20 | - | d9f83ac | running, fresh 20ep | `runs/ARCHIVED_DIRECT20_SINGLE_GPU_20260725.md` |
