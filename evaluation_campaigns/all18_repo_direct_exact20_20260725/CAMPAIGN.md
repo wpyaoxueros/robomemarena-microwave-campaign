@@ -4,8 +4,10 @@
 
 This campaign verifies that every reproducibility package currently retained in
 this repository can be launched from its recorded assets and can produce a
-traceable 20-episode result. Historical result tables are evidence only; they
-do not substitute for a new run in this campaign.
+traceable 20-episode result. A run already launched from the current frozen
+repository package remains eligible: it counts when it reaches 20 valid
+official episode summaries. Historical result tables are evidence only; they
+do not substitute for a current repository run in this campaign.
 
 ## Scope
 
@@ -14,8 +16,12 @@ The 18 unique task IDs are:
 `1, 2, 3, 6, 7, 10, 12, 13, 14, 16, 18, 20, 21, 22, 23, 24, 25, 26`.
 
 Task12 and Task13 already completed valid instances from the same frozen chain.
-They count as the two completed continuation rows. Every other task must start
-a new 20-episode reproduction from its registered package.
+Task6, Task7, Task10, Task16 and Task26 already have current runs launched
+from their registered frozen packages. Each of these rows counts as complete
+once that current run reaches 20 valid official summaries; it must not be
+restarted just because the campaign policy was clarified after launch. Every
+other task that does not have such a current valid run must start a new
+20-episode reproduction from its registered package.
 
 ## Evaluation Contract
 
@@ -49,7 +55,9 @@ package remains unchanged; the patch and its SHA256 are committed before use.
 
 ## Counting Rules
 
-- The current Task12 and Task13 processes are continuation rows, not restarts.
+- A current run launched from the registered frozen package is a continuation
+  row. It becomes counted only after 20 valid official episode summaries.
+- Task12 and Task13 are already completed continuation rows.
 - Every other row begins with `NUM_TRIALS=20` or the package's explicit
   independent-one-episode worker protocol when it needs a fixed seed.
 - An evaluator/process abort without an official episode summary is not a
