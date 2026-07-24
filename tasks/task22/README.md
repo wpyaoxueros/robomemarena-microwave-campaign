@@ -5,9 +5,10 @@ package. It pins the official stage scorer to
 `62214036103ee8d5fef9b475dd8b344b6e2cfc03` and fails instead of falling back
 to the older microwave evaluator.
 
-The VLA/VLM checkpoint paths, training data, videos, and private environment
-file are intentionally excluded. Supply them through an untracked environment
-file based on `paths.example.env`.
+Checkpoint files, training data, videos, and private environment files are not
+committed. Their exact source paths for each registered runtime are committed in
+[`../CHECKPOINT_REGISTRY.md`](../CHECKPOINT_REGISTRY.md); supply the selected
+pair through an untracked environment file based on `paths.example.env`.
 
 The baseline entry point uses VLM-generated prompts and pure EEF hold/release.
 All `ORACLE_*` variables are fixed to `0`; no object-moving anchor or

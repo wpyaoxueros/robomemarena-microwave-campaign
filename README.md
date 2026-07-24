@@ -12,7 +12,11 @@ records the Task7 8ep autonomous result (4/8 stage successes).
 `counting/task16_vlm35999_d9f83ac_pourreturnassist_20260724` records the
 Task16 VLM-prompted rotation-return controller-assisted success separately.
 
-No checkpoint, raw video, debug image, credential, or absolute local path is
-committed here. Source repositories have been imported with their Git history
+Checkpoint files, raw video, debug images, credentials, and datasets are not
+committed here. The exact local source paths for every canonical Task20--Task24
+VLA/VLM/norm pair are deliberately committed in
+[`tasks/CHECKPOINT_REGISTRY.md`](tasks/CHECKPOINT_REGISTRY.md), so each pair can
+later be uploaded to Hugging Face and reproduced without guessing which assets
+were used. Source repositories have been imported with their Git history
 preserved; they remain read-only historical references and are no longer the
 destination for new versions.

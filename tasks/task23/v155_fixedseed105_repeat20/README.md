@@ -22,8 +22,8 @@
 - `run_task23_v155.sh`：不改 v154 行为的单 episode 入口。
 - `scripts/run_fixed_seed_worker.sh`：一个 worker 串行执行四次 seed105。
 - `submit_fixedseed105_zzhang510.sh`：提交一个 worker；worker `0..4` 合计 20 次。
-- `inputs.env.example`：外部模型、数据、环境路径接口。仓库不写入 checkpoint
-  的内部绝对路径。
+- `inputs.env.example`：外部模型、数据、环境路径接口。该版本的精确 checkpoint
+  路径已登记在 [`../../CHECKPOINT_REGISTRY.md`](../../CHECKPOINT_REGISTRY.md)。
 - `config/`：本版本所有 hold target、passage、tolerance 和 release-anchor 配置。
 - `evaluators/` 与 `scripts/`：本次运行使用的评测包装代码快照。
 - `history/`：继承关系、假设、提交记录和最终结果。

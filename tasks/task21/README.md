@@ -6,7 +6,8 @@
 
 ## 使用的 checkpoint
 
-权重不在本仓库中。冻结成功使用的是：
+权重不在本仓库中。冻结成功的精确本机路径已登记在
+[`../CHECKPOINT_REGISTRY.md`](../CHECKPOINT_REGISTRY.md)。冻结成功使用的是：
 
 - VLA：`fullvlm_v2_robomemarena_noflip_v2_bs128_4gpu_20260507_183338` 的 step `35999`。
 - VLM：`task21_r17_openkeep_latepick_borrow_20260701_0848_borrowtrain_t21_ckpt1000_20260701_100519`。

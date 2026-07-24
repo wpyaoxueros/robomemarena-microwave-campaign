@@ -18,7 +18,8 @@
 
 ## 使用的 checkpoint
 
-权重不在仓库中。通过本机 `.env` 提供路径：
+权重不在仓库中，但冻结版本的精确本机路径已登记在
+[`../CHECKPOINT_REGISTRY.md`](../CHECKPOINT_REGISTRY.md)。通过本机 `.env` 提供路径：
 
 - VLA：`fullvlm_v2_robomemarena_noflip_v2_bs128_4gpu_20260507_183338`，step `35999`。
 - VLM：`task20_v49c6_strict_autonomous_20260714`。

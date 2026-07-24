@@ -10,5 +10,7 @@ hold/release, completed-stage context, and robot-only release anchors can
 control timing; they cannot generate prompts or move objects. `Close_Microwave`
 is audit-only under this package's stage-only success convention.
 
-No checkpoint files, local checkpoint paths, raw task data, or videos are
-committed. Use `paths.example.env` as a private local interface.
+No checkpoint files, raw task data, or videos are committed. The exact local
+checkpoint paths are registered in
+[`../CHECKPOINT_REGISTRY.md`](../CHECKPOINT_REGISTRY.md); use
+`paths.example.env` as the private local interface.
