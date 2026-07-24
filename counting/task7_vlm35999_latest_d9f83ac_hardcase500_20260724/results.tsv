@@ -1,0 +1,9 @@
+episode	seed	stage_score_pct	stage_success	goal_success	stages
+0	100	100.0	1	1	Lift=Y;Pour_One=Y;Pour_Two=Y
+1	101	100.0	1	1	Lift=Y;Pour_One=Y;Pour_Two=Y
+2	102	33.3	0	0	Lift=Y;Pour_One=N;Pour_Two=N
+3	103	66.7	0	0	Lift=Y;Pour_One=Y;Pour_Two=N
+4	104	66.7	0	0	Lift=Y;Pour_One=Y;Pour_Two=N
+5	105	100.0	1	1	Lift=Y;Pour_One=Y;Pour_Two=Y
+6	106	100.0	1	1	Lift=Y;Pour_One=Y;Pour_Two=Y
+7	107	33.3	0	0	Lift=Y;Pour_One=N;Pour_Two=N
