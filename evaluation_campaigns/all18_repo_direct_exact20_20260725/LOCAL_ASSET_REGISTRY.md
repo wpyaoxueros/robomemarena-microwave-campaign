@@ -38,7 +38,9 @@ not committed to Git. `verified` means the path was checked on 2026-07-25.
 
 ## Completion Rule
 
-Task12 and Task13 are the only continuation rows: they already finished the
-same committed runner and asset chain to 20 episodes. The other 16 rows are
-not allowed to inherit historical metrics; each needs a new 20-valid-episode
-run whose manifest cites this registry and whose result is committed here.
+Task12 and Task13 are already completed continuation rows. Task6, Task7,
+Task10, Task16 and Task26 have current runs launched from their registered
+frozen packages; each counts when it reaches 20 valid official episode
+summaries. Historical metrics alone never count. Every task without a current
+eligible run needs a new 20-valid-episode run whose manifest cites this
+registry and whose result is committed here.
