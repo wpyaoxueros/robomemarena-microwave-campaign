@@ -31,3 +31,10 @@ This campaign must fail before rollout if the scorer file is absent or its hash 
 ## Reproducibility contract
 
 Every task result must contain a run manifest with the exact launch command, VLA/VLM identifiers, norm SHA256, remote commit, scorer SHA256, copied launcher/evaluator, official summaries, and raw artifact paths/checksums. The pre-run record is committed before GPU submission; result records are committed after completion.
+
+## Scheduler visibility lesson (2026-07-25)
+
+- Do not infer that a borrowed-account job has stopped, or that its GPUs are free, from `squeue` executed as `hlei573`. Slurm job privacy can hide `zzhang510`, `xiangqim`, and `prtroas0003` jobs from that shell.
+- Query each submitting account's own shell before reporting job state or free GPU capacity, for example `ssh -F /dev/null <user>@10.120.48.27 'squeue -u "$(id -un)" ...'`.
+- Treat `sacct` as accounting history only. It can retain a stale `RUNNING` state after a job is no longer visible to another shell, so it is not sufficient evidence of active GPU use.
+- For an active-run report, record the owner-shell `squeue` result, the job's output/log update time, and the per-task completed-episode count. For capacity, count the owner's live GPU requests and compare them with the applicable QOS limit before submitting.
