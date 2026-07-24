@@ -21,7 +21,7 @@ SOURCE_ROOT=/data/user/hlei573/vla_memory_experiments/official_runtime_sources/R
 OPENPI_ROOT=/data/user/hlei573/openpi
 OPENPI_INFERENCE_ROOT=/data/user/hlei573/openpi_inference
 VLA_CKPT=/data/user/hlei573/openpi/checkpoints/pi05_libero_robomemarena_fullvlm_v2_noflip_dataset/fullvlm_v2_robomemarena_noflip_v2_bs128_4gpu_20260507_183338/35999
-TARGET_LIBERO_PATH="${SOURCE_ROOT}/evaluation_benchmark/libero_fork"
+TARGET_LIBERO_PATH=/data/user/hlei573/vla_memory_experiments/official_source_archives/RoboMemArena_openhelix_d9f83ac_full_20260725/evaluation_benchmark/libero_fork
 EXPECTED_SCORER_SHA=0ab5e19cb7b90844b86fe04a76facc0364af55f1e841c4754aa675404a318538
 
 case "${TASK_ID}" in
