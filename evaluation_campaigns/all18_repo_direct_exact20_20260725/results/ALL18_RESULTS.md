@@ -1,0 +1,25 @@
+# All-18 Reproduction Results
+
+This table is updated only from a completed task's official summaries and
+run manifest. A historical result is not counted as a new campaign result.
+
+| Task | Frozen package | Episodes | Success | Scorer | Status | Result manifest |
+| --- | --- | ---: | ---: | --- | --- | --- |
+| 1 | archived direct-use package | 0/20 | - | pending | pending | - |
+| 2 | archived special package | 0/20 | - | pending | pending | - |
+| 3 | archived direct-use package | 0/20 | - | pending | pending | - |
+| 6 | Task6 counting package | 0/20 | - | pending | pending | - |
+| 7 | Task7 counting package | 0/20 | - | pending | pending | - |
+| 10 | Task10 counting package | 0/20 | - | pending | pending | - |
+| 12 | d9 archived continuation | 20/20 | stage 50.0%, goal 70.0% | d9f83ac | complete, counted | `/data/user/xiangqim/hlei573_borrow_outputs/latest_openhelix_d9f83ac_exact20_20260725/task12/task12_openhelix_d9f83ac_exact20_seed104_20260725_030249/logs_task_sync_hold/task12_openhelix_d9f83ac_exact20_seed104_20260725_030249/summary.tsv` |
+| 13 | d9 archived continuation | 20/20 | stage 70.0%, goal 76.7% | d9f83ac | complete, counted | `/data/user/xiangqim/hlei573_borrow_outputs/latest_openhelix_d9f83ac_exact20_20260725/task13/task13_openhelix_d9f83ac_exact20_seed104_20260725_030249/logs_task_sync_hold/task13_openhelix_d9f83ac_exact20_seed104_20260725_030249/summary.tsv` |
+| 14 | Task14 v1 | 0/20 | - | pending | pending | - |
+| 16 | Task16 counting package | 0/20 | - | pending | pending | - |
+| 18 | Task18 v2 original snapshot | 0/20 | - | d9 overlay pending | fresh required | current v3/archived worker excluded |
+| 20 | Task20 v110 | 0/20 | - | d9 overlay pending | fresh required | - |
+| 21 | Task21 v121 | 0/20 | - | d9 overlay pending | fresh required | - |
+| 22 | Task22 autonomous package | 0/20 | - | d9f83ac | fresh required | - |
+| 23 | Task23 v155 | 0/20 | - | d9 overlay pending | fresh required | - |
+| 24 | Task24 v131 | 0/20 | - | d9 overlay pending | fresh required | - |
+| 25 | archived direct-use package | 0/20 | - | d9f83ac | fresh required | - |
+| 26 | archived direct-use package | 0/20 | - | d9f83ac | fresh required | - |
