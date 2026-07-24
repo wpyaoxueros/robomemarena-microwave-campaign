@@ -1,18 +1,18 @@
 task_id	family	vla_contract	primary_metric	remote_commit	status
-1	archived-repro	original-fullvlm-v2-noflip-35999	remote stage and goal audit	d9f83ac	pre-run-ready
-3	archived-repro	original-fullvlm-v2-noflip-35999	remote stage and goal audit	d9f83ac	pre-run-ready
+1	archived-repro	original-fullvlm-v2-noflip-35999	remote stage and goal audit	d9f83ac	pre-run-ready-capacity-blocked
+3	archived-repro	original-fullvlm-v2-noflip-35999	remote stage and goal audit	d9f83ac	pre-run-ready-capacity-blocked
 6	counting	original-fullvlm-v2-noflip-35999	remote stage_success	d9f83ac	asset-audit-pending
 7	counting	original-fullvlm-v2-noflip-35999	remote stage_success	d9f83ac	asset-audit-pending
 10	counting	original-fullvlm-v2-noflip-35999	remote stage_success	d9f83ac	asset-audit-pending
-12	archived-repro	original-fullvlm-v2-noflip-35999	remote stage and goal audit	d9f83ac	pre-run-ready
-13	archived-repro	original-fullvlm-v2-noflip-35999	remote stage and goal audit	d9f83ac	pre-run-ready
+12	archived-repro	original-fullvlm-v2-noflip-35999	remote stage and goal audit	d9f83ac	pre-run-ready-capacity-blocked
+13	archived-repro	original-fullvlm-v2-noflip-35999	remote stage and goal audit	d9f83ac	pre-run-ready-capacity-blocked
 14	drawer	original-fullvlm-v2-noflip-35999	remote stage and goal audit	d9f83ac	asset-audit-pending
 16	counting	original-fullvlm-v2-noflip-35999	remote stage_success	d9f83ac	asset-audit-pending
-18	archived-repro	original-fullvlm-v2-noflip-35999	remote stage and goal audit	d9f83ac	pre-run-ready
+18	archived-repro	original-fullvlm-v2-noflip-35999	remote stage and goal audit	d9f83ac	pre-run-ready-capacity-blocked
 20	microwave	original-fullvlm-v2-noflip-35999	remote mandatory stages	d9f83ac	asset-audit-pending
 21	microwave	original-fullvlm-v2-noflip-35999	remote mandatory stages	d9f83ac	asset-audit-pending
 22	microwave	original-fullvlm-v2-noflip-35999	remote mandatory stages	d9f83ac	asset-audit-pending
 23	microwave	original-fullvlm-v2-noflip-35999	remote mandatory stages	d9f83ac	asset-audit-pending
 24	microwave	original-fullvlm-v2-noflip-35999	remote mandatory stages	d9f83ac	asset-audit-pending
-25	archived-repro	original-fullvlm-v2-noflip-35999	remote stage and goal audit	d9f83ac	pre-run-ready
-26	archived-repro	original-fullvlm-v2-noflip-35999	remote stage and goal audit	d9f83ac	pre-run-ready
+25	archived-repro	original-fullvlm-v2-noflip-35999	remote stage and goal audit	d9f83ac	pre-run-ready-capacity-blocked
+26	archived-repro	original-fullvlm-v2-noflip-35999	remote stage and goal audit	d9f83ac	pre-run-ready-capacity-blocked
