@@ -3,7 +3,7 @@ task_id	family	frozen_package_or_entrypoint	seed_protocol	result_mode	launch_sta
 2	archived-special	success_packs/repro20_remote_metrics_20260704_175011/run_one.sh	104--123	20 new episodes	fresh-required
 3	archived	success_packs/repro20_remote_metrics_20260704_175011 + d9 archived adapter	104--123	20 new episodes	fresh-required
 6	counting	counting/task6_fixed_seed_latest_d9f83ac	seed100 x20 independent	20 valid independent episodes	current-run-count-when-20-valid
-7	counting	counting/task7_vlm35999_latest_d9f83ac_hardcase500_20260724	100--119	20 new episodes	current-run-count-when-20-valid
+7	counting	counting/task7_vlm35999_latest_d9f83ac_hardcase500_20260724	100--107 reference first; then 100--119	8ep strict two-GPU comparison before 20 new episodes	reference-8ep-required-single-gpu-run-excluded
 10	counting	counting/task10_vlm35999_d9f83ac_pourreturnassist_20260724	100--119	20 new episodes	current-run-count-when-20-valid
 12	archived	evaluation_campaigns/latest_openhelix_d9f83ac_exact20_20260725	104--123	continue same frozen 20-episode process	complete-20-of-20-counted
 13	archived	evaluation_campaigns/latest_openhelix_d9f83ac_exact20_20260725	104--123	continue same frozen 20-episode process	complete-20-of-20-counted
