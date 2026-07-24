@@ -1,0 +1,2 @@
+task_id	status	error	stage_score_pct	stage_success_rate	goal_success_rate	video_dir	duration_sec
+10	completed		26.7	0.0000	0.2667	/data/user/hlei573/vla_memory_experiments/repro_eval_packs/counting_vlm35999_latest_d9f83ac_2ep_20260723/runs_stageprompt/task10_ckpt750_pourreturnassist_d9f83ac_10ep_seed100_20260724_223534/videos/task10	2842.07

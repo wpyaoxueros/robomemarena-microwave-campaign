@@ -1,0 +1,11 @@
+episode	seed	lift_wine_bottle	pour_one	pour_two	stage_score_pct	stage_success	goal_fraction	failure_reason
+0	100	Y	Y	N	66.7	0	0.667	incomplete_stage
+1	101	Y	N	N	33.3	0	0.333	incomplete_stage
+2	102	Y	N	N	33.3	0	0.333	incomplete_stage
+3	103	N	N	N	0.0	0	0.000	incomplete_stage
+4	104	N	N	N	0.0	0	0.000	incomplete_stage
+5	105	N	N	N	0.0	0	0.000	incomplete_stage
+6	106	Y	Y	N	66.7	0	0.667	incomplete_stage
+7	107	N	N	N	0.0	0	0.000	incomplete_stage
+8	108	Y	Y	N	66.7	0	0.667	incomplete_stage
+9	109	N	N	N	0.0	0	0.000	incomplete_stage
