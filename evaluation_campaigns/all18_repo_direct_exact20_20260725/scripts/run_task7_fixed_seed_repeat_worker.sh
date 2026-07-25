@@ -10,6 +10,7 @@ CAMPAIGN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 REPO_DIR="$(cd "${CAMPAIGN_DIR}/../.." && pwd)"
 PACK_DIR="${REPO_DIR}/counting/task7_vlm35999_latest_d9f83ac_hardcase500_20260724"
 FROZEN_RUNNER="${PACK_DIR}/scripts/run_autonomous_task.sh"
+MATERIALIZE_PACK="${CAMPAIGN_DIR}/scripts/materialize_task7_historical_execution_pack.py"
 
 OUTPUT_ROOT=${OUTPUT_ROOT:?set OUTPUT_ROOT to an irpn-writable run root}
 WORKER_ID=${WORKER_ID:?set WORKER_ID}
@@ -21,6 +22,7 @@ PORT_BASE=${PORT_BASE:?set PORT_BASE}
 [[ "${REPEAT_COUNT}" =~ ^[1-9][0-9]*$ ]] || { echo "REPEAT_COUNT must be positive" >&2; exit 2; }
 [[ "${FIXED_SEED}" =~ ^[0-9]+$ ]] || { echo "FIXED_SEED must be numeric" >&2; exit 2; }
 [[ -x "${FROZEN_RUNNER}" ]] || { echo "missing frozen runner: ${FROZEN_RUNNER}" >&2; exit 2; }
+[[ -f "${MATERIALIZE_PACK}" ]] || { echo "missing pack materializer: ${MATERIALIZE_PACK}" >&2; exit 2; }
 [[ -d "${OUTPUT_ROOT}" && -w "${OUTPUT_ROOT}" ]] || { echo "OUTPUT_ROOT is not writable: ${OUTPUT_ROOT}" >&2; exit 2; }
 
 SOURCE_ROOT=/data/user/hlei573/vla_memory_experiments/official_runtime_sources/RoboMemArena_openhelix_d9f83ac_20260725
@@ -74,6 +76,18 @@ for repeat_index in $(seq 0 "$((REPEAT_COUNT - 1))"); do
   printf 'repeat=%s port=%s started_at=%s\n' "${repeat_index}" "${PORT}" "$(date -Is)" \
     | tee "${EP_ROOT}/launch.env"
 
+  # The historical success path used this guarded wrapper: VLM still emits every
+  # prompt, while the guard only rejects premature/regressive transitions.
+  # Materializing a per-episode execution pack preserves the frozen wrapper and
+  # points its scorer import at the declared d9 official source.
+  EXECUTION_PACK="${EP_ROOT}/execution_pack"
+  python3 "${MATERIALIZE_PACK}" \
+    --frozen-pack "${PACK_DIR}" \
+    --source-root "${SOURCE_ROOT}" \
+    --output "${EXECUTION_PACK}" >"${EP_ROOT}/execution_pack_build.txt"
+  EVALUATOR_FILE_OVERRIDE="${EXECUTION_PACK}/evaluators/eval_counting_autonomous_guarded_d9f83ac.py"
+  EXECUTION_RUNNER="${EXECUTION_PACK}/scripts/run_autonomous_task.sh"
+
   SOURCE_ROOT="${SOURCE_ROOT}" \
   TARGET_LIBERO_PATH="${TARGET_LIBERO_PATH}" \
   OPENPI_ROOT="${OPENPI_ROOT}" \
@@ -88,9 +102,10 @@ for repeat_index in $(seq 0 "$((REPEAT_COUNT - 1))"); do
   POST_STAGE_STEPS=30 \
   VLM_INTERVAL=25 \
   HOLD_AFTER_REQUIRED_STAGES=0 \
+  EVALUATOR_FILE_OVERRIDE="${EVALUATOR_FILE_OVERRIDE}" \
   PORT="${PORT}" \
   RUN_ID="task7_fixedseed${FIXED_SEED}_worker${WORKER_ID}_repeat${repeat_index}" \
   OUT_ROOT="${EP_ROOT}" \
   RUNTIME_HOME="${RUNTIME_HOME:-${HOME}}" \
-  bash "${FROZEN_RUNNER}" >"${EP_ROOT}/driver.log" 2>&1
+  bash "${EXECUTION_RUNNER}" >"${EP_ROOT}/driver.log" 2>&1
 done

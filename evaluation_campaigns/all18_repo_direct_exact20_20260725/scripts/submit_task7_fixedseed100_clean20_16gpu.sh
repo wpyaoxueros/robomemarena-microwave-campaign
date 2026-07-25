@@ -25,8 +25,8 @@ if [[ "${1:-}" == "--workers" ]]; then
 fi
 
 STAMP="${STAMP:-$(date +%Y%m%d_%H%M%S)}"
-RUN_ROOT="${REPO_DIR}/evidence/runs/task7_fixedseed100_clean20_16gpu_${STAMP}"
-SESSION="lhs_t7s100_clean20_${STAMP}"
+RUN_ROOT="${REPO_DIR}/evidence/runs/task7_fixedseed100_guarded20_16gpu_${STAMP}"
+SESSION="lhs_t7s100_guarded20_${STAMP}"
 EXCLUDE_NODES="ACD1-31,ACD1-39,ACD1-58,ACD1-9"
 REPEATS=(3 3 3 3 2 2 2 2)
 
@@ -35,7 +35,7 @@ mkdir -p "${RUN_ROOT}"
 chmod 2775 "${RUN_ROOT}"
 
 cat >"${RUN_ROOT}/launch_manifest.env" <<EOF
-campaign=task7_fixedseed100_clean20_16gpu
+campaign=task7_fixedseed100_guarded20_16gpu
 fixed_seed=100
 workers=8
 repeat_counts=${REPEATS[*]}
@@ -45,6 +45,8 @@ official_commit=d9f83ac5182e25ad7f0a301a77a0b667f2392df1
 excluded_abort_nodes=${EXCLUDE_NODES}
 oracle_prompt_injection=off
 object_anchor=off
+runtime_prompt_guard=historical_stage_guard
+evaluator_runtime=materialized_frozen_guarded_wrapper
 EOF
 
 tmux -f /dev/null new-session -d -s "${SESSION}" \
