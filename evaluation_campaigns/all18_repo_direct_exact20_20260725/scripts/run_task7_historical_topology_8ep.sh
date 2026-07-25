@@ -65,6 +65,7 @@ grep -Fq 'CUDA_VISIBLE_DEVICES=1 "${EVAL_PY}"' "${FROZEN_PACK_DIR}/scripts/run_a
 STAMP=${STAMP:-$(date +%Y%m%d_%H%M%S)}
 RUN_ID=${RUN_ID:-task7_historical_topology_8ep_${STAMP}}
 OUT_ROOT="${OUTPUT_ROOT}/task7_reference/${RUN_ID}"
+EXECUTION_PACK="${OUT_ROOT}/execution_pack"
 mkdir -p "${OUT_ROOT}/code_snapshot"
 
 # The d9 runtime checkout deliberately excludes the LIBERO fork. The archived
@@ -76,7 +77,15 @@ unset VLM_CUDA_VISIBLE_DEVICES
 unset MUJOCO_EGL_DEVICE_ID
 
 VLM_MODEL_SHA256="$(sha256sum "${VLM_CKPT}/model.safetensors" | awk '{print $1}')"
+python3 "${CAMPAIGN_DIR}/scripts/materialize_task7_historical_execution_pack.py" \
+  --frozen-pack "${FROZEN_PACK_DIR}" \
+  --source-root "${SOURCE_ROOT}" \
+  --output "${EXECUTION_PACK}" | tee "${OUT_ROOT}/execution_pack_build.txt"
+EXECUTION_RUNNER="${EXECUTION_PACK}/run_task7_8ep.sh"
+EXECUTION_MANIFEST="${EXECUTION_PACK}/execution_pack_manifest.json"
+
 cp -p "${BASH_SOURCE[0]}" "${FROZEN_RUNNER}" \
+  "${CAMPAIGN_DIR}/scripts/materialize_task7_historical_execution_pack.py" \
   "${FROZEN_PACK_DIR}/scripts/run_autonomous_task.sh" \
   "${OUT_ROOT}/code_snapshot/"
 {
@@ -94,6 +103,11 @@ cp -p "${BASH_SOURCE[0]}" "${FROZEN_RUNNER}" \
   printf 'frozen_runner=%s\n' "${FROZEN_RUNNER}"
   printf 'frozen_runner_sha256=%s\n' "$(sha256sum "${FROZEN_RUNNER}" | awk '{print $1}')"
   printf 'frozen_autonomous_runner_sha256=%s\n' "$(sha256sum "${FROZEN_PACK_DIR}/scripts/run_autonomous_task.sh" | awk '{print $1}')"
+  printf 'execution_pack=%s\n' "${EXECUTION_PACK}"
+  printf 'execution_pack_manifest=%s\n' "${EXECUTION_MANIFEST}"
+  printf 'execution_pack_manifest_sha256=%s\n' "$(sha256sum "${EXECUTION_MANIFEST}" | awk '{print $1}')"
+  printf 'execution_runner=%s\n' "${EXECUTION_RUNNER}"
+  printf 'execution_runner_sha256=%s\n' "$(sha256sum "${EXECUTION_RUNNER}" | awk '{print $1}')"
   printf 'vla_ckpt=%s\n' "${VLA_CKPT}"
   printf 'vla_norm=%s\n' "${VLA_CKPT}/assets/robomemarena_fullvlm_v2_noflip_dataset_v2/norm_stats.json"
   printf 'vla_norm_sha256=%s\n' "$(sha256sum "${VLA_CKPT}/assets/robomemarena_fullvlm_v2_noflip_dataset_v2/norm_stats.json" | awk '{print $1}')"
@@ -126,4 +140,10 @@ export VLM_INTERVAL=25
 export HOLD_AFTER_REQUIRED_STAGES=0
 export PORT=${PORT:-29707}
 
-exec bash "${FROZEN_RUNNER}"
+# The frozen package was originally nested in this Git worktree. The generated
+# byte-identical copy lives under the submitter's output root, so preserve the
+# same provenance-only Git lookup without changing any rollout source file.
+export GIT_DIR="${REPO_DIR}/.git"
+export GIT_WORK_TREE="${REPO_DIR}"
+
+exec bash "${EXECUTION_RUNNER}"

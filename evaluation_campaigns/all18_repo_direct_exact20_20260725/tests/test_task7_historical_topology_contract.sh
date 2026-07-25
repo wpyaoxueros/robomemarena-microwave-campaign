@@ -2,14 +2,18 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+REPO="$(cd "${ROOT}/../.." && pwd)"
 RUNNER="${ROOT}/scripts/run_task7_historical_topology_8ep.sh"
 SUBMITTER="${ROOT}/scripts/submit_task7_historical_topology_8ep.sh"
+PACK="${REPO}/counting/task7_vlm35999_latest_d9f83ac_hardcase500_20260724"
+SOURCE_ROOT=/data/user/hlei573/vla_memory_experiments/official_runtime_sources/RoboMemArena_openhelix_d9f83ac_20260725
 
 [[ -x "${RUNNER}" ]]
 [[ -x "${SUBMITTER}" ]]
 
 grep -Fq 'task7_vlm35999_latest_d9f83ac_hardcase500_20260724' "${RUNNER}"
-grep -Fq 'exec bash "${FROZEN_RUNNER}"' "${RUNNER}"
+grep -Fq 'materialize_task7_historical_execution_pack.py' "${RUNNER}"
+grep -Fq 'exec bash "${EXECUTION_RUNNER}"' "${RUNNER}"
 grep -Fq 'official_source_archives/RoboMemArena_openhelix_d9f83ac_full_20260725/evaluation_benchmark/libero_fork' "${RUNNER}"
 grep -Fq 'GIT_CONFIG_KEY_0=safe.directory' "${RUNNER}"
 grep -Fq 'GIT_CONFIG_KEY_1=safe.directory' "${RUNNER}"
@@ -25,6 +29,19 @@ grep -Fq 'VLM_INTERVAL=25' "${RUNNER}"
 grep -Fq 'HOLD_AFTER_REQUIRED_STAGES=0' "${RUNNER}"
 ! grep -Fq 'build_counting_single_gpu_overlay.py' "${RUNNER}"
 ! grep -Fq 'materialize_counting_evaluator_overlay.py' "${RUNNER}"
+grep -Fq 'EXECUTION_PACK="${OUT_ROOT}/execution_pack"' "${RUNNER}"
+grep -Fq 'export GIT_DIR="${REPO_DIR}/.git"' "${RUNNER}"
+grep -Fq 'export GIT_WORK_TREE="${REPO_DIR}"' "${RUNNER}"
+
+probe_parent="$(mktemp -d)"
+probe_root="${probe_parent}/execution_pack"
+trap 'rm -rf "${probe_parent}"' EXIT
+python3 "${ROOT}/scripts/materialize_task7_historical_execution_pack.py" \
+  --frozen-pack "${PACK}" \
+  --source-root "${SOURCE_ROOT}" \
+  --output "${probe_root}" >/dev/null
+[[ "$(GIT_DIR="${REPO}/.git" GIT_WORK_TREE="${REPO}" git -C "${probe_root}" rev-parse HEAD)" == "$(git -C "${REPO}" rev-parse HEAD)" ]]
+[[ -L "${probe_root}/source/RoboMemArena_d9f83ac" ]]
 
 grep -Fq -- '--gres=gpu:2' "${SUBMITTER}"
 ! grep -Fq -- '--gres=gpu:1' "${SUBMITTER}"
