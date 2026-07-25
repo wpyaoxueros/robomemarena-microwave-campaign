@@ -102,11 +102,36 @@ export GIT_CONFIG_VALUE_0="${REPO_DIR}"
 STAMP=${STAMP:-$(date +%Y%m%d_%H%M%S)}
 RUN_ID=${RUN_ID:-task${TASK_ID}_historical_d9f83ac_exact20_${STAMP}}
 OUT_ROOT="${OUTPUT_ROOT}/counting_historical_two_gpu/${RUN_ID}"
+EXECUTION_PACK="${OUT_ROOT}/execution_pack"
 PORT=${PORT:-$((29860 + TASK_ID))}
 SEED=${SEED:-${DEFAULT_SEED}}
 mkdir -p "${OUT_ROOT}/code_snapshot" "${OUT_ROOT}/logs"
 cp -p "${BASH_SOURCE[0]}" "${FROZEN_ENTRYPOINT}" "${FROZEN_RUNNER}" \
   "${FROZEN_EVALUATOR}" "${FROZEN_SERVER}" "${OUT_ROOT}/code_snapshot/"
+
+# The frozen counting evaluators resolve their official evaluator relative to
+# PACK_DIR/source/RoboMemArena_d9f83ac. Preserve that original code contract in
+# a job-local copy and point only the expected source path at the pinned d9
+# checkout. No evaluator source, model asset, scorer, or device binding changes.
+cp -a "${FROZEN_PACK_DIR}" "${EXECUTION_PACK}"
+mkdir -p "${EXECUTION_PACK}/source"
+ln -s "${SOURCE_ROOT}" "${EXECUTION_PACK}/source/RoboMemArena_d9f83ac"
+[[ "$(readlink "${EXECUTION_PACK}/source/RoboMemArena_d9f83ac")" == "${SOURCE_ROOT}" ]] || {
+  echo "execution-pack official source link does not target the pinned source root" >&2
+  exit 3
+}
+ENTRYPOINT_REL="${FROZEN_ENTRYPOINT#${FROZEN_PACK_DIR}/}"
+RUNNER_REL="${FROZEN_RUNNER#${FROZEN_PACK_DIR}/}"
+EVALUATOR_REL="${FROZEN_EVALUATOR#${FROZEN_PACK_DIR}/}"
+SERVER_REL="${FROZEN_SERVER#${FROZEN_PACK_DIR}/}"
+EXECUTION_ENTRYPOINT="${EXECUTION_PACK}/${ENTRYPOINT_REL}"
+EXECUTION_RUNNER="${EXECUTION_PACK}/${RUNNER_REL}"
+EXECUTION_EVALUATOR="${EXECUTION_PACK}/${EVALUATOR_REL}"
+EXECUTION_SERVER="${EXECUTION_PACK}/${SERVER_REL}"
+check_sha "${EXPECTED_ENTRYPOINT_SHA}" "${EXECUTION_ENTRYPOINT}"
+check_sha "${EXPECTED_RUNNER_SHA}" "${EXECUTION_RUNNER}"
+check_sha "${EXPECTED_EVALUATOR_SHA}" "${EXECUTION_EVALUATOR}"
+check_sha "${EXPECTED_SERVER_SHA}" "${EXECUTION_SERVER}"
 
 {
   printf 'task_id=%s\n' "${TASK_ID}"
@@ -123,6 +148,8 @@ cp -p "${BASH_SOURCE[0]}" "${FROZEN_ENTRYPOINT}" "${FROZEN_RUNNER}" \
   printf 'remote_scorer_sha256=%s\n' "$(sha256sum "${SCORER_FILE}" | awk '{print $1}')"
   printf 'official_evaluator_sha256=%s\n' "$(sha256sum "${OFFICIAL_EVALUATOR_FILE}" | awk '{print $1}')"
   printf 'frozen_pack=%s\n' "${FROZEN_PACK_DIR}"
+  printf 'execution_pack=%s\n' "${EXECUTION_PACK}"
+  printf 'execution_pack_source_link=%s\n' "$(readlink "${EXECUTION_PACK}/source/RoboMemArena_d9f83ac")"
   printf 'frozen_entrypoint=%s\n' "${FROZEN_ENTRYPOINT}"
   printf 'frozen_entrypoint_sha256=%s\n' "$(sha256sum "${FROZEN_ENTRYPOINT}" | awk '{print $1}')"
   printf 'frozen_runner=%s\n' "${FROZEN_RUNNER}"
@@ -150,7 +177,7 @@ if [[ "${TASK_ID}" == "6" ]]; then
     echo "Task6 historical direct comparator requires repeats 0..19 in one job" >&2
     exit 2
   }
-  RUNNER="${FROZEN_RUNNER}" \
+  RUNNER="${EXECUTION_RUNNER}" \
   RUN_GROUP="${RUN_ID}" \
   WORKER_ID=0 \
   REPEAT_START="${REPEAT_START}" \
@@ -166,9 +193,9 @@ if [[ "${TASK_ID}" == "6" ]]; then
   TARGET_LIBERO_PATH="${TARGET_LIBERO_PATH}" \
   VLA_CKPT="${VLA_CKPT}" \
   VLM_CKPT="${VLM_CKPT}" \
-  bash "${FROZEN_ENTRYPOINT}"
+  bash "${EXECUTION_ENTRYPOINT}"
 
-  python3 "${FROZEN_PACK_DIR}/scripts/summarize_task6_fixed_seed_repeat_group.py" \
+  python3 "${EXECUTION_PACK}/scripts/summarize_task6_fixed_seed_repeat_group.py" \
     --workers-root "${OUT_ROOT}/workers" \
     --expected-episodes=20 \
     --expected-seed="${SEED}" \
@@ -194,4 +221,4 @@ PORT="${PORT}" \
 RUN_ID="${RUN_ID}" \
 OUT_ROOT="${OUT_ROOT}" \
 RUNTIME_HOME="${RUNTIME_HOME:-${HOME}}" \
-bash "${FROZEN_ENTRYPOINT}"
+bash "${EXECUTION_ENTRYPOINT}"

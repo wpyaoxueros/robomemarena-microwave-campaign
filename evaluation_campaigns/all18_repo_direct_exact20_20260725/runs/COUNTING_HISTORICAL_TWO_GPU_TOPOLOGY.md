@@ -19,6 +19,13 @@ The comparator fails before rollout unless exactly two GPUs are visible. It
 does not build an evaluator overlay, remap both models to one GPU, inject an
 oracle prompt, or replace the frozen VLM/VLA/norm paths.
 
+The frozen evaluator imports the official evaluator through
+`PACK_DIR/source/RoboMemArena_d9f83ac`. Each run therefore copies the frozen
+code into an output-local `execution_pack` and creates only this expected
+source-directory symlink to the pinned d9 checkout. The copied Python files
+are SHA256-checked against the frozen package before rollout; the symlink is a
+path compatibility layer, not an evaluator modification.
+
 ## Launch
 
 From a validated borrowed-account shell:
