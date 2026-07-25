@@ -16,7 +16,7 @@ run manifest. A historical result is not counted as a new campaign result.
 | 14 | Task14 v1 | 0/20 | - | d9f83ac | job `437609` is excluded: it failed at the old callback boundary before a rollout. A two-GPU d9-compat 1ep smoke is running before a fresh 20ep launch. | `runs/TASK14_V1_D9_20EP_20260725.md` |
 | 16 | Task16 counting package | 20/20 | stage 85.0%, mean stage 90.0%, goal 90.0% | d9f83ac | complete, counted; two-GPU frozen-package replay, VLM prompt selection and oracle prompt injection off | `runs/TASK16_HISTORICAL_TWO_GPU_D9_20EP_20260725.md` |
 | 18 | Task18 v2 original snapshot | 0/20 | - | d9 overlay pending | fresh required | current v3/archived worker excluded |
-| 20 | Task20 v110 | 4/20 | provisional stage 2/4, mean stage 83.4%, goal 2/4 | d9f83ac | worker0 complete and valid; worker1 owns episodes 4..7 under the identical two-GPU d9 overlay | `runs/TASK20_V110_D9_WORKER0_20260725.md` |
+| 20 | Task20 v110 | 4/20 | provisional stage 2/4, mean stage 83.4%, goal 2/4 | d9f83ac | worker0 complete and valid; workers1..4 now run episodes 4..19 under the identical two-GPU d9 overlay | `runs/TASK20_V110_D9_WORKER0_20260725.md` |
 | 21 | Task21 v121 | 0/20 | - | d9f83ac | invalid single-GPU attempt: 13 launched episodes produced no official score; each reached native abort/cancellation before an eligible summary. Relaunch with the frozen two-GPU topology. | `runs/TASK21_D9_DIRECT20_SINGLE_GPU.md` |
 | 22 | Task22 autonomous package | 0/20 | - | d9f83ac | fresh required | - |
 | 23 | Task23 v155 | 0/20 | - | d9 overlay pending | fresh required | - |
