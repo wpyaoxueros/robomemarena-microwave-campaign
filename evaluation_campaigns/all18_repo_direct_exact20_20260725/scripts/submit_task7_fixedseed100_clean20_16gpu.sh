@@ -15,7 +15,7 @@ if [[ "${1:-}" == "--workers" ]]; then
   for WORKER_ID in "${!REPEATS[@]}"; do
     PORT_BASE="$((32000 + WORKER_ID * 100))"
     srun -p acd_u -c 8 --gres=gpu:2 --mem=160G --exclude="${EXCLUDE_NODES}" \
-      --job-name="lhs_t7s100_clean_w${WORKER_ID}_${STAMP}" \
+      --job-name="lhs_t7s100_guard_w${WORKER_ID}_${STAMP}" \
       env OUTPUT_ROOT="${RUN_ROOT}" WORKER_ID="${WORKER_ID}" \
         REPEAT_COUNT="${REPEATS[WORKER_ID]}" FIXED_SEED=100 PORT_BASE="${PORT_BASE}" \
       bash "${WORKER}" >"${RUN_ROOT}/worker${WORKER_ID}.submit.log" 2>&1 &
