@@ -13,7 +13,7 @@ run manifest. A historical result is not counted as a new campaign result.
 | 10 | Task10 counting package | 0/20 | - | d9f83ac | current frozen-package run active; counts when 20 valid summaries exist | `runs/COUNTING_DIRECT20_OVERLAYFIX_20260725.md` |
 | 12 | d9 archived continuation | 20/20 | stage 50.0%, goal 70.0% | d9f83ac | complete, counted | `/data/user/xiangqim/hlei573_borrow_outputs/latest_openhelix_d9f83ac_exact20_20260725/task12/task12_openhelix_d9f83ac_exact20_seed104_20260725_030249/logs_task_sync_hold/task12_openhelix_d9f83ac_exact20_seed104_20260725_030249/summary.tsv` |
 | 13 | d9 archived continuation | 20/20 | stage 70.0%, goal 76.7% | d9f83ac | complete, counted | `/data/user/xiangqim/hlei573_borrow_outputs/latest_openhelix_d9f83ac_exact20_20260725/task13/task13_openhelix_d9f83ac_exact20_seed104_20260725_030249/logs_task_sync_hold/task13_openhelix_d9f83ac_exact20_seed104_20260725_030249/summary.tsv` |
-| 14 | Task14 v1 | 0/20 | - | d9f83ac | recorded VLM path recovered and readable; two-GPU exact replay pending | `LOCAL_ASSET_REGISTRY.md` |
+| 14 | Task14 v1 | 0/20 | - | d9f83ac | running: frozen two-GPU replay, seed 104, 20 episodes | `runs/TASK14_V1_D9_20EP_20260725.md` |
 | 16 | Task16 counting package | 0/20 | - | d9f83ac | current frozen-package run active; counts when 20 valid summaries exist | `runs/COUNTING_DIRECT20_OVERLAYFIX_20260725.md` |
 | 18 | Task18 v2 original snapshot | 0/20 | - | d9 overlay pending | fresh required | current v3/archived worker excluded |
 | 20 | Task20 v110 | 0/20 | - | d9f83ac | running: frozen two-GPU worker0 is validating fixed-seed-106 episodes 0..3; remaining workers will be added without changing v110 rollout controls | `runs/TASK20_V110_D9_WORKER0_20260725.md` |
