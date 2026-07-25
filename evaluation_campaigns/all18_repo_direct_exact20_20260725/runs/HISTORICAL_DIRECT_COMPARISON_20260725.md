@@ -95,6 +95,10 @@ It is excluded and must restart from the corrected execution pack.
 - Task6 job `437037` used the campaign's single-GPU overlay, which remapped
   VLA, VLM, and EGL to one GPU. It was stopped on 2026-07-25 and must not be
   compared with the frozen Task6 `17/20` record.
+- Task21 job `437095` likewise remapped its frozen VLA/VLM runtime to one GPU.
+  It started 13 episode attempts but wrote zero `[OFFICIAL_SCORE]` lines or
+  eligible summaries before native evaluator termination/cancellation. It is
+  excluded; the next Task21 replay must retain the frozen two-GPU topology.
 - Task6 job `437167` used the correct two-GPU allocation but the imported
   code-only snapshot lacked the frozen evaluator's expected
   `source/RoboMemArena_d9f83ac` path. It exited before a rollout or summary,

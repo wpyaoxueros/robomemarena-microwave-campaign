@@ -46,12 +46,19 @@ other task that does not have such a current valid run must start a new
 - VLM selects prompts. `ORACLE_*` next-prompt injection and object-moving
   anchors are prohibited from a successful result.
 
-## Single-GPU Policy
+## Topology Policy
 
-Each worker receives one Slurm GPU and binds both VLA and VLM to it. Original
-packages that hard-code VLA to device `0` and VLM to device `1` are copied into
-`overlays/` and receive only a device-selection parameterization. The original
-package remains unchanged; the patch and its SHA256 are committed before use.
+Use the frozen package's original VLA/VLM topology unless a one-GPU smoke has
+already produced an eligible official summary. A one-GPU remap is only a
+compatibility diagnostic until that gate passes; it must not replace a proven
+two-GPU runtime solely to save cards.
+
+Task6 job `437037` and Task21 job `437095` are the recorded counterexamples:
+both remapped VLA, VLM, and EGL to one visible GPU, then failed before an
+eligible 20-episode result. Task21 launched 13 episode attempts and produced
+zero official summaries before cancellation. Future Task21 replays therefore
+use its frozen two-GPU topology. The original package remains unchanged; any
+job-local overlay and its SHA256 are committed before use.
 
 ## Counting Rules
 

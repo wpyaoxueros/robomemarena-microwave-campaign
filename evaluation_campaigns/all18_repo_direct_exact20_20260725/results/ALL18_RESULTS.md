@@ -17,7 +17,7 @@ run manifest. A historical result is not counted as a new campaign result.
 | 16 | Task16 counting package | 0/20 | - | d9f83ac | current frozen-package run active; counts when 20 valid summaries exist | `runs/COUNTING_DIRECT20_OVERLAYFIX_20260725.md` |
 | 18 | Task18 v2 original snapshot | 0/20 | - | d9 overlay pending | fresh required | current v3/archived worker excluded |
 | 20 | Task20 v110 | 0/20 | - | d9 overlay ready | recorded VLM and both frozen robot-anchor HDF assets recovered; two-GPU exact replay pending | `LOCAL_ASSET_REGISTRY.md` |
-| 21 | Task21 v121 | 0/20 | - | d9 overlay ready | fresh direct-use 20ep launcher ready | `runs/TASK21_D9_DIRECT20_SINGLE_GPU.md` |
+| 21 | Task21 v121 | 0/20 | - | d9f83ac | invalid single-GPU attempt: 13 launched episodes produced no official score; each reached native abort/cancellation before an eligible summary. Relaunch with the frozen two-GPU topology. | `runs/TASK21_D9_DIRECT20_SINGLE_GPU.md` |
 | 22 | Task22 autonomous package | 0/20 | - | d9f83ac | fresh required | - |
 | 23 | Task23 v155 | 0/20 | - | d9 overlay pending | fresh required | - |
 | 24 | Task24 v131 | 0/20 | - | d9 overlay pending | fresh required | - |

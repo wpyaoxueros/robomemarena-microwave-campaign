@@ -1,9 +1,10 @@
-# Task21 D9 Single-GPU Direct20
+# Task21 D9 Single-GPU Compatibility Attempt (Excluded)
 
-This is the current direct-use reproduction entrypoint for the frozen Task21
-package. It preserves the Task21 v130 fixed-seed-107 protocol: five sequential
-workers, four independent one-episode resets per worker, for 20 total valid
-official episode summaries.
+This was a one-GPU compatibility attempt for the frozen Task21 package. It
+preserves the Task21 v130 fixed-seed-107 protocol: five sequential workers,
+four independent one-episode resets per worker, for 20 total valid official
+episode summaries. It is excluded from the campaign because it did not produce
+an eligible official summary.
 
 ## Source and Scorer
 
@@ -31,7 +32,7 @@ overlay path.
 - VLM: `/data/user/hlei573/vla_memory_experiments/english_ref_vlm26/output_shared_20260701_082527_task21r17c_task21_r17_openkeep_latepick_rawtrace_open_microwave_to_pick_butter/hzhang061/eval_artifacts/vlm_eval_ready/task21_task21_r17_openkeep_latepick_borrow_20260701_0848_borrowtrain_t21_ckpt1000_20260701_100519/task21_r17_openkeep_latepick_borrow_20260701_0848_borrowtrain_t21_ckpt1000`.
 - Task data: `/data/user/hlei573/data/full_trajectory_v2/21_butter_chocolate_microwave_dataset`.
 
-## Runtime Contract
+## Recorded Runtime Contract
 
 - Entry point:
   `scripts/run_task21_d9_direct20_single_gpu.sh`.
@@ -41,8 +42,21 @@ overlay path.
   anchor template, its completed-structure context, EEF hold/release, and its
   original `MAX_STEPS` and `REPLAN_STEPS` settings.
 - All `ORACLE_*` prompt controls remain zero in the original v121 runtime.
-- A result counts only when the overlay validator accepts all 20 independent
-  summaries and the aggregate script emits a valid 20-row result.
+- A result would count only when the overlay validator accepts all 20
+  independent summaries and the aggregate script emits a valid 20-row result.
+
+## Failure Record
+
+- Job: `437095` under `xiangqim`.
+- Output root:
+  `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/task21/task21_all18_d9_direct20_single_gpu_20260725_071200`.
+- Thirteen episode attempts started. None wrote `[OFFICIAL_SCORE]` or an
+  eligible summary; the evaluator repeatedly terminated natively after VLM
+  loading, and the job was cancelled rather than spending the remaining GPU
+  time on invalid episodes.
+- This runner is retained as an audit artifact only. Do not use it for a
+  Task21 reproducibility claim. Use the frozen two-GPU topology for the next
+  Task21 20-episode run.
 
 ## Launch
 
