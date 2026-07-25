@@ -8,6 +8,7 @@ TASK_ID=${1:?usage: run_archived_repro20_historical_topology.sh TASK_ID}
 CAMPAIGN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 REPO_DIR="$(cd "${CAMPAIGN_DIR}/../.." && pwd)"
 OUTPUT_ROOT=${OUTPUT_ROOT:?set OUTPUT_ROOT to the submit-account output root}
+CAMPAIGN_GIT_COMMIT=${CAMPAIGN_GIT_COMMIT:?set CAMPAIGN_GIT_COMMIT before entering the compute node}
 
 [[ -n "${SLURM_JOB_ID:-}" ]] || { echo "must run inside a Slurm allocation" >&2; exit 2; }
 [[ -n "${CUDA_VISIBLE_DEVICES:-}" ]] || { echo "Slurm did not expose GPUs" >&2; exit 2; }
@@ -143,7 +144,7 @@ cp -p "${BASH_SOURCE[0]}" "${RUN_ONE}" "${TASK1_RUNNER}" "${TASK1_EVAL}" "${TASK
   printf 'seed=104\n'
   printf 'max_steps=2000-default-or-task-specific-original\n'
   printf 'replan_steps=5-default-or-task-specific-original\n'
-  printf 'campaign_git_commit=%s\n' "$(git -C "${REPO_DIR}" rev-parse HEAD)"
+  printf 'campaign_git_commit=%s\n' "${CAMPAIGN_GIT_COMMIT}"
   printf 'modern_adapter=disabled\n'
 } > "${OUT_ROOT}/historical_runtime_manifest.env"
 
