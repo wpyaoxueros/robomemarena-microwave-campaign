@@ -1,19 +1,19 @@
 task_id	family	frozen_package_or_entrypoint	seed_protocol	result_mode	launch_state
-1	archived	success_packs/repro20_remote_metrics_20260704_175011 + d9 archived adapter	104--123	20 new episodes	fresh-required
-2	archived-special	success_packs/repro20_remote_metrics_20260704_175011/run_one.sh	104--123	20 new episodes	fresh-required
-3	archived	success_packs/repro20_remote_metrics_20260704_175011 + d9 archived adapter	104--123	20 new episodes	fresh-required
+1	archived	success_packs/repro20_remote_metrics_20260704_175011/run_one.sh historical66e789 two-GPU	104--123	20 direct historical episodes	historical-two-gpu-ready
+2	archived-special	success_packs/repro20_remote_metrics_20260704_175011/run_one.sh historical66e789 two-GPU	104--123	20 direct historical episodes	historical-two-gpu-ready
+3	archived	success_packs/repro20_remote_metrics_20260704_175011/run_one.sh historical66e789 two-GPU	104--123	20 direct historical episodes	historical-two-gpu-ready
 6	counting	counting/task6_fixed_seed_latest_d9f83ac	seed100 x20 independent	20 valid independent episodes	current-run-count-when-20-valid
 7	counting	counting/task7_vlm35999_latest_d9f83ac_hardcase500_20260724	100--107 reference complete; then 100--119	8ep strict two-GPU comparison complete; 20 new episodes pending	reference-8ep-complete-exact-historical-match-single-gpu-run-excluded
 10	counting	counting/task10_vlm35999_d9f83ac_pourreturnassist_20260724	100--119	20 new episodes	current-run-count-when-20-valid
-12	archived	evaluation_campaigns/latest_openhelix_d9f83ac_exact20_20260725	104--123	continue same frozen 20-episode process	complete-20-of-20-counted
-13	archived	evaluation_campaigns/latest_openhelix_d9f83ac_exact20_20260725	104--123	continue same frozen 20-episode process	complete-20-of-20-counted
+12	archived	success_packs/repro20_remote_metrics_20260704_175011/run_one.sh historical66e789 two-GPU	104--123	20 direct historical episodes	historical-two-gpu-ready-d9-result-kept-separate
+13	archived	success_packs/repro20_remote_metrics_20260704_175011/run_one.sh historical66e789 two-GPU	104--123	20 direct historical episodes	historical-two-gpu-ready-d9-result-kept-separate
 14	drawer	task14/versions/v1_latestscore_35999_20ep	104--123	20 new episodes	fresh-required
 16	counting	counting/task16_vlm35999_d9f83ac_pourreturnassist_20260724	100--119	20 new episodes	current-run-count-when-20-valid
-18	archived	tasks/task18/versions/v2_original_snapshot_topology_replay	104--123	20 new episodes	fresh-required-current-wrapper-excluded
+18	archived	success_packs/repro20_remote_metrics_20260704_175011/run_one.sh historical66e789 two-GPU	104--123	20 direct historical episodes	historical-two-gpu-ready-current-wrapper-excluded
 20	microwave	tasks/task20/versions/v110_placecookies11_latest622	seed106 x20 independent	20 valid independent episodes	fresh-required
 21	microwave	tasks/task21 v121 frozen contract	seed107 x20 independent	20 valid independent episodes	fresh-required
 22	microwave	tasks/task22 latest autonomous package	104--123	20 new episodes	fresh-required
 23	microwave	tasks/task23/v155_fixedseed105_repeat20	seed105 x20 independent	20 valid independent episodes	fresh-required
 24	microwave	tasks/task24 v131 frozen contract	seed108 x20 independent	20 valid independent episodes	fresh-required
-25	archived	success_packs/repro20_remote_metrics_20260704_175011 + d9 archived adapter	104--123	20 new episodes	fresh-required
-26	archived	success_packs/repro20_remote_metrics_20260704_175011 + d9 archived adapter	104--123	20 new episodes	current-run-count-when-20-valid
+25	archived	success_packs/repro20_remote_metrics_20260704_175011/run_one.sh historical66e789 two-GPU	104--123	20 direct historical episodes	historical-two-gpu-ready
+26	archived	success_packs/repro20_remote_metrics_20260704_175011/run_one.sh historical66e789 two-GPU	104--123	20 direct historical episodes	historical-two-gpu-ready-current-single-gpu-run-excluded
