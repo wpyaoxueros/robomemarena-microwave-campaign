@@ -21,6 +21,10 @@ TASK18_ROOT = pathlib.Path(
     "/data/user/zzhang510/hlei573_borrow_outputs/"
     "repro20_official66e789_20260704_1815/task18"
 )
+RUNTIME_SOURCE = pathlib.Path(
+    "/data/user/hlei573/tmp/rma_refeval_fresh_20260513_052445/RoboMemArena/"
+    "evaluation_benchmark/openpi_minimal_runtime"
+)
 
 
 def sha256(path: pathlib.Path) -> str:
@@ -58,6 +62,26 @@ def main() -> int:
             assert sha256(output / "repro_snapshot" / "files" / "base_eval_py__eval_tasks2_26_vlm_vla.py") == sha256(
                 original_repro / "files" / "base_eval_py__eval_tasks2_26_vlm_vla.py"
             )
+            frozen_base = (
+                output
+                / "RoboMemArena"
+                / "evaluation_benchmark"
+                / "reference_evaluation"
+                / "tasks2_26_vlm5_reference"
+                / "eval_tasks2_26_vlm_vla.py"
+            )
+            assert sha256(frozen_base) == sha256(
+                original_repro / "files" / "base_eval_py__eval_tasks2_26_vlm_vla.py"
+            )
+            for module in (
+                "retry_tasks2_26_stage_from_anygrasp.py",
+                "eval_task1_qwen3_async_openpi_inference_vla_cam.py",
+                "keyframe_selection.py",
+                "robocerebra_adapter.py",
+            ):
+                assert sha256(
+                    output / "RoboMemArena" / "evaluation_benchmark" / "openpi_minimal_runtime" / module
+                ) == sha256(RUNTIME_SOURCE / module)
 
             manifest = json.loads((output / "execution_pack_manifest.json").read_text(encoding="utf-8"))
             assert manifest["task_id"] == task_id
@@ -67,6 +91,7 @@ def main() -> int:
             assert manifest["files"]["code_snapshot/eval_tasks2_26_sync_endpose_hold_officialscore.py"] == sha256(
                 original_evaluator
             )
+            assert manifest["frozen_base_evaluator"] == str(frozen_base)
 
     print("PASS archived original execution-pack contract")
     return 0

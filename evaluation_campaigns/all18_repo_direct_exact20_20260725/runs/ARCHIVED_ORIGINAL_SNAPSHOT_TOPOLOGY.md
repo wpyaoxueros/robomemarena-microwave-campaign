@@ -23,7 +23,23 @@ live-source Task2/Task18 replays are excluded before any rate comparison.
 
 `materialize_archived_original_execution_pack.py` copies each task's archived
 `code_snapshot` and `repro_snapshot/files` into a job-local execution pack and
-verifies every copied file SHA256. The two-GPU runner uses only that pack for:
+verifies every copied file SHA256. It also reconstructs the original relative
+directory of the archived base evaluator:
+
+```text
+RoboMemArena/evaluation_benchmark/reference_evaluation/
+  tasks2_26_vlm5_reference/eval_tasks2_26_vlm_vla.py
+RoboMemArena/evaluation_benchmark/openpi_minimal_runtime/*.py
+```
+
+This hierarchy is required because the unchanged base evaluator derives its
+runtime-module directory relative to `__file__`. A previous flat-copy attempt
+(`437181` / `437179`) failed before episode zero with
+`ModuleNotFoundError: retry_tasks2_26_stage_from_anygrasp`; it is excluded.
+The corrected pack preserves the archived base evaluator byte-for-byte and
+copies the matching original runtime modules with recorded SHA256 hashes.
+
+The two-GPU runner uses only that pack for:
 
 - launcher and evaluator;
 - base evaluator and task config;
@@ -31,9 +47,10 @@ verifies every copied file SHA256. The two-GPU runner uses only that pack for:
 - official stage scripts and BDDL files.
 
 The only adapter behavior is replacing obsolete absolute source locations with
-the equivalent job-local frozen files. It does not edit the copied files,
-modify rollout parameters, replace the VLA/VLM checkpoint, or change the
-first-visible VLA / second-visible VLM GPU binding.
+the equivalent job-local frozen files while preserving their original relative
+layout. It does not edit the copied files, modify rollout parameters, replace
+the VLA/VLM checkpoint, or change the first-visible VLA / second-visible VLM
+GPU binding.
 
 ## Task Mapping
 
