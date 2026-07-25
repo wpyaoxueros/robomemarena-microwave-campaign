@@ -50,3 +50,12 @@ eight per-episode logs/videos.
 - The execution-pack materialization above is the narrow fix. A submit-account
   preflight created the package and verified the original runner/evaluator
   hashes before the replacement launch.
+
+## Completed Reference
+
+Job `437141` completed the replacement run on 2026-07-25. It reproduced the
+historical seed-by-seed result exactly: seeds `100`, `101`, `105`, and `106`
+succeeded; seeds `102`, `103`, `104`, and `107` did not. The result is `4/8`
+stage success with a `75.0%` mean stage score. Full provenance, checkpoint
+paths, hashes, summary, and video location are recorded in
+`results/TASK7_HISTORICAL_TOPOLOGY_8EP_20260725.md`.
