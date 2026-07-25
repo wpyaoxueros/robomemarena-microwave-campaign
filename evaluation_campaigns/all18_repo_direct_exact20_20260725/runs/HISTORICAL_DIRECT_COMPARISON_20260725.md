@@ -36,6 +36,16 @@ new strict comparison; do not combine them with the excluded generic runs.
 Duplicate Task13 job `437521` was cancelled before scoring; it must not be
 counted or used as a second replicate.
 
+## Task16 Frozen Restart
+
+Task16 previous job `437496` exited cleanly but did not leave an auditable
+result under the campaign output root, so it is not a counted result.  A fresh
+two-GPU frozen-package replay was started instead:
+
+| Task | Submit account | Job | Output root | Pinned runtime | Status at restart |
+| ---: | --- | ---: | --- | --- | --- |
+| 16 | `xiangqim` | `437552` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/counting_historical_two_gpu/task16_historical_d9f83ac_exact20_20260725_114200_d9frozen` | d9f83ac, VLA35999, norm `4f71f864...`, VLM checkpoint-100 | running; two visible GPUs, oracle prompt injection off |
+
 ## Pinned 6221403 Runtime for Microwave Replays
 
 Task20/21/23/24 frozen packages require the exact OpenHelix scorer commit
