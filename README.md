@@ -20,3 +20,8 @@ later be uploaded to Hugging Face and reproduced without guessing which assets
 were used. Source repositories have been imported with their Git history
 preserved; they remain read-only historical references and are no longer the
 destination for new versions.
+
+Runtime control and official scoring are intentionally separate. The repository
+owns rollout behavior such as prompt guards and hold/release; the pinned remote
+RoboMemArena source owns only stage/BDDL scoring. See
+[`docs/RUNTIME_SCORING_BOUNDARY_CN.md`](docs/RUNTIME_SCORING_BOUNDARY_CN.md).

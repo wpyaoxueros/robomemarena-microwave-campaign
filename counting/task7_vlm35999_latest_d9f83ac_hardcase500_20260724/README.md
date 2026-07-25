@@ -35,3 +35,8 @@ Set `SOURCE_ROOT`, `OPENPI_ROOT`, `OPENPI_INFERENCE_ROOT`, `VLA_CKPT` and
 
 The launcher refuses to use defaults for checkpoint or source paths. It keeps
 the original VLA, the pinned scorer and non-injecting prompt guard contract.
+
+The guard belongs to this package's rollout layer. The remote `d9f83ac` source
+is used for official stage/BDDL scoring only; do not replace this guarded
+runtime with the remote generic evaluator. The repository-wide contract is in
+[`docs/RUNTIME_SCORING_BOUNDARY_CN.md`](../../docs/RUNTIME_SCORING_BOUNDARY_CN.md).
