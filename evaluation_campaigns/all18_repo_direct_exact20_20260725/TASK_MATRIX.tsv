@@ -7,10 +7,10 @@ task_id	family	frozen_package_or_entrypoint	seed_protocol	result_mode	launch_sta
 10	counting	counting/task10_vlm35999_d9f83ac_pourreturnassist_20260724	100--119	20 new episodes	current-run-count-when-20-valid
 12	archived	archived Task12 code_snapshot + repro_snapshot historical66e789 two-GPU	104--123	20 direct historical episodes	original-snapshot-two-gpu-ready-d9-result-kept-separate
 13	archived	archived Task13 code_snapshot + repro_snapshot historical66e789 two-GPU	104--123	20 direct historical episodes	original-snapshot-two-gpu-ready-d9-result-kept-separate
-14	drawer	task14/versions/v1_latestscore_35999_20ep	104--123	20 new episodes	fresh-required
+14	drawer	task14/versions/v1_latestscore_35999_20ep	104--123	20 new episodes	asset-recovered-two-gpu-replay-pending
 16	counting	counting/task16_vlm35999_d9f83ac_pourreturnassist_20260724	100--119	20 frozen two-GPU direct episodes	historical-two-gpu-ready-single-gpu-run-excluded
 18	archived	archived Task18 code_snapshot + repro_snapshot historical66e789 two-GPU	104--123	20 direct historical episodes	original-snapshot-two-gpu-ready-current-wrapper-excluded
-20	microwave	tasks/task20/versions/v110_placecookies11_latest622	seed106 x20 independent	20 valid independent episodes	fresh-required
+20	microwave	tasks/task20/versions/v110_placecookies11_latest622	seed106 x20 independent	20 valid independent episodes	asset-recovered-two-gpu-replay-pending
 21	microwave	tasks/task21 v121 frozen contract	seed107 x20 independent	20 valid independent episodes	fresh-required
 22	microwave	tasks/task22 latest autonomous package	104--123	20 new episodes	fresh-required
 23	microwave	tasks/task23/v155_fixedseed105_repeat20	seed105 x20 independent	20 valid independent episodes	fresh-required

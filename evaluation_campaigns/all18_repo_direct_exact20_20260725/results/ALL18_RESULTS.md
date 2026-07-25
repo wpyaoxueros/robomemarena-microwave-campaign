@@ -13,10 +13,10 @@ run manifest. A historical result is not counted as a new campaign result.
 | 10 | Task10 counting package | 0/20 | - | d9f83ac | current frozen-package run active; counts when 20 valid summaries exist | `runs/COUNTING_DIRECT20_OVERLAYFIX_20260725.md` |
 | 12 | d9 archived continuation | 20/20 | stage 50.0%, goal 70.0% | d9f83ac | complete, counted | `/data/user/xiangqim/hlei573_borrow_outputs/latest_openhelix_d9f83ac_exact20_20260725/task12/task12_openhelix_d9f83ac_exact20_seed104_20260725_030249/logs_task_sync_hold/task12_openhelix_d9f83ac_exact20_seed104_20260725_030249/summary.tsv` |
 | 13 | d9 archived continuation | 20/20 | stage 70.0%, goal 76.7% | d9f83ac | complete, counted | `/data/user/xiangqim/hlei573_borrow_outputs/latest_openhelix_d9f83ac_exact20_20260725/task13/task13_openhelix_d9f83ac_exact20_seed104_20260725_030249/logs_task_sync_hold/task13_openhelix_d9f83ac_exact20_seed104_20260725_030249/summary.tsv` |
-| 14 | Task14 v1 | 0/20 | - | pending | pending | - |
+| 14 | Task14 v1 | 0/20 | - | d9f83ac | recorded VLM path recovered and readable; two-GPU exact replay pending | `LOCAL_ASSET_REGISTRY.md` |
 | 16 | Task16 counting package | 0/20 | - | d9f83ac | current frozen-package run active; counts when 20 valid summaries exist | `runs/COUNTING_DIRECT20_OVERLAYFIX_20260725.md` |
 | 18 | Task18 v2 original snapshot | 0/20 | - | d9 overlay pending | fresh required | current v3/archived worker excluded |
-| 20 | Task20 v110 | 0/20 | - | d9 overlay ready | blocked: the two frozen robot-anchor HDF assets are missing; long-HDF substitution is prohibited | `LOCAL_ASSET_REGISTRY.md` |
+| 20 | Task20 v110 | 0/20 | - | d9 overlay ready | recorded VLM and both frozen robot-anchor HDF assets recovered; two-GPU exact replay pending | `LOCAL_ASSET_REGISTRY.md` |
 | 21 | Task21 v121 | 0/20 | - | d9 overlay ready | fresh direct-use 20ep launcher ready | `runs/TASK21_D9_DIRECT20_SINGLE_GPU.md` |
 | 22 | Task22 autonomous package | 0/20 | - | d9f83ac | fresh required | - |
 | 23 | Task23 v155 | 0/20 | - | d9 overlay pending | fresh required | - |
