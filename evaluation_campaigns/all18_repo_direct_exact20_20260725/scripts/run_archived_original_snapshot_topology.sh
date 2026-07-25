@@ -138,12 +138,19 @@ FROZEN_BASE_EVALUATOR="${EXECUTION_PACK}/RoboMemArena/evaluation_benchmark/refer
 FROZEN_OFFICIAL_SCRIPTS="${EXECUTION_PACK}/RoboMemArena/evaluation_benchmark/scripts"
 FROZEN_TASK_CONFIG="${FROZEN_REPRO}/task_config__fullvlm_v2_26_memory_tasks.json"
 FROZEN_TARGETS="${FROZEN_REPRO}/endpose_hold_targets__tasks2_26_endpose_targets_seed100_199.json"
-FROZEN_PASSAGES="${FROZEN_REPRO}/passage_counts__tasks2_26_target_passage_counts_seed100_199_alltasks_tol045_20260624_074452.json"
 
 for required in "${FROZEN_LAUNCHER}" "${FROZEN_EVALUATOR}" "${FROZEN_BASE_EVALUATOR}" "${FROZEN_OFFICIAL_SCRIPTS}/eval_common.py" "${FROZEN_OFFICIAL_SCRIPTS}/task2_26_reference_stage.py" "${FROZEN_TASK_CONFIG}" "${FROZEN_TARGETS}"; do
   [[ -f "${required}" ]] || { echo "missing frozen runtime asset: ${required}" >&2; exit 3; }
 done
 if [[ "${PASSAGE_MODE}" == snapshot ]]; then
+  mapfile -t frozen_passage_files < <(
+    find "${FROZEN_REPRO}" -maxdepth 1 -type f -name 'passage_counts__*.json' -print | sort
+  )
+  [[ ${#frozen_passage_files[@]} -eq 1 ]] || {
+    echo "expected exactly one frozen passage-count file under ${FROZEN_REPRO}, found ${#frozen_passage_files[@]}" >&2
+    exit 3
+  }
+  FROZEN_PASSAGES="${frozen_passage_files[0]}"
   [[ -f "${FROZEN_PASSAGES}" ]] || { echo "missing frozen passage counts: ${FROZEN_PASSAGES}" >&2; exit 3; }
   PASSAGE_COUNTS="${FROZEN_PASSAGES}"
 else

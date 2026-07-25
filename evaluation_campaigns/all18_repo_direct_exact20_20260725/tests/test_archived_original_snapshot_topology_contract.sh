@@ -28,4 +28,15 @@ grep -Fx 'completed_subtasks_mode=off' "${plan}"
 grep -Fx 'frozen_launcher_sha256=11aba57fac364c8e9fc9f430c44edf7677defcdd00982667b75e07f98cc9cebd' "${plan}"
 grep -Fx 'frozen_evaluator_sha256=cda4a23bf018f0c9e4ecb8bc6438d08fbfc6c7be92ebe655751604833dfe3ed4' "${plan}"
 
+FROZEN_SNAPSHOT_DRY_RUN=1 \
+OUTPUT_ROOT="${tmp}/output" \
+CAMPAIGN_GIT_COMMIT=test-contract \
+bash "${RUNNER}" 12 >/dev/null
+
+task12_plan="${tmp}/output/archived_original_snapshot/task12_originalsnapshot66e789_exact20_dryrun/original_snapshot_runtime_plan.env"
+task12_passages="${tmp}/output/archived_original_snapshot/task12_originalsnapshot66e789_exact20_dryrun/execution_pack/repro_snapshot/files/passage_counts__drawer_passage_counts_task4full_plus_alltasks_20260627.json"
+[[ -f "${task12_plan}" ]]
+[[ -f "${task12_passages}" ]]
+grep -Fx "passage_counts=${task12_passages}" "${task12_plan}"
+
 echo 'PASS archived original snapshot topology contract'

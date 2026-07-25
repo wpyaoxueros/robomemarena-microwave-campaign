@@ -9,7 +9,7 @@ the listed account-side output contains its runtime manifest and summary.
 | Task | Submit account | Job | Topology | Frozen scorer | Output root | State at launch |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | `zzhang510` | `437154` | two GPU, original archived launcher | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_repro20_historical/task1_historical66e789_exact20_20260725_084435` | complete: 14/20, TSR=70.0%, CSR=82.5% |
-| 6 | `xiangqim` | `437171` | VLA first visible GPU; VLM/eval second visible GPU | `d9f83ac5182e25ad7f0a301a77a0b667f2392df1` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/counting_historical_two_gpu/task6_historical_d9f83ac_exact20_20260725_090223` | running; snapshot 2026-07-25 10:36: 18/20 complete, 15 stage-success |
+| 6 | `xiangqim` | `437171` | VLA first visible GPU; VLM/eval second visible GPU | `d9f83ac5182e25ad7f0a301a77a0b667f2392df1` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/counting_historical_two_gpu/task6_historical_d9f83ac_exact20_20260725_090223` | complete: 17/20 stage-success and goal-success; all 20 exits clean |
 | 2 | `zzhang510` | `437250` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task2_originalsnapshot66e789_exact20_20260725_095829` | running; snapshot 2026-07-25 10:36: 7/7 completed and successful |
 | 3 | `zzhang510` | `437278` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task3_originalsnapshot66e789_exact20_20260725_100422` | running; snapshot 2026-07-25 10:36: 4/6 successful |
 | 18 | `xiangqim` | `437253` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task18_originalsnapshot66e789_exact20_20260725_095844` | running; snapshot 2026-07-25 10:36: 3/6 successful |
@@ -101,6 +101,14 @@ an exact two-GPU formal submission succeeds.
   rebound resolver in an import-layout test before submission.
 - Any archived or counting run using `*_single_gpu*` is recorded only as a
   compatibility diagnostic, not a historical-success reproduction.
+- Task12 job `437347` passed fresh one- and two-GPU probes but exited before
+  episode zero. The external replay wrapper had hard-coded the later
+  `tasks2_26_target...` passage filename, while Task12's original snapshot
+  contains `passage_counts__drawer_passage_counts_task4full_plus_alltasks_20260627.json`.
+  It produced no rollout or summary and is excluded. The repaired wrapper now
+  selects the unique `passage_counts__*.json` copied from each task's own frozen
+  snapshot; Task12/13 resolve to the drawer file and Task18/25/26 resolve to
+  their original target-count file.
 
 ## Integrity Checks
 
@@ -114,6 +122,9 @@ an exact two-GPU formal submission succeeds.
   `0ab5e19cb7b90844b86fe04a76facc0364af55f1e841c4754aa675404a318538`.
 - The archived runs pin their historical source scripts and the `66e7894`
   stage scorer in each `historical_runtime_manifest.env`.
+- The archived replay topology contract now dry-runs Task12 and asserts the
+  selected passage file is the original snapshot's drawer-count JSON. A dry-run
+  matrix also verifies the per-snapshot passage asset for Task12/13/18/25/26.
 
 Final per-task 20-episode metrics are added only after the actual submit
 account confirms completion and the original summary files are present.
