@@ -4,7 +4,7 @@ set -euo pipefail
 # Keep Task14's frozen rollout configuration.  The only replacement is the
 # already-audited adapter that translates the current d9 evaluator callback.
 CAMPAIGN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
-PACK_DIR="${CAMPAIGN_DIR}/tasks/task14/versions/v1_latestscore_35999_20ep"
+PACK_DIR="${CAMPAIGN_DIR}/task14/versions/v1_latestscore_35999_20ep"
 D9_CAMPAIGN="${CAMPAIGN_DIR}/evaluation_campaigns/latest_openhelix_d9f83ac_exact20_20260725"
 
 OPENPI_ROOT=${OPENPI_ROOT:-/data/user/hlei573/openpi}
