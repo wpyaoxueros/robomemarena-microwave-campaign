@@ -10,6 +10,7 @@ the listed account-side output contains its runtime manifest and summary.
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | `zzhang510` | `437154` | two GPU, original archived launcher | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_repro20_historical/task1_historical66e789_exact20_20260725_084435` | complete: 14/20, TSR=70.0%, CSR=82.5% |
 | 6 | `xiangqim` | `437171` | VLA first visible GPU; VLM/eval second visible GPU | `d9f83ac5182e25ad7f0a301a77a0b667f2392df1` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/counting_historical_two_gpu/task6_historical_d9f83ac_exact20_20260725_090223` | complete: 17/20 stage-success and goal-success; all 20 exits clean |
+| 12 | `xiangqim` | `437367` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task12_originalsnapshot66e789_exact20_20260725_105349` | running; fresh 1/2-GPU probes passed and runtime selected the original drawer passage file |
 | 2 | `zzhang510` | `437250` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task2_originalsnapshot66e789_exact20_20260725_095829` | running; snapshot 2026-07-25 10:36: 7/7 completed and successful |
 | 3 | `zzhang510` | `437278` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task3_originalsnapshot66e789_exact20_20260725_100422` | running; snapshot 2026-07-25 10:36: 4/6 successful |
 | 18 | `xiangqim` | `437253` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task18_originalsnapshot66e789_exact20_20260725_095844` | running; snapshot 2026-07-25 10:36: 3/6 successful |
@@ -41,7 +42,6 @@ without creating unverified pending formal jobs.
 
 | Task | Submit account | Waits for | Wait session | Frozen campaign commit |
 | --- | --- | --- | --- | --- |
-| 12 | `xiangqim` | Task6 job `437171` | `lhs_wait_t12_after_t437171_v2_20260725_102812` | `cab03422b8150b2c4432f866568cefced76a694c` |
 | 13 | `zzhang510` | Task2 job `437250` | `lhs_wait_t13_after_t437250_v2_20260725_102814` | `cab03422b8150b2c4432f866568cefced76a694c` |
 | 25 | `zzhang510` | Task3 job `437278` | `lhs_wait_t25_after_t437278_v2_20260725_102814` | `cab03422b8150b2c4432f866568cefced76a694c` |
 | 26 | `xiangqim` | Task18 job `437253` | `lhs_wait_t26_after_t437253_v2_20260725_102812` | `cab03422b8150b2c4432f866568cefced76a694c` |
