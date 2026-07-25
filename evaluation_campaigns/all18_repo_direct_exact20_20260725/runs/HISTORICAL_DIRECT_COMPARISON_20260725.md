@@ -10,10 +10,10 @@ the listed account-side output contains its runtime manifest and summary.
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | `zzhang510` | `437154` | two GPU, original archived launcher | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_repro20_historical/task1_historical66e789_exact20_20260725_084435` | complete: 14/20, TSR=70.0%, CSR=82.5% |
 | 6 | `xiangqim` | `437171` | VLA first visible GPU; VLM/eval second visible GPU | `d9f83ac5182e25ad7f0a301a77a0b667f2392df1` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/counting_historical_two_gpu/task6_historical_d9f83ac_exact20_20260725_090223` | complete: 17/20 stage-success and goal-success; all 20 exits clean |
-| 12 | `xiangqim` | `437367` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task12_originalsnapshot66e789_exact20_20260725_105349` | running; fresh 1/2-GPU probes passed and runtime selected the original drawer passage file |
-| 2 | `zzhang510` | `437250` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task2_originalsnapshot66e789_exact20_20260725_095829` | running; snapshot 2026-07-25 10:36: 7/7 completed and successful |
-| 3 | `zzhang510` | `437278` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task3_originalsnapshot66e789_exact20_20260725_100422` | running; snapshot 2026-07-25 10:36: 4/6 successful |
-| 18 | `xiangqim` | `437253` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task18_originalsnapshot66e789_exact20_20260725_095844` | running; snapshot 2026-07-25 10:36: 3/6 successful |
+| 12 | `xiangqim` | `437367` | two GPU, generic archived topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task12_originalsnapshot66e789_exact20_20260725_105349` | excluded: generic materializer loaded copied `5a927...`, not original runtime `EVAL_PY=ef956...` |
+| 2 | `zzhang510` | `437250` | two GPU, generic archived topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task2_originalsnapshot66e789_exact20_20260725_095829` | excluded: generic materializer loaded copied `cda4...`, not original runtime `EVAL_PY=ef956...` |
+| 3 | `zzhang510` | `437278` | two GPU, generic archived topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task3_originalsnapshot66e789_exact20_20260725_100422` | excluded: generic materializer loaded copied `5a927...`, not original runtime `EVAL_PY=ef956...` |
+| 18 | `xiangqim` | `437253` | two GPU, generic archived topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task18_originalsnapshot66e789_exact20_20260725_095844` | excluded: generic materializer loaded copied `5a927...`, not original runtime `EVAL_PY=ef956...`; it also had the wrong lift gate |
 
 ## Pinned 6221403 Runtime for Microwave Replays
 
@@ -55,11 +55,9 @@ predecessor from the submit account, and retry the mandatory fresh probes until
 an exact two-GPU formal submission succeeds.
 
 Task26's waiter observed the Task18 cancellation and submitted job `437459`
-before the waiter could be removed. Its own original Task26 snapshot requires
-`pick_gripper_gate=1` and `pick_lift_gate=1`, which the new run manifest
-confirms. It remains a valid Task26 replay. Task18 is explicitly deferred until
-the next two-GPU slot, where it will restart with the corrected
-`pick_lift_gate=0` contract.
+before the waiter could be removed. Although its gate configuration was
+correct, it used the same generic copied driver rather than `EVAL_PY=ef956...`.
+It is excluded and must restart from the corrected execution pack.
 
 ## Excluded Runs
 
@@ -116,12 +114,13 @@ the next two-GPU slot, where it will restart with the corrected
   selects the unique `passage_counts__*.json` copied from each task's own frozen
   snapshot; Task12/13 resolve to the drawer file and Task18/25/26 resolve to
   their original target-count file.
-- Task18 job `437253` used the correct frozen source files and two-GPU
-  topology, but the generic campaign wrapper incorrectly set
+- Task18 job `437253` also used the generic copied outer driver rather than the
+  original runtime `EVAL_PY`, and the generic campaign wrapper incorrectly set
   `ENDPOSE_PICK_OBJECT_LIFT_GATE=1`. The actual Task18 snapshot, its saved
   environment, and its previous 5/5 replay all require `0`. It was cancelled
-  after ten completed episodes and is excluded. The corrected wrapper has a
-  dry-run contract assertion for Task18's `pick_lift_gate=0` before restart.
+  after ten completed episodes and is excluded. The corrected wrapper now has
+  a dry-run contract assertion for both `pick_lift_gate=0` and the original
+  runtime evaluator hash before restart.
 
 ## Integrity Checks
 
@@ -150,7 +149,7 @@ These are in-progress counts, not final 20-episode claims.
 
 | Task | Job | Completed main episodes | Main-view successes | Status |
 | --- | --- | ---: | ---: | --- |
-| 2 | `437250` | 11/20 | 11/11 | still running |
-| 3 | `437278` | 10/20 | 7/10 | still running |
-| 12 | `437367` | 0/20 | - | ep0 entered rollout with its original drawer-passage JSON |
-| 18 | `437253` | 9/20 | 5/9 | still running |
+| 2 | `437250` | 11/20 | 11/11 | excluded: wrong outer evaluator driver |
+| 3 | `437278` | 10/20 | 7/10 | excluded: wrong outer evaluator driver |
+| 12 | `437367` | 0/20 | - | excluded: wrong outer evaluator driver |
+| 18 | `437253` | 9/20 | 5/9 | excluded: wrong outer evaluator driver and lift gate |

@@ -1,30 +1,39 @@
 # Archived Original-Snapshot Two-GPU Replays
 
-This lane replays the files saved by the original successful exact20 outputs,
-not a later file at the same source pathname.
+This lane replays the actual command-time files recorded by the original
+successful exact20 outputs.  The saved `code_snapshot` remains provenance, but
+the outer evaluator is frozen from the original run's recorded `EVAL_PY`.
 
 ## Why This Exists
 
-The first July 25 archived replay loaded the live historical source directory.
-For Task2 and Task18 that was not byte-identical to the files that produced the
-original success:
+The original run environment and its copied snapshots disagree about the outer
+evaluator.  In every archived task below, `env.sorted` and `MANIFEST.txt`
+record the evaluator that was actually executed as
+`repro20_remote_metrics_20260704_175011/evaluators/eval_tasks2_26_sync_endpose_hold_officialscore.py`
+with SHA256 `ef95604ca17c7900eac172d0e082a3738ca5b62e8468bf4f53c522590ff7dd2b`.
+The copied evaluator artifacts are older:
 
-| Component | Original saved snapshot | Later live source |
+| Component | Copied snapshot artifact | Actual original `EVAL_PY` |
 | --- | --- | --- |
 | Task2/3/12/13/18/25/26 launcher | `11aba57fac364c8e9fc9f430c44edf7677defcdd00982667b75e07f98cc9cebd` | `b02956ea062b13dfecef3900d9e9666f633717d77aef8b828d933ebb6c4dcf22` |
 | Task2 evaluator | `cda4a23bf018f0c9e4ecb8bc6438d08fbfc6c7be92ebe655751604833dfe3ed4` | `ef95604ca17c7900eac172d0e082a3738ca5b62e8468bf4f53c522590ff7dd2b` |
 | Task3/12/13/18/25/26 evaluator | `5a927406c3dd90e0ba833950e6456f88beb2cf28f8adc2707f1f2f8fdb67643b` | `ef95604ca17c7900eac172d0e082a3738ca5b62e8468bf4f53c522590ff7dd2b` |
 
-The later Task2 launcher introduced a runtime end-pose hold/release seen at
-`t=303`; the original successful Task2 trace has no such event. Therefore the
-live-source Task2/Task18 replays are excluded before any rate comparison.
+The earlier generic materializer chose the copied artifact as its driver.  It
+therefore did not reproduce the original process environment, even though it
+correctly copied the launcher, base evaluator, task config, targets, passage
+counts, official scripts, and BDDL.  Every result made with that generic
+driver is excluded before rate comparison.
 
 ## Frozen Inputs
 
 `materialize_archived_original_execution_pack.py` copies each task's archived
 `code_snapshot` and `repro_snapshot/files` into a job-local execution pack and
-verifies every copied file SHA256. It also reconstructs the original relative
-directory of the archived base evaluator:
+verifies every copied file SHA256.  It resolves `EVAL_PY` from the archived
+`env.sorted`, rejects any hash other than the recorded `ef956...` driver, and
+copies that driver into the isolated runtime.  The execution manifest records
+both the original source path and SHA256.  It also reconstructs the original
+relative directory of the archived base evaluator:
 
 ```text
 RoboMemArena/evaluation_benchmark/reference_evaluation/
@@ -43,10 +52,11 @@ repository root containing both `evaluation_benchmark` and `bddl`. A previous fl
 `ModuleNotFoundError: retry_tasks2_26_stage_from_anygrasp`; it is excluded.
 The corrected pack preserves the archived base evaluator byte-for-byte and
 copies the matching original runtime modules with recorded SHA256 hashes.
-The archived outer evaluator is also copied byte-for-byte to the isolated
-`driver/` directory. This mirrors the original `SOURCE_ROOT/evaluators`
+The actual original runtime outer evaluator is copied byte-for-byte to the
+isolated `driver/` directory. This mirrors the original `SOURCE_ROOT/evaluators`
 execution context, which had no sibling `eval_common.py`; the full archived
-`code_snapshot/` remains available for the frozen launcher and scorer assets.
+`code_snapshot/` remains available as provenance and for the frozen launcher
+and scorer assets.
 The archived official scripts are likewise reconstructed at
 `RoboMemArena/evaluation_benchmark/scripts/`, with their task BDDL copied to
 the sibling `bddl/` directory. This matters because the outer evaluator

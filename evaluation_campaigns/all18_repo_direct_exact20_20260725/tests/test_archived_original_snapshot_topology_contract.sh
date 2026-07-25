@@ -26,7 +26,8 @@ grep -Fx 'pick_lift_gate=0' "${plan}"
 grep -Fx 'vlm_task_text_mode=english_reference_no_candidate' "${plan}"
 grep -Fx 'completed_subtasks_mode=off' "${plan}"
 grep -Fx 'frozen_launcher_sha256=11aba57fac364c8e9fc9f430c44edf7677defcdd00982667b75e07f98cc9cebd' "${plan}"
-grep -Fx 'frozen_evaluator_sha256=cda4a23bf018f0c9e4ecb8bc6438d08fbfc6c7be92ebe655751604833dfe3ed4' "${plan}"
+grep -Fx 'frozen_evaluator_sha256=ef95604ca17c7900eac172d0e082a3738ca5b62e8468bf4f53c522590ff7dd2b' "${plan}"
+grep -Fx 'original_runtime_evaluator_sha256=ef95604ca17c7900eac172d0e082a3738ca5b62e8468bf4f53c522590ff7dd2b' "${plan}"
 
 FROZEN_SNAPSHOT_DRY_RUN=1 \
 OUTPUT_ROOT="${tmp}/output" \

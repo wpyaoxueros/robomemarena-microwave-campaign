@@ -161,6 +161,28 @@ sha256() {
   sha256sum "$1" | awk '{print $1}'
 }
 
+mapfile -t runtime_driver_manifest < <(
+  python3 - "${EXECUTION_PACK}/execution_pack_manifest.json" <<'PY'
+import json
+import pathlib
+import sys
+
+manifest = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+print(manifest["original_runtime_evaluator"])
+print(manifest["original_runtime_evaluator_sha256"])
+PY
+)
+[[ ${#runtime_driver_manifest[@]} -eq 2 ]] || {
+  echo "invalid runtime evaluator manifest: ${EXECUTION_PACK}/execution_pack_manifest.json" >&2
+  exit 3
+}
+ORIGINAL_RUNTIME_EVALUATOR="${runtime_driver_manifest[0]}"
+ORIGINAL_RUNTIME_EVALUATOR_SHA256="${runtime_driver_manifest[1]}"
+[[ "$(sha256 "${FROZEN_EVALUATOR}")" == "${ORIGINAL_RUNTIME_EVALUATOR_SHA256}" ]] || {
+  echo "frozen evaluator hash does not match archived EVAL_PY: ${FROZEN_EVALUATOR}" >&2
+  exit 3
+}
+
 {
   printf 'task_id=%s\n' "${TASK_ID}"
   printf 'run_id=%s\n' "${RUN_ID}"
@@ -187,12 +209,14 @@ sha256() {
   printf 'frozen_launcher_sha256=%s\n' "$(sha256 "${FROZEN_LAUNCHER}")"
   printf 'frozen_evaluator=%s\n' "${FROZEN_EVALUATOR}"
   printf 'frozen_evaluator_sha256=%s\n' "$(sha256 "${FROZEN_EVALUATOR}")"
+  printf 'original_runtime_evaluator=%s\n' "${ORIGINAL_RUNTIME_EVALUATOR}"
+  printf 'original_runtime_evaluator_sha256=%s\n' "${ORIGINAL_RUNTIME_EVALUATOR_SHA256}"
   printf 'frozen_base_evaluator=%s\n' "${FROZEN_BASE_EVALUATOR}"
   printf 'frozen_base_evaluator_sha256=%s\n' "$(sha256 "${FROZEN_BASE_EVALUATOR}")"
   printf 'frozen_official_scripts_dir=%s\n' "${FROZEN_OFFICIAL_SCRIPTS}"
   printf 'frozen_task_config=%s\n' "${FROZEN_TASK_CONFIG}"
   printf 'frozen_targets=%s\n' "${FROZEN_TARGETS}"
-  printf 'frozen_official_scripts_dir=%s\n' "${FROZEN_CODE}"
+  printf 'frozen_code_snapshot=%s\n' "${FROZEN_CODE}"
   printf 'execution_pack_manifest=%s\n' "${EXECUTION_PACK}/execution_pack_manifest.json"
   printf 'campaign_git_commit=%s\n' "${CAMPAIGN_GIT_COMMIT}"
   printf 'modern_adapter=disabled\n'

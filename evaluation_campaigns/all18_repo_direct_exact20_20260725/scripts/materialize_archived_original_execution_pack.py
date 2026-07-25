@@ -40,6 +40,10 @@ TASK_ROOTS = {
         "repro20_official66e789_20260704_1815/task26"
     ),
 }
+ORIGINAL_RUNTIME_EVALUATOR_SHA256 = {
+    task_id: "ef95604ca17c7900eac172d0e082a3738ca5b62e8468bf4f53c522590ff7dd2b"
+    for task_id in TASK_ROOTS
+}
 
 REQUIRED_CODE_FILES = (
     "run_one.sh",
@@ -152,14 +156,44 @@ def materialize_root_bddl(output: pathlib.Path) -> dict[str, str]:
     }
 
 
-def materialize_isolated_driver(code_snapshot: pathlib.Path, output: pathlib.Path) -> pathlib.Path:
-    """Place the archived outer evaluator in an import-isolated driver directory.
+def original_runtime_evaluator(task_id: int, repro_snapshot: pathlib.Path) -> pathlib.Path:
+    """Resolve the evaluator file that the archived run actually executed.
+
+    ``code_snapshot`` and the copied ``eval_py__...`` artifact can lag the
+    process environment.  The original run's ``env.sorted`` is therefore the
+    authoritative record for ``EVAL_PY``.  Freeze that exact file before a
+    replay so the execution pack does not silently substitute an older driver.
+    """
+    env_file = repro_snapshot / "env.sorted"
+    if not env_file.is_file():
+        raise FileNotFoundError(env_file)
+    for line in env_file.read_text(encoding="utf-8").splitlines():
+        key, separator, value = line.partition("=")
+        if separator and key == "EVAL_PY":
+            source = pathlib.Path(value)
+            if not source.is_file():
+                raise FileNotFoundError(
+                    f"archived EVAL_PY no longer exists: {source} from {env_file}"
+                )
+            actual_sha256 = sha256(source)
+            expected_sha256 = ORIGINAL_RUNTIME_EVALUATOR_SHA256[task_id]
+            if actual_sha256 != expected_sha256:
+                raise RuntimeError(
+                    "archived EVAL_PY hash changed; refusing to replay a different evaluator: "
+                    f"task={task_id} expected={expected_sha256} actual={actual_sha256} path={source}"
+                )
+            return source
+    raise RuntimeError(f"missing EVAL_PY in archived environment: {env_file}")
+
+
+def materialize_isolated_driver(source: pathlib.Path, output: pathlib.Path) -> pathlib.Path:
+    """Place the original runtime outer evaluator in an isolated driver directory.
 
     The original evaluator ran from ``SOURCE_ROOT/evaluators``, which contained
-    no ``eval_common.py``. Running it from the archived code snapshot would
-    shadow the base evaluator's original runtime ``eval_common`` module.
+    no ``eval_common.py``.  Running it from the archived code snapshot would
+    both shadow the base evaluator's original runtime ``eval_common`` module
+    and, for these historical runs, select an older evaluator than ``EVAL_PY``.
     """
-    source = code_snapshot / "eval_tasks2_26_sync_endpose_hold_officialscore.py"
     driver = output / FROZEN_DRIVER_EVALUATOR_RELATIVE
     driver.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(source, driver)
@@ -205,6 +239,7 @@ def main() -> int:
     code_snapshot = task_root / "code_snapshot"
     repro_snapshot = only_repro_snapshot(task_root)
     repro_files = repro_snapshot / "files"
+    runtime_driver_source = original_runtime_evaluator(args.task_id, repro_snapshot)
     output = args.output.resolve()
 
     if output.exists():
@@ -223,7 +258,7 @@ def main() -> int:
         source = repro_snapshot / name
         if source.is_file():
             shutil.copy2(source, output / "repro_snapshot" / name)
-    isolated_driver = materialize_isolated_driver(code_snapshot, output)
+    isolated_driver = materialize_isolated_driver(runtime_driver_source, output)
     official_scripts_dir, official_script_hashes = materialize_official_scripts(code_snapshot, output)
     runtime_hashes = materialize_base_evaluator_runtime(repro_files, output)
     bddl_hashes = materialize_root_bddl(output)
@@ -251,6 +286,8 @@ def main() -> int:
         "original_code_snapshot": str(code_snapshot.resolve()),
         "original_repro_snapshot": str(repro_snapshot.resolve()),
         "original_repro_manifest_sha256": sha256(repro_snapshot / "MANIFEST.txt"),
+        "original_runtime_evaluator": str(runtime_driver_source.resolve()),
+        "original_runtime_evaluator_sha256": sha256(runtime_driver_source),
         "files": execution_hashes,
         "frozen_base_evaluator": str((output / FROZEN_BASE_EVALUATOR_RELATIVE).resolve()),
         "frozen_driver_evaluator": str(isolated_driver.resolve()),

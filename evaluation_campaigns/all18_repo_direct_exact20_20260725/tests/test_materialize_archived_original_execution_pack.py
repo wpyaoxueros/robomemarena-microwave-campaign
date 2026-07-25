@@ -21,22 +21,58 @@ TASK18_ROOT = pathlib.Path(
     "/data/user/zzhang510/hlei573_borrow_outputs/"
     "repro20_official66e789_20260704_1815/task18"
 )
+OTHER_TASK_ROOTS = {
+    3: pathlib.Path(
+        "/data/user/zzhang510/hlei573_borrow_outputs/"
+        "repro20_official66e789_20260704_1815/task3"
+    ),
+    12: pathlib.Path(
+        "/data/user/zzhang510/hlei573_borrow_outputs/"
+        "repro20_official66e789_20260704_1815/task12"
+    ),
+    13: pathlib.Path(
+        "/data/user/zzhang510/hlei573_borrow_outputs/"
+        "repro20_official66e789_20260704_1815/task13"
+    ),
+    25: pathlib.Path(
+        "/data/user/zzhang510/hlei573_borrow_outputs/"
+        "repro20_official66e789_20260704_1815/task25"
+    ),
+    26: pathlib.Path(
+        "/data/user/zzhang510/hlei573_borrow_outputs/"
+        "repro20_official66e789_20260704_1815/task26"
+    ),
+}
 RUNTIME_SOURCE = pathlib.Path(
     "/data/user/hlei573/tmp/rma_refeval_fresh_20260513_052445/RoboMemArena/"
     "evaluation_benchmark/openpi_minimal_runtime"
 )
 BDDL_SOURCE = RUNTIME_SOURCE.parents[1] / "bddl"
+EXPECTED_RUNTIME_EVALUATOR_SHA256 = (
+    "ef95604ca17c7900eac172d0e082a3738ca5b62e8468bf4f53c522590ff7dd2b"
+)
 
 
 def sha256(path: pathlib.Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def original_runtime_evaluator(repro_snapshot: pathlib.Path) -> pathlib.Path:
+    env_file = repro_snapshot / "env.sorted"
+    for line in env_file.read_text(encoding="utf-8").splitlines():
+        key, separator, value = line.partition("=")
+        if separator and key == "EVAL_PY":
+            evaluator = pathlib.Path(value)
+            assert evaluator.is_file(), evaluator
+            return evaluator
+    raise AssertionError(f"missing EVAL_PY in {env_file}")
+
+
 def main() -> int:
     with tempfile.TemporaryDirectory() as temp_dir:
-        for task_id, task_root, evaluator_sha in (
-            (2, TASK2_ROOT, "cda4a23bf018f0c9e4ecb8bc6438d08fbfc6c7be92ebe655751604833dfe3ed4"),
-            (18, TASK18_ROOT, "5a927406c3dd90e0ba833950e6456f88beb2cf28f8adc2707f1f2f8fdb67643b"),
+        for task_id, task_root in (
+            (2, TASK2_ROOT),
+            (18, TASK18_ROOT),
         ):
             output = pathlib.Path(temp_dir) / f"execution_pack_task{task_id}"
             subprocess.run(
@@ -55,14 +91,16 @@ def main() -> int:
             original_evaluator = task_root / "code_snapshot" / "eval_tasks2_26_sync_endpose_hold_officialscore.py"
             assert sha256(output / "code_snapshot" / original_launcher.name) == sha256(original_launcher)
             assert sha256(output / "code_snapshot" / original_evaluator.name) == sha256(original_evaluator)
-            assert sha256(original_evaluator) == evaluator_sha
-            isolated_driver = output / "driver" / original_evaluator.name
-            assert sha256(isolated_driver) == sha256(original_evaluator)
-            assert not (isolated_driver.parent / "eval_common.py").exists()
 
             manifests = list(task_root.glob("logs_task_sync_hold/*/repro_snapshot/*/MANIFEST.txt"))
             assert len(manifests) == 1
             original_repro = manifests[0].parent
+            original_runtime_driver = original_runtime_evaluator(original_repro)
+            assert sha256(original_runtime_driver) == EXPECTED_RUNTIME_EVALUATOR_SHA256
+            assert sha256(original_runtime_driver) != sha256(original_evaluator)
+            isolated_driver = output / "driver" / original_evaluator.name
+            assert sha256(isolated_driver) == sha256(original_runtime_driver)
+            assert not (isolated_driver.parent / "eval_common.py").exists()
             assert sha256(output / "repro_snapshot" / "files" / "base_eval_py__eval_tasks2_26_vlm_vla.py") == sha256(
                 original_repro / "files" / "base_eval_py__eval_tasks2_26_vlm_vla.py"
             )
@@ -104,6 +142,8 @@ def main() -> int:
             assert manifest["task_id"] == task_id
             assert manifest["original_task_root"] == str(task_root.resolve())
             assert manifest["original_repro_snapshot"] == str(original_repro.resolve())
+            assert manifest["original_runtime_evaluator"] == str(original_runtime_driver.resolve())
+            assert manifest["original_runtime_evaluator_sha256"] == sha256(original_runtime_driver)
             assert manifest["files"]["code_snapshot/run_tasks2_26_sync_hold_eval.sh"] == sha256(original_launcher)
             assert manifest["files"]["code_snapshot/eval_tasks2_26_sync_endpose_hold_officialscore.py"] == sha256(
                 original_evaluator
@@ -121,6 +161,30 @@ def main() -> int:
             official_bddl = official_scripts.parent / "bddl" / task_bddl.name
             assert sha256(official_bddl) == sha256(task_root / "code_snapshot" / "bddl" / task_bddl.name)
             assert manifest["frozen_official_scripts_dir"] == str(official_scripts)
+
+        for task_id, task_root in OTHER_TASK_ROOTS.items():
+            output = pathlib.Path(temp_dir) / f"runtime_driver_task{task_id}"
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(BUILDER),
+                    "--task-id",
+                    str(task_id),
+                    "--output",
+                    str(output),
+                ],
+                check=True,
+            )
+            manifests = list(task_root.glob("logs_task_sync_hold/*/repro_snapshot/*/MANIFEST.txt"))
+            assert len(manifests) == 1
+            original_repro = manifests[0].parent
+            original_runtime_driver = original_runtime_evaluator(original_repro)
+            frozen_driver = output / "driver" / "eval_tasks2_26_sync_endpose_hold_officialscore.py"
+            manifest = json.loads((output / "execution_pack_manifest.json").read_text(encoding="utf-8"))
+            assert sha256(original_runtime_driver) == EXPECTED_RUNTIME_EVALUATOR_SHA256
+            assert sha256(frozen_driver) == sha256(original_runtime_driver)
+            assert manifest["original_runtime_evaluator"] == str(original_runtime_driver.resolve())
+            assert manifest["original_runtime_evaluator_sha256"] == sha256(original_runtime_driver)
 
     print("PASS archived original execution-pack contract")
     return 0
