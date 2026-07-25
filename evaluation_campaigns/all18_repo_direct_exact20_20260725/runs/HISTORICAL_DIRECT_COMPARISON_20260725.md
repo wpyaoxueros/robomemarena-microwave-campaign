@@ -15,6 +15,27 @@ the listed account-side output contains its runtime manifest and summary.
 | 3 | `zzhang510` | `437278` | two GPU, generic archived topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task3_originalsnapshot66e789_exact20_20260725_100422` | excluded: generic materializer loaded copied `5a927...`, not original runtime `EVAL_PY=ef956...` |
 | 18 | `xiangqim` | `437253` | two GPU, generic archived topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task18_originalsnapshot66e789_exact20_20260725_095844` | excluded: generic materializer loaded copied `5a927...`, not original runtime `EVAL_PY=ef956...`; it also had the wrong lift gate |
 
+## Corrected Runtime-Driver Restarts
+
+All rows below use campaign commit `c3fb8b9d4b39e72f51df3af1a0ef0195d9d98fb0`.
+Each execution-pack manifest and runtime plan records
+`frozen_evaluator_sha256=original_runtime_evaluator_sha256=ef95604ca17c7900eac172d0e082a3738ca5b62e8468bf4f53c522590ff7dd2b`.
+They are the only archived Task2/3/12/13/18/25/26 results eligible for the
+new strict comparison; do not combine them with the excluded generic runs.
+
+| Task | Submit account | Job | Output root | Status at restart |
+| ---: | --- | ---: | --- | --- |
+| 13 | `zzhang510` | `437518` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task13_originalsnapshot66e789_exact20_20260725_113400_rtefix` | running; original lift gate `1`, `completed_struct` |
+| 25 | `zzhang510` | `437528` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task25_originalsnapshot66e789_exact20_20260725_113600_rtefix` | running; original lift gate `1` |
+| 12 | `xiangqim` | `437531` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task12_originalsnapshot66e789_exact20_20260725_113700_rtefix` | running; original drawer-passage file, lift gate `1`, `completed_struct` |
+| 18 | `xiangqim` | `437534` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task18_originalsnapshot66e789_exact20_20260725_113800_rtefix` | running; original lift gate `0` |
+| 2 | `xiangqim` | `437541` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task2_originalsnapshot66e789_exact20_20260725_113900_rtefix` | running; original gates `0` |
+| 3 | `xiangqim` | `437542` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task3_originalsnapshot66e789_exact20_20260725_113901_rtefix` | running; original gates `0` |
+| 26 | `xiangqim` | `437545` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task26_originalsnapshot66e789_exact20_20260725_114000_rtefix` | running; original lift gate `1` |
+
+Duplicate Task13 job `437521` was cancelled before scoring; it must not be
+counted or used as a second replicate.
+
 ## Pinned 6221403 Runtime for Microwave Replays
 
 Task20/21/23/24 frozen packages require the exact OpenHelix scorer commit
