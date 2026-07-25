@@ -28,6 +28,7 @@ without creating unverified pending formal jobs.
 | 25 | `zzhang510` | Task3 job `437278` | `lhs_wait_t25_after_t437278_v2_20260725_102814` | `cab03422b8150b2c4432f866568cefced76a694c` |
 | 26 | `xiangqim` | Task18 job `437253` | `lhs_wait_t26_after_t437253_v2_20260725_102812` | `cab03422b8150b2c4432f866568cefced76a694c` |
 | 16 | `xiangqim` | completed Task12 original-snapshot 20ep summary | `lhs_wait_t16_after_t12_originalsnapshot_20260725_103300` | `25ed8f07629f50441fd7202f7c6d3a54a590cf74` |
+| 14 | `zzhang510` | completed Task13 original-snapshot 20ep summary | `lhs_wait_t14_after_t13_originalsnapshot_20260725_103700` | `20961c6a30a7d392bd3f7ae1c583ec6bffde0a9a` |
 
 The first generation of wait sessions (`..._101000` and `..._101500`) wrote
 only their initial wait line and then exited before submission. They are
