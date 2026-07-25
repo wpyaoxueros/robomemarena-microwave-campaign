@@ -9,9 +9,7 @@ the listed account-side output contains its runtime manifest and summary.
 | Task | Submit account | Job | Topology | Frozen scorer | Output root | State at launch |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | `zzhang510` | `437154` | two GPU, original archived launcher | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_repro20_historical/task1_historical66e789_exact20_20260725_084435` | running |
-| 2 | `zzhang510` | `437161` | two GPU, original archived launcher | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_repro20_historical/task2_historical66e789_exact20_20260725_084728` | running |
 | 6 | `xiangqim` | `437171` | VLA first visible GPU; VLM/eval second visible GPU | `d9f83ac5182e25ad7f0a301a77a0b667f2392df1` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/counting_historical_two_gpu/task6_historical_d9f83ac_exact20_20260725_090223` | running |
-| 18 | `xiangqim` | `437151` | two GPU, original archived launcher | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_repro20_historical/task18_historical66e789_exact20_20260725_084403` | running |
 
 ## Excluded Runs
 
@@ -24,6 +22,12 @@ the listed account-side output contains its runtime manifest and summary.
   was stopped, and is excluded. The next revision materializes that path as a
   job-local symlink to the already hash-pinned d9 source without changing any
   evaluator file.
+- Task2 job `437161` and Task18 job `437151` both used two GPUs but loaded a
+  later launcher/evaluator at the historical source pathname. They were
+  stopped after three completed episodes each and are excluded: Task2 had a
+  new `ENDPOSE_HOLD_START`/release path absent from the original successful
+  trace, while Task18 used the same changed launcher. Their replacement route
+  is documented in `ARCHIVED_ORIGINAL_SNAPSHOT_TOPOLOGY.md`.
 - Any archived or counting run using `*_single_gpu*` is recorded only as a
   compatibility diagnostic, not a historical-success reproduction.
 
