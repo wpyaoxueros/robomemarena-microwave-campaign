@@ -39,4 +39,17 @@ task12_passages="${tmp}/output/archived_original_snapshot/task12_originalsnapsho
 [[ -f "${task12_passages}" ]]
 grep -Fx "passage_counts=${task12_passages}" "${task12_plan}"
 
+FROZEN_SNAPSHOT_DRY_RUN=1 \
+OUTPUT_ROOT="${tmp}/output" \
+CAMPAIGN_GIT_COMMIT=test-contract \
+bash "${RUNNER}" 18 >/dev/null
+
+task18_plan="${tmp}/output/archived_original_snapshot/task18_originalsnapshot66e789_exact20_dryrun/original_snapshot_runtime_plan.env"
+[[ -f "${task18_plan}" ]]
+grep -Fx 'task_id=18' "${task18_plan}"
+grep -Fx 'replan_steps=5' "${task18_plan}"
+grep -Fx 'pick_gripper_gate=0' "${task18_plan}"
+grep -Fx 'pick_lift_gate=0' "${task18_plan}"
+grep -Fx 'completed_subtasks_mode=off' "${task18_plan}"
+
 echo 'PASS archived original snapshot topology contract'

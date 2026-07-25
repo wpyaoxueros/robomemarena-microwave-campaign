@@ -76,7 +76,7 @@ case "${TASK_ID}" in
     PASSAGE_MODE=snapshot
     DRAWER_GUARD=1
     PICK_GRIPPER_GATE=0
-    PICK_LIFT_GATE=1
+    PICK_LIFT_GATE=0
     TEXT_MODE=english_reference_no_candidate
     COMPLETED_MODE=off
     ;;

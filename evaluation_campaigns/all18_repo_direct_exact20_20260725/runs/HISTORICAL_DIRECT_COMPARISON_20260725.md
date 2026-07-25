@@ -109,6 +109,12 @@ an exact two-GPU formal submission succeeds.
   selects the unique `passage_counts__*.json` copied from each task's own frozen
   snapshot; Task12/13 resolve to the drawer file and Task18/25/26 resolve to
   their original target-count file.
+- Task18 job `437253` used the correct frozen source files and two-GPU
+  topology, but the generic campaign wrapper incorrectly set
+  `ENDPOSE_PICK_OBJECT_LIFT_GATE=1`. The actual Task18 snapshot, its saved
+  environment, and its previous 5/5 replay all require `0`. It was cancelled
+  after ten completed episodes and is excluded. The corrected wrapper has a
+  dry-run contract assertion for Task18's `pick_lift_gate=0` before restart.
 
 ## Integrity Checks
 
