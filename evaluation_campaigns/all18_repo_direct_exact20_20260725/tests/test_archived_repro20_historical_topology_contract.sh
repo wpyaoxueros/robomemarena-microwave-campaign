@@ -41,6 +41,8 @@ grep -Fq 'run_archived_repro20_historical_topology.sh' "${SUBMITTER}"
 
 grep -Fq 'for part in acd_u acd_ue emergency_acd' "${PROBE_SUBMITTER}"
 grep -Fq -- '--gres="gpu:${gpus}"' "${PROBE_SUBMITTER}"
+grep -Fq 'timeout 25s srun --immediate=20' "${PROBE_SUBMITTER}"
+grep -Fq 'scancel --name="${probe_name}" -u "$(id -un)"' "${PROBE_SUBMITTER}"
 grep -Fq '>&2' "${PROBE_SUBMITTER}"
 grep -Fq 'TWO_GPU_PARTITION="$(probe_partition' "${PROBE_SUBMITTER}"
 grep -Fq 'PARTITION="${TWO_GPU_PARTITION}"' "${PROBE_SUBMITTER}"

@@ -22,19 +22,22 @@ probe_partition() {
   local cpus="$3"
   local mem="$4"
   local part
+  local probe_name
 
   for part in acd_u acd_ue emergency_acd; do
+    probe_name="lhs_t${TASK_ID}_probe_${label}_${STAMP}"
     printf '[PROBE] label=%s partition=%s gpus=%s cpus=%s mem=%s\n' \
       "${label}" "${part}" "${gpus}" "${cpus}" "${mem}" | tee -a "${PROBE_LOG}" >&2
-    if srun --immediate=20 -p "${part}" --gres="gpu:${gpus}" -c "${cpus}" \
+    if timeout 25s srun --immediate=20 -p "${part}" --gres="gpu:${gpus}" -c "${cpus}" \
       --mem="${mem}" --time=00:01:00 \
-      --job-name="lhs_t${TASK_ID}_probe_${label}_${STAMP}" \
+      --job-name="${probe_name}" \
       bash -lc 'printf "PROBE_OK user=%s host=%s cudas=%s\\n" "$(whoami)" "$(hostname)" "${CUDA_VISIBLE_DEVICES:-unset}"; nvidia-smi -L | head -2' \
       >>"${PROBE_LOG}" 2>&1; then
       printf '[PROBE_OK] label=%s partition=%s\n' "${label}" "${part}" | tee -a "${PROBE_LOG}" >&2
       printf '%s\n' "${part}"
       return 0
     fi
+    scancel --name="${probe_name}" -u "$(id -un)" >>"${PROBE_LOG}" 2>&1 || true
     printf '[PROBE_FAIL] label=%s partition=%s\n' "${label}" "${part}" | tee -a "${PROBE_LOG}" >&2
   done
   return 1
