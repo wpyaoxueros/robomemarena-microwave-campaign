@@ -19,6 +19,7 @@ esac
 
 STAMP=${STAMP:-$(date +%Y%m%d_%H%M%S)}
 SEED=${SEED:-104}
+POST_GOAL_STEPS=${POST_GOAL_STEPS:-200}
 BATCH_ROOT="${OUTPUT_ROOT_OVERRIDE}/lhs_gpu_batches/${STAMP}"
 mkdir -p "${BATCH_ROOT}/logs"
 
@@ -28,6 +29,7 @@ unix_user=$(id -un)
 slurm_job_id=${SLURM_JOB_ID}
 remote_commit=d9f83ac5182e25ad7f0a301a77a0b667f2392df1
 seed=${SEED}
+post_goal_steps=${POST_GOAL_STEPS}
 allocated_gpu_ids=${CUDA_VISIBLE_DEVICES}
 gpu_count=${GPU_COUNT}
 formal_task12_gpu_ids=${GPU_IDS[0]},${GPU_IDS[1]}
@@ -50,6 +52,7 @@ run_formal() {
     ARCHIVED_TASKS_EVAL_OVERRIDE="${CAMPAIGN_DIR}/adapters/eval_tasks2_26_sync_endpose_hold_d9_compat.py" \
     PORT="${port}" \
     SEED="${SEED}" \
+    POST_GOAL_STEPS="${POST_GOAL_STEPS}" \
     bash "${CAMPAIGN_DIR}/scripts/run_archived_exact20_inside_allocation.sh" \
       "${task_id}" "${env_file}" >"${log_file}" 2>&1
 }

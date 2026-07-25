@@ -9,6 +9,7 @@ TASK_ID=${1:?usage: run_archived_direct20_two_gpu.sh TASK_ID}
 CAMPAIGN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ARCHIVED_CAMPAIGN="${CAMPAIGN_DIR}/../latest_openhelix_d9f83ac_exact20_20260725"
 OUTPUT_ROOT=${OUTPUT_ROOT:?set OUTPUT_ROOT to the submit-account output root}
+POST_GOAL_STEPS=${POST_GOAL_STEPS:-200}
 
 case "${TASK_ID}" in
   3)
@@ -77,6 +78,7 @@ mujoco_egl_binding=1
 vla_ckpt=${VLA_POLICY}
 vlm_ckpt=${VLM_CKPT}
 norm=${VLA_NORM_FILE}
+post_goal_steps=${POST_GOAL_STEPS}
 EOF
 
 export VLA_CUDA_VISIBLE_DEVICES=0
@@ -84,6 +86,7 @@ export VLM_CUDA_VISIBLE_DEVICES=1
 export MUJOCO_EGL_DEVICE_ID=1
 export NUM_TRIALS=20
 export SEED=104
+export POST_GOAL_STEPS
 export RUN_ID
 export OUTPUT_ROOT_OVERRIDE="${OUTPUT_ROOT}"
 export ARCHIVED_TASKS_EVAL_OVERRIDE="${ARCHIVED_CAMPAIGN}/adapters/eval_tasks2_26_sync_endpose_hold_d9_compat.py"

@@ -36,6 +36,7 @@ for ((repeat = 0; repeat < REPEATS; repeat++)); do
     NUM_TRIALS=1 \
     MAX_STEPS=1000 \
     REPLAN_STEPS=10 \
+    POST_GOAL_STEPS="${POST_GOAL_STEPS:-200}" \
     VLA_REPO_ID="${NORM_REPO}" \
       /bin/bash "${RUNNER}" >"${attempt_root}/worker.log" 2>&1
     rc=$?

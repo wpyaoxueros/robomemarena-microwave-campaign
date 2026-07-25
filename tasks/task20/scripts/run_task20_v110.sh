@@ -32,6 +32,7 @@ export SEED=${SEED:-106}
 export NUM_TRIALS=${NUM_TRIALS:-1}
 export MAX_STEPS=${MAX_STEPS:-1000}
 export REPLAN_STEPS=${REPLAN_STEPS:-10}
+export POST_GOAL_STEPS=${POST_GOAL_STEPS:-200}
 export PORT=${PORT:-9714}
 export RUN_ID=${RUN_ID:-task20_v110_seed${SEED}_${STAMP}}
 export OUTPUT_ROOT=${OUTPUT_ROOT:-${PACK_DIR}/outputs}

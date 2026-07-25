@@ -18,6 +18,7 @@ esac
 
 export NUM_TRIALS=20
 export SEED=${SEED:-104}
+export POST_GOAL_STEPS=${POST_GOAL_STEPS:-200}
 export PORT=${PORT:-$((9400 + TASK_ID))}
 export RUNTIME_ENV
 

@@ -51,6 +51,7 @@ actual_norm_sha="$(sha256sum "${VLA_NORM_FILE}" | awk '{print $1}')"
 
 NUM_TRIALS=${NUM_TRIALS:-20}
 SEED=${SEED:-104}
+POST_GOAL_STEPS=${POST_GOAL_STEPS:-200}
 [[ "${NUM_TRIALS}" == "20" ]] || {
   echo "[ERROR] this formal launcher requires exactly 20 episodes, got ${NUM_TRIALS}" >&2
   exit 4
@@ -80,6 +81,7 @@ vlm_label=${VLM_LABEL}
 norm_sha256=${actual_norm_sha}
 num_trials=${NUM_TRIALS}
 seed=${SEED}
+post_goal_steps=${POST_GOAL_STEPS}
 EOF
 
 BASE_EVAL="${OFFICIAL_ROOT}/evaluation_benchmark/reference_evaluation/tasks2_26_vlm5_reference/eval_tasks2_26_vlm_vla.py"
@@ -167,6 +169,7 @@ env \
   SEED="${SEED}" \
   MAX_STEPS="${MAX_STEPS}" \
   REPLAN_STEPS="${REPLAN_STEPS}" \
+  POST_GOAL_STEPS="${POST_GOAL_STEPS}" \
   EVAL_PY="${ARCHIVED_TASKS_EVAL}" \
   TASKS2_26_BASE_EVAL_PY="${BASE_EVAL}" \
   TASK_CONFIG="${TASK_CONFIG}" \

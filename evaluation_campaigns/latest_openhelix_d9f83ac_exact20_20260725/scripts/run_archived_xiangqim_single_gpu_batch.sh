@@ -26,6 +26,7 @@ done
 
 STAMP=${STAMP:-$(date +%Y%m%d_%H%M%S)}
 SEED=${SEED:-104}
+POST_GOAL_STEPS=${POST_GOAL_STEPS:-200}
 BATCH_ROOT="${OUTPUT_ROOT_OVERRIDE}/lhs_single_gpu_batches/${STAMP}"
 mkdir -p "${BATCH_ROOT}/logs"
 
@@ -35,6 +36,7 @@ mkdir -p "${BATCH_ROOT}/logs"
   echo "slurm_job_id=${SLURM_JOB_ID}"
   echo "remote_commit=d9f83ac5182e25ad7f0a301a77a0b667f2392df1"
   echo "seed=${SEED}"
+  echo "post_goal_steps=${POST_GOAL_STEPS}"
   echo "allocated_gpu_ids=${CUDA_VISIBLE_DEVICES}"
   echo "task_ids=${TASK_IDS}"
   for index in "${!TASK_LIST[@]}"; do
@@ -55,6 +57,7 @@ run_task() {
     ARCHIVED_TASKS_EVAL_OVERRIDE="${CAMPAIGN_DIR}/adapters/eval_tasks2_26_sync_endpose_hold_d9_compat.py" \
     PORT="${port}" \
     SEED="${SEED}" \
+    POST_GOAL_STEPS="${POST_GOAL_STEPS}" \
     bash "${CAMPAIGN_DIR}/scripts/run_archived_exact20_inside_allocation.sh" \
       "${task_id}" "${env_file}" >"${log_file}" 2>&1
 }

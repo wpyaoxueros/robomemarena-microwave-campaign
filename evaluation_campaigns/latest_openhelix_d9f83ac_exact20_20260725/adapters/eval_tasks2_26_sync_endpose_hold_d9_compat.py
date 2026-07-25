@@ -888,6 +888,7 @@ def run_episode_sync_endpose_hold(
     goal_check_override,
     vlm_camera_pose: dict | None,
     logger: logging.Logger,
+    post_goal_steps: int = 200,
 ) -> tuple[float, dict[str, bool], bool, list[np.ndarray], list[np.ndarray]]:
     if args.async_vlm:
         raise ValueError("eval_tasks2_26_sync_endpose_hold.py is sync-only; set ASYNC_VLM=0.")
@@ -895,6 +896,7 @@ def run_episode_sync_endpose_hold(
     cfg = hold_config()
     labels = list(planner.task_info.primitive_labels)
     task_id_int = int(planner.task_info.task_id)
+    post_goal_steps = max(0, int(post_goal_steps))
     final_subtask = labels[-1] if labels else ""
     targets = load_task_targets(cfg, task_id_int, labels)
     target_passage_requirements = load_task_passage_requirements(cfg, task_id_int, labels)
@@ -956,6 +958,7 @@ def run_episode_sync_endpose_hold(
     runtime_completed_subtasks: list[str] = []
     setattr(planner, "_runtime_completed_subtasks", runtime_completed_subtasks)
     ever_goal_success = False
+    post_goal_stage_reached_t: int | None = None
     last_gripper_action: float | None = None
     pick_gate_open_seen = False
     pick_gate_closed_after_open = False
@@ -1138,7 +1141,7 @@ def run_episode_sync_endpose_hold(
         return True, cos_sim, displacement, prev_dist, "ok"
 
     def check_goal(done: bool) -> bool:
-        nonlocal ever_goal_success
+        nonlocal ever_goal_success, post_goal_stage_reached_t
         goal_success = (
             bool(goal_check_override(env, stage_done))
             if goal_check_override is not None
@@ -1147,8 +1150,27 @@ def run_episode_sync_endpose_hold(
         if goal_success and not ever_goal_success:
             logger.info("[t=%s] goal success", t)
         ever_goal_success = ever_goal_success or goal_success
+        stage_success = bool(official_stage._stage_success_from_stage_done(task_id_int, official_stage_done))
+        if stage_success and post_goal_stage_reached_t is None:
+            post_goal_stage_reached_t = t
+            logger.info(
+                "[POST_GOAL_STAGE_REACHED] t=%s task=%s post_goal_steps=%s stage_done_json=%s",
+                t,
+                task_id_int,
+                post_goal_steps,
+                json.dumps(official_stage_done, ensure_ascii=False, separators=(",", ":")),
+            )
         if done:
             logger.info("[DONE] t=%s, task done", t)
+            return True
+        if post_goal_stage_reached_t is not None and (t - post_goal_stage_reached_t) >= post_goal_steps:
+            logger.info(
+                "[POST_GOAL_STAGE_EXIT] t=%s task=%s reached_t=%s post_goal_steps=%s",
+                t,
+                task_id_int,
+                post_goal_stage_reached_t,
+                post_goal_steps,
+            )
             return True
         return False
 
@@ -2051,6 +2073,7 @@ def run_episode_sync_endpose_hold_d9_compat(
         goal_check_override=goal_check_override,
         vlm_camera_pose=vlm_camera_pose,
         logger=logger,
+        post_goal_steps=post_goal_steps,
     )
     stage_success = bool(official_stage._stage_success_from_stage_done(planner_task_id, stage_done))
     logger.info(

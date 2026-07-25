@@ -3,6 +3,12 @@
 This table is updated only from a completed task's official summaries and
 run manifest. A historical result is not counted as a new campaign result.
 
+> **2026-07-25 correction:** the archived d9 adapter previously logged but did
+> not execute `POST_GOAL_STEPS=200`. Any row marked pre-correction is evidence
+> only and must be replayed with the corrected adapter before it can count in
+> the strict current campaign. See
+> `../latest_openhelix_d9f83ac_exact20_20260725/POST_GOAL_200_CORRECTION_20260725.md`.
+
 | Task | Frozen package | Episodes | Success | Scorer | Status | Result manifest |
 | --- | --- | ---: | ---: | --- | --- | --- |
 | 1 | archived direct-use package | 0/20 | - | d9f83ac | invalid: 20 trace dirs but official aggregate says num_trials=0 | `runs/ARCHIVED_DIRECT20_SINGLE_GPU_20260725.md` |
@@ -11,12 +17,12 @@ run manifest. A historical result is not counted as a new campaign result.
 | 6 | Task6 counting package | 0/20 | - | d9f83ac | running after source-overlay fix | `runs/COUNTING_DIRECT20_OVERLAYFIX_20260725.md` |
 | 7 | Task7 counting package | 8/8 historical seeds | stage 50.0%, mean stage 75.0%, goal 75.0% | d9f83ac | complete strict two-GPU reference; all eight seed outcomes exactly match the historical 4/8 result. The single-GPU 20ep compatibility run remains excluded. | `results/TASK7_HISTORICAL_TOPOLOGY_8EP_20260725.md` |
 | 10 | Task10 counting package | 0/20 | - | d9f83ac | current frozen-package run active; counts when 20 valid summaries exist | `runs/COUNTING_DIRECT20_OVERLAYFIX_20260725.md` |
-| 12 | d9 archived continuation | 20/20 | stage 50.0%, goal 70.0% | d9f83ac | complete, counted | `/data/user/xiangqim/hlei573_borrow_outputs/latest_openhelix_d9f83ac_exact20_20260725/task12/task12_openhelix_d9f83ac_exact20_seed104_20260725_030249/logs_task_sync_hold/task12_openhelix_d9f83ac_exact20_seed104_20260725_030249/summary.tsv` |
-| 13 | d9 archived continuation | 20/20 | stage 70.0%, goal 76.7% | d9f83ac | complete, counted | `/data/user/xiangqim/hlei573_borrow_outputs/latest_openhelix_d9f83ac_exact20_20260725/task13/task13_openhelix_d9f83ac_exact20_seed104_20260725_030249/logs_task_sync_hold/task13_openhelix_d9f83ac_exact20_seed104_20260725_030249/summary.tsv` |
+| 12 | d9 archived continuation | 20/20 pre-correction | stage 50.0%, goal 70.0% | d9f83ac | evidence only; rerun with post-goal 200 | `/data/user/xiangqim/hlei573_borrow_outputs/latest_openhelix_d9f83ac_exact20_20260725/task12/task12_openhelix_d9f83ac_exact20_seed104_20260725_030249/logs_task_sync_hold/task12_openhelix_d9f83ac_exact20_seed104_20260725_030249/summary.tsv` |
+| 13 | d9 archived continuation | 20/20 pre-correction | stage 70.0%, goal 76.7% | d9f83ac | evidence only; rerun with post-goal 200 | `/data/user/xiangqim/hlei573_borrow_outputs/latest_openhelix_d9f83ac_exact20_20260725/task13/task13_openhelix_d9f83ac_exact20_seed104_20260725_030249/logs_task_sync_hold/task13_openhelix_d9f83ac_exact20_seed104_20260725_030249/summary.tsv` |
 | 14 | Task14 v1 | 0/20 | - | d9f83ac | job `437609` is excluded: it failed at the old callback boundary before a rollout. A two-GPU d9-compat 1ep smoke is running before a fresh 20ep launch. | `runs/TASK14_V1_D9_20EP_20260725.md` |
 | 16 | Task16 counting package | 20/20 | stage 85.0%, mean stage 90.0%, goal 90.0% | d9f83ac | complete, counted; two-GPU frozen-package replay, VLM prompt selection and oracle prompt injection off | `runs/TASK16_HISTORICAL_TWO_GPU_D9_20EP_20260725.md` |
 | 18 | Task18 v2 original snapshot | 0/20 | - | d9 overlay pending | fresh required | current v3/archived worker excluded |
-| 20 | Task20 v110 | 4/20 | provisional stage 2/4, mean stage 83.4%, goal 2/4 | d9f83ac | worker0 complete and valid; workers1..4 now run episodes 4..19 under the identical two-GPU d9 overlay | `runs/TASK20_V110_D9_WORKER0_20260725.md` |
+| 20 | Task20 v110 | 12 valid pre-correction | stage/goal 7/12 | d9f83ac | evidence only; prior workers stopped and strict post-goal 200 replay required | `runs/TASK20_V110_D9_WORKER0_20260725.md` |
 | 21 | Task21 v121 | 0/20 | - | d9f83ac | invalid single-GPU attempt: 13 launched episodes produced no official score; each reached native abort/cancellation before an eligible summary. Relaunch with the frozen two-GPU topology. | `runs/TASK21_D9_DIRECT20_SINGLE_GPU.md` |
 | 22 | Task22 autonomous package | 0/20 | - | d9f83ac | fresh required | - |
 | 23 | Task23 v155 | 0/20 | - | d9 overlay pending | fresh required | - |
