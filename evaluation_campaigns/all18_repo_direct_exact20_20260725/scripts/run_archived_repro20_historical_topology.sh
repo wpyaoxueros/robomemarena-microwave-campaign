@@ -105,6 +105,13 @@ check_sha 4f71f864b3d34e3b58616d5c01b5efa86e57b317e014a091f62f9ef13ba67a8a "${VL
 }
 check_sha 5e3e20286d8dd77335bff28115a3a0a892cc435f8a8eeec176c3c56d6ac583d6 "${OFFICIAL_STAGE}"
 
+# The submit account does not own this shared worktree. Keep the exception
+# process-local so the job can record its campaign commit without changing the
+# account's global Git configuration.
+export GIT_CONFIG_COUNT=1
+export GIT_CONFIG_KEY_0=safe.directory
+export GIT_CONFIG_VALUE_0="${REPO_DIR}"
+
 STAMP=${STAMP:-$(date +%Y%m%d_%H%M%S)}
 RUN_ID=${RUN_ID:-task${TASK_ID}_historical66e789_exact20_${STAMP}}
 OUT_ROOT="${OUTPUT_ROOT}/archived_repro20_historical/${RUN_ID}"

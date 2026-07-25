@@ -5,6 +5,7 @@ TASK_ID=${1:?usage: submit_archived_repro20_historical_topology.sh TASK_ID}
 CAMPAIGN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 RUNNER="${CAMPAIGN_DIR}/scripts/run_archived_repro20_historical_topology.sh"
 OUTPUT_ROOT=${OUTPUT_ROOT:?set OUTPUT_ROOT to the submit-account output root}
+PARTITION=${PARTITION:-acd_u}
 MEM_MB=${MEM_MB:-327680}
 TIME_LIMIT=${TIME_LIMIT:-10:00:00}
 STAMP=${STAMP:-$(date +%Y%m%d_%H%M%S)}
@@ -19,7 +20,7 @@ LOG_FILE="${LOG_DIR}/${SESSION}.log"
 mkdir -p "${LOG_DIR}"
 
 tmux -f /dev/null new-session -d -s "${SESSION}" \
-  "bash -lc 'srun -p acd_u --gres=gpu:2 -c16 --mem=${MEM_MB}M --time=${TIME_LIMIT} --job-name=${JOB_NAME} env OUTPUT_ROOT=${OUTPUT_ROOT} RUN_ID=${RUN_ID} bash ${RUNNER} ${TASK_ID} >>${LOG_FILE} 2>&1; rc=\$?; printf \"[TMUX_EXIT] status=%s\\n\" \"\$rc\" >>${LOG_FILE}; exec bash'"
+  "bash -lc 'srun -p \"${PARTITION}\" --gres=gpu:2 -c16 --mem=${MEM_MB}M --time=${TIME_LIMIT} --job-name=${JOB_NAME} env OUTPUT_ROOT=${OUTPUT_ROOT} RUN_ID=${RUN_ID} bash ${RUNNER} ${TASK_ID} >>${LOG_FILE} 2>&1; rc=\$?; printf \"[TMUX_EXIT] status=%s\\n\" \"\$rc\" >>${LOG_FILE}; exec bash'"
 
-printf 'session=%s\njob_name=%s\nrun_id=%s\nlog=%s\n' \
-  "${SESSION}" "${JOB_NAME}" "${RUN_ID}" "${LOG_FILE}"
+printf 'session=%s\njob_name=%s\nrun_id=%s\npartition=%s\nlog=%s\n' \
+  "${SESSION}" "${JOB_NAME}" "${RUN_ID}" "${PARTITION}" "${LOG_FILE}"
