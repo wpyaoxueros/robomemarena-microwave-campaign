@@ -128,3 +128,16 @@ an exact two-GPU formal submission succeeds.
 
 Final per-task 20-episode metrics are added only after the actual submit
 account confirms completion and the original summary files are present.
+
+## Live Progress Snapshot (2026-07-25 10:59 CST)
+
+This snapshot was read from the actual submit-account output roots. Counts use
+main-view episode videos only; wrist copies are not counted as extra episodes.
+These are in-progress counts, not final 20-episode claims.
+
+| Task | Job | Completed main episodes | Main-view successes | Status |
+| --- | --- | ---: | ---: | --- |
+| 2 | `437250` | 11/20 | 11/11 | still running |
+| 3 | `437278` | 10/20 | 7/10 | still running |
+| 12 | `437367` | 0/20 | - | ep0 entered rollout with its original drawer-passage JSON |
+| 18 | `437253` | 9/20 | 5/9 | still running |
