@@ -40,3 +40,19 @@ The guard belongs to this package's rollout layer. The remote `d9f83ac` source
 is used for official stage/BDDL scoring only; do not replace this guarded
 runtime with the remote generic evaluator. The repository-wide contract is in
 [`docs/RUNTIME_SCORING_BOUNDARY_CN.md`](../../docs/RUNTIME_SCORING_BOUNDARY_CN.md).
+
+## Fixed Seed=100, 20 Repeats
+
+The current canonical repeat test fixes both the LIBERO environment seed and
+the VLA policy seed to `100`. It runs 20 independent one-episode processes as
+eight two-GPU workers with counts `3,3,3,3,2,2,2,2`; VLA and VLM stay on
+separate GPUs. The historical guarded runtime is materialized for every
+episode, while the stage scorer remains pinned to remote `d9f83ac`.
+
+Run this entrypoint from the submit account:
+
+```bash
+./run_task7_fixedseed100_guarded20_16gpu.sh
+```
+
+The output directory name begins with `task7_fixedseed100_guarded20_16gpu_`.
