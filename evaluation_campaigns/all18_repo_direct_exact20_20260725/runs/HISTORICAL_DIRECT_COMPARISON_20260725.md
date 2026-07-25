@@ -14,6 +14,20 @@ the listed account-side output contains its runtime manifest and summary.
 | 3 | `zzhang510` | `437278` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task3_originalsnapshot66e789_exact20_20260725_100422` | running after account-side two-GPU probe |
 | 18 | `xiangqim` | `437253` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task18_originalsnapshot66e789_exact20_20260725_095844` | running after account-side import-layout check |
 
+## Queued Follow-ups
+
+Each queued replay waits for the exact predecessor's two-GPU allocation to
+finish, then runs fresh one- and two-GPU probes in the submitting account
+before it can launch. This preserves the original VLA/VLM two-GPU topology
+without creating unverified pending formal jobs.
+
+| Task | Submit account | Waits for | Wait session | Frozen campaign commit |
+| --- | --- | --- | --- | --- |
+| 12 | `xiangqim` | Task6 job `437171` | `lhs_wait_t12_after_t6_20260725_101000` | `cab03422b8150b2c4432f866568cefced76a694c` |
+| 13 | `zzhang510` | Task2 job `437250` | `lhs_wait_t13_after_t2_20260725_101500` | `cab03422b8150b2c4432f866568cefced76a694c` |
+| 25 | `zzhang510` | Task3 job `437278` | `lhs_wait_t25_after_t3_20260725_101500` | `cab03422b8150b2c4432f866568cefced76a694c` |
+| 26 | `xiangqim` | Task18 job `437253` | `lhs_wait_t26_after_t18_20260725_101500` | `cab03422b8150b2c4432f866568cefced76a694c` |
+
 ## Excluded Runs
 
 - Task6 job `437037` used the campaign's single-GPU overlay, which remapped
