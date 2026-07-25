@@ -25,9 +25,9 @@ new strict comparison; do not combine them with the excluded generic runs.
 
 | Task | Submit account | Job | Output root | Status at restart |
 | ---: | --- | ---: | --- | --- |
-| 13 | `zzhang510` | `437518` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task13_originalsnapshot66e789_exact20_20260725_113400_rtefix` | running; original lift gate `1`, `completed_struct` |
-| 25 | `zzhang510` | `437528` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task25_originalsnapshot66e789_exact20_20260725_113600_rtefix` | running; original lift gate `1` |
-| 12 | `xiangqim` | `437531` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task12_originalsnapshot66e789_exact20_20260725_113700_rtefix` | running; original drawer-passage file, lift gate `1`, `completed_struct` |
+| 13 | `zzhang510` | `437518` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task13_originalsnapshot66e789_exact20_20260725_113400_rtefix` | running; ep0 stage 66.7%, original lift gate `1`, `completed_struct` |
+| 25 | `zzhang510` | `437528` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task25_originalsnapshot66e789_exact20_20260725_113600_rtefix` | running; ep0 stage/goal 100%, original lift gate `1` |
+| 12 | `xiangqim` | `437531` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task12_originalsnapshot66e789_exact20_20260725_113700_rtefix` | running; ep0 stage 66.7%, original drawer-passage file, lift gate `1`, `completed_struct` |
 | 18 | `xiangqim` | `437534` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task18_originalsnapshot66e789_exact20_20260725_113800_rtefix` | running; original lift gate `0` |
 | 2 | `xiangqim` | `437541` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task2_originalsnapshot66e789_exact20_20260725_113900_rtefix` | running; original gates `0` |
 | 3 | `xiangqim` | `437542` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task3_originalsnapshot66e789_exact20_20260725_113901_rtefix` | running; original gates `0` |
