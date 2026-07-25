@@ -135,11 +135,12 @@ FROZEN_REPRO="${EXECUTION_PACK}/repro_snapshot/files"
 FROZEN_LAUNCHER="${FROZEN_CODE}/run_tasks2_26_sync_hold_eval.sh"
 FROZEN_EVALUATOR="${EXECUTION_PACK}/driver/eval_tasks2_26_sync_endpose_hold_officialscore.py"
 FROZEN_BASE_EVALUATOR="${EXECUTION_PACK}/RoboMemArena/evaluation_benchmark/reference_evaluation/tasks2_26_vlm5_reference/eval_tasks2_26_vlm_vla.py"
+FROZEN_OFFICIAL_SCRIPTS="${EXECUTION_PACK}/RoboMemArena/evaluation_benchmark/scripts"
 FROZEN_TASK_CONFIG="${FROZEN_REPRO}/task_config__fullvlm_v2_26_memory_tasks.json"
 FROZEN_TARGETS="${FROZEN_REPRO}/endpose_hold_targets__tasks2_26_endpose_targets_seed100_199.json"
 FROZEN_PASSAGES="${FROZEN_REPRO}/passage_counts__tasks2_26_target_passage_counts_seed100_199_alltasks_tol045_20260624_074452.json"
 
-for required in "${FROZEN_LAUNCHER}" "${FROZEN_EVALUATOR}" "${FROZEN_BASE_EVALUATOR}" "${FROZEN_TASK_CONFIG}" "${FROZEN_TARGETS}"; do
+for required in "${FROZEN_LAUNCHER}" "${FROZEN_EVALUATOR}" "${FROZEN_BASE_EVALUATOR}" "${FROZEN_OFFICIAL_SCRIPTS}/eval_common.py" "${FROZEN_OFFICIAL_SCRIPTS}/task2_26_reference_stage.py" "${FROZEN_TASK_CONFIG}" "${FROZEN_TARGETS}"; do
   [[ -f "${required}" ]] || { echo "missing frozen runtime asset: ${required}" >&2; exit 3; }
 done
 if [[ "${PASSAGE_MODE}" == snapshot ]]; then
@@ -181,6 +182,7 @@ sha256() {
   printf 'frozen_evaluator_sha256=%s\n' "$(sha256 "${FROZEN_EVALUATOR}")"
   printf 'frozen_base_evaluator=%s\n' "${FROZEN_BASE_EVALUATOR}"
   printf 'frozen_base_evaluator_sha256=%s\n' "$(sha256 "${FROZEN_BASE_EVALUATOR}")"
+  printf 'frozen_official_scripts_dir=%s\n' "${FROZEN_OFFICIAL_SCRIPTS}"
   printf 'frozen_task_config=%s\n' "${FROZEN_TASK_CONFIG}"
   printf 'frozen_targets=%s\n' "${FROZEN_TARGETS}"
   printf 'frozen_official_scripts_dir=%s\n' "${FROZEN_CODE}"
@@ -239,6 +241,6 @@ exec env \
   DISABLE_OUTPUT_NORMALIZE=1 \
   VLM_TASK_TEXT_MODE="${TEXT_MODE}" \
   VLM_COMPLETED_SUBTASKS_MODE="${COMPLETED_MODE}" \
-  ROBOMEMARENA_OFFICIAL_SCRIPTS_DIR="${FROZEN_CODE}" \
+  ROBOMEMARENA_OFFICIAL_SCRIPTS_DIR="${FROZEN_OFFICIAL_SCRIPTS}" \
   REPRO_SNAPSHOT_LAUNCHER="${FROZEN_LAUNCHER}" \
   bash "${FROZEN_LAUNCHER}"

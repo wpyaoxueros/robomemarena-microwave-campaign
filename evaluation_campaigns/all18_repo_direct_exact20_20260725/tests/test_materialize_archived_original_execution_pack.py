@@ -111,6 +111,17 @@ def main() -> int:
             assert manifest["frozen_base_evaluator"] == str(frozen_base)
             assert manifest["frozen_driver_evaluator"] == str(isolated_driver)
 
+            official_scripts = output / "RoboMemArena" / "evaluation_benchmark" / "scripts"
+            assert sha256(official_scripts / "eval_common.py") == sha256(
+                task_root / "code_snapshot" / "eval_common.py"
+            )
+            assert sha256(official_scripts / "task2_26_reference_stage.py") == sha256(
+                task_root / "code_snapshot" / "task2_26_reference_stage.py"
+            )
+            official_bddl = official_scripts.parent / "bddl" / task_bddl.name
+            assert sha256(official_bddl) == sha256(task_root / "code_snapshot" / "bddl" / task_bddl.name)
+            assert manifest["frozen_official_scripts_dir"] == str(official_scripts)
+
     print("PASS archived original execution-pack contract")
     return 0
 

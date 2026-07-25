@@ -31,6 +31,8 @@ RoboMemArena/evaluation_benchmark/reference_evaluation/
   tasks2_26_vlm5_reference/eval_tasks2_26_vlm_vla.py
 RoboMemArena/evaluation_benchmark/openpi_minimal_runtime/*.py
 RoboMemArena/bddl/*.bddl
+RoboMemArena/evaluation_benchmark/scripts/*.py
+RoboMemArena/evaluation_benchmark/bddl/*.bddl
 driver/eval_tasks2_26_sync_endpose_hold_officialscore.py
 ```
 
@@ -45,6 +47,11 @@ The archived outer evaluator is also copied byte-for-byte to the isolated
 `driver/` directory. This mirrors the original `SOURCE_ROOT/evaluators`
 execution context, which had no sibling `eval_common.py`; the full archived
 `code_snapshot/` remains available for the frozen launcher and scorer assets.
+The archived official scripts are likewise reconstructed at
+`RoboMemArena/evaluation_benchmark/scripts/`, with their task BDDL copied to
+the sibling `bddl/` directory. This matters because the outer evaluator
+rebinds the base evaluator's BDDL resolver to the official `eval_common.py`
+inside `main()`.
 
 The two-GPU runner uses only that pack for:
 

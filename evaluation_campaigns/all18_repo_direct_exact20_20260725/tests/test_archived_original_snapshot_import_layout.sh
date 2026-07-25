@@ -16,7 +16,7 @@ mkdir -p "${tmp}/out/videos"
 OPENPI_ROOT="${OPENPI_ROOT}" \
 OPENPI_INFERENCE_ROOT=/data/user/hlei573/openpi_inference \
 TARGET_LIBERO_PATH="${LIBERO_ROOT}" \
-ROBOMEMARENA_OFFICIAL_SCRIPTS_DIR="${tmp}/pack/code_snapshot" \
+ROBOMEMARENA_OFFICIAL_SCRIPTS_DIR="${tmp}/pack/RoboMemArena/evaluation_benchmark/scripts" \
 TASKS2_26_BASE_EVAL_PY="${tmp}/pack/RoboMemArena/evaluation_benchmark/reference_evaluation/tasks2_26_vlm5_reference/eval_tasks2_26_vlm_vla.py" \
 OUT_ROOT="${tmp}/out" \
 VIDEO_DIR="${tmp}/out/videos" \
@@ -38,7 +38,14 @@ spec.loader.exec_module(module)
 expected = pack / "RoboMemArena" / "evaluation_benchmark" / "openpi_minimal_runtime" / "eval_common.py"
 actual = pathlib.Path(module.base.ec.__file__).resolve()
 assert actual == expected.resolve(), (actual, expected)
-print(f"IMPORT_LAYOUT_OK eval_common={actual}")
+official_expected = pack / "RoboMemArena" / "evaluation_benchmark" / "scripts" / "eval_common.py"
+official_actual = pathlib.Path(module.official_ec.__file__).resolve()
+assert official_actual == official_expected.resolve(), (official_actual, official_expected)
+module.base.ec._resolve_bddl_path = module.official_ec._resolve_bddl_path
+assert module.base.ec._resolve_bddl_path(2) == (
+    pack / "RoboMemArena" / "evaluation_benchmark" / "bddl" / "2_butter_popcorn_basket.bddl"
+)
+print(f"IMPORT_LAYOUT_OK base_eval_common={actual} official_eval_common={official_actual}")
 PY
 
 echo 'PASS archived original snapshot import-layout contract'

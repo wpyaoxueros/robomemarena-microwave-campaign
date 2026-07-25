@@ -49,6 +49,13 @@ the listed account-side output contains its runtime manifest and summary.
   the same evaluator path. Both are excluded; the next pack runs the unchanged
   outer evaluator from an isolated driver directory with no sibling
   `eval_common.py`.
+- Task2 job `437210` passed the isolated-driver import but reached the outer
+  evaluator's `main()` rebind, where its flattened official script copy again
+  resolved BDDL relative to the wrong parent. It exited before episode zero.
+  Task18 job `437213` was stopped during startup before that path was entered.
+  Both are excluded. The next pack reconstructs the original official
+  `evaluation_benchmark/scripts` plus sibling `bddl` hierarchy and verifies the
+  rebound resolver in an import-layout test before submission.
 - Any archived or counting run using `*_single_gpu*` is recorded only as a
   compatibility diagnostic, not a historical-success reproduction.
 

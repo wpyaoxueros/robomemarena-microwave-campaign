@@ -54,6 +54,13 @@ REQUIRED_REPRO_FILES = (
     "eval_py__eval_tasks2_26_sync_endpose_hold_officialscore.py",
     "launcher__run_tasks2_26_sync_hold_eval.sh",
 )
+OFFICIAL_SCRIPT_FILES = (
+    "eval_common.py",
+    "eval_task1_only.py",
+    "policy_adapter.py",
+    "run_all_tasks1_26.py",
+    "task2_26_reference_stage.py",
+)
 ORIGINAL_RMA_ROOT = pathlib.Path(
     "/data/user/hlei573/tmp/rma_refeval_fresh_20260513_052445/RoboMemArena"
 )
@@ -161,6 +168,33 @@ def materialize_isolated_driver(code_snapshot: pathlib.Path, output: pathlib.Pat
     return driver
 
 
+def materialize_official_scripts(code_snapshot: pathlib.Path, output: pathlib.Path) -> tuple[pathlib.Path, dict[str, str]]:
+    """Restore the archived official scripts at their original relative path."""
+    scripts_dir = output / "RoboMemArena" / "evaluation_benchmark" / "scripts"
+    scripts_dir.mkdir(parents=True, exist_ok=True)
+    for name in OFFICIAL_SCRIPT_FILES:
+        source = code_snapshot / name
+        if not source.is_file():
+            raise FileNotFoundError(source)
+        shutil.copy2(source, scripts_dir / name)
+
+    source_bddl = code_snapshot / "bddl"
+    if not source_bddl.is_dir():
+        raise FileNotFoundError(source_bddl)
+    frozen_bddl = scripts_dir.parent / "bddl"
+    shutil.copytree(source_bddl, frozen_bddl, copy_function=shutil.copy2)
+
+    return scripts_dir, {
+        str(path.relative_to(output)): sha256(path)
+        for path in sorted(
+            [
+                *(scripts_dir / name for name in OFFICIAL_SCRIPT_FILES),
+                *(item for item in frozen_bddl.rglob("*") if item.is_file()),
+            ]
+        )
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--task-id", type=int, choices=sorted(TASK_ROOTS), required=True)
@@ -190,6 +224,7 @@ def main() -> int:
         if source.is_file():
             shutil.copy2(source, output / "repro_snapshot" / name)
     isolated_driver = materialize_isolated_driver(code_snapshot, output)
+    official_scripts_dir, official_script_hashes = materialize_official_scripts(code_snapshot, output)
     runtime_hashes = materialize_base_evaluator_runtime(repro_files, output)
     bddl_hashes = materialize_root_bddl(output)
 
@@ -219,6 +254,8 @@ def main() -> int:
         "files": execution_hashes,
         "frozen_base_evaluator": str((output / FROZEN_BASE_EVALUATOR_RELATIVE).resolve()),
         "frozen_driver_evaluator": str(isolated_driver.resolve()),
+        "frozen_official_scripts_dir": str(official_scripts_dir.resolve()),
+        "frozen_official_script_files": official_script_hashes,
         "frozen_runtime_files": runtime_hashes,
         "frozen_bddl_files": bddl_hashes,
     }
