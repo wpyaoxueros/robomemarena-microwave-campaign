@@ -4,9 +4,11 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 RUNNER="${ROOT}/scripts/run_archived_repro20_historical_topology.sh"
 SUBMITTER="${ROOT}/scripts/submit_archived_repro20_historical_topology.sh"
+PROBE_SUBMITTER="${ROOT}/scripts/probe_and_submit_archived_repro20_historical_topology.sh"
 
 [[ -x "${RUNNER}" ]]
 [[ -x "${SUBMITTER}" ]]
+[[ -x "${PROBE_SUBMITTER}" ]]
 
 grep -Fq 'TASK_ID=${1:?usage:' "${RUNNER}"
 grep -Fq 'case "${TASK_ID}" in' "${RUNNER}"
@@ -32,5 +34,12 @@ grep -Fq 'PARTITION=${PARTITION:-acd_u}' "${SUBMITTER}"
 grep -Fq "srun -p \\\"\${PARTITION}\\\"" "${SUBMITTER}"
 grep -Fq 'tmux -f /dev/null new-session' "${SUBMITTER}"
 grep -Fq 'run_archived_repro20_historical_topology.sh' "${SUBMITTER}"
+
+grep -Fq 'for part in acd_u acd_ue emergency_acd' "${PROBE_SUBMITTER}"
+grep -Fq -- '--gres="gpu:${gpus}"' "${PROBE_SUBMITTER}"
+grep -Fq '>&2' "${PROBE_SUBMITTER}"
+grep -Fq 'TWO_GPU_PARTITION="$(probe_partition' "${PROBE_SUBMITTER}"
+grep -Fq 'PARTITION="${TWO_GPU_PARTITION}"' "${PROBE_SUBMITTER}"
+grep -Fq 'submit_archived_repro20_historical_topology.sh' "${PROBE_SUBMITTER}"
 
 echo 'PASS archived repro20 historical two-GPU topology contract'
