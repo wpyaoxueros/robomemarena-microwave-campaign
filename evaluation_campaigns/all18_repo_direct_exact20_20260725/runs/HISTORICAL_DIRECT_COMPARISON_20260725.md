@@ -41,6 +41,14 @@ the listed account-side output contains its runtime manifest and summary.
   before episode zero and Task18 was cancelled during VLA startup before any
   rollout. Both are excluded. The next pack copies and hashes the complete
   original BDDL root as well.
+- Task2 job `437195` confirms that the BDDL root was then present, but it also
+  exposed a second layout-sensitive import: placing the archived outer
+  evaluator next to `code_snapshot/eval_common.py` changed the import target
+  relative to the original `SOURCE_ROOT/evaluators` directory. It exited before
+  episode zero. Task18 job `437198` was stopped during startup before entering
+  the same evaluator path. Both are excluded; the next pack runs the unchanged
+  outer evaluator from an isolated driver directory with no sibling
+  `eval_common.py`.
 - Any archived or counting run using `*_single_gpu*` is recorded only as a
   compatibility diagnostic, not a historical-success reproduction.
 

@@ -66,6 +66,9 @@ FROZEN_BASE_EVALUATOR_RELATIVE = pathlib.Path(
 FROZEN_RUNTIME_RELATIVE = pathlib.Path(
     "RoboMemArena/evaluation_benchmark/openpi_minimal_runtime"
 )
+FROZEN_DRIVER_EVALUATOR_RELATIVE = pathlib.Path(
+    "driver/eval_tasks2_26_sync_endpose_hold_officialscore.py"
+)
 
 
 def sha256(path: pathlib.Path) -> str:
@@ -142,6 +145,22 @@ def materialize_root_bddl(output: pathlib.Path) -> dict[str, str]:
     }
 
 
+def materialize_isolated_driver(code_snapshot: pathlib.Path, output: pathlib.Path) -> pathlib.Path:
+    """Place the archived outer evaluator in an import-isolated driver directory.
+
+    The original evaluator ran from ``SOURCE_ROOT/evaluators``, which contained
+    no ``eval_common.py``. Running it from the archived code snapshot would
+    shadow the base evaluator's original runtime ``eval_common`` module.
+    """
+    source = code_snapshot / "eval_tasks2_26_sync_endpose_hold_officialscore.py"
+    driver = output / FROZEN_DRIVER_EVALUATOR_RELATIVE
+    driver.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(source, driver)
+    if sha256(driver) != sha256(source):
+        raise RuntimeError("isolated driver evaluator copy hash mismatch")
+    return driver
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--task-id", type=int, choices=sorted(TASK_ROOTS), required=True)
@@ -170,6 +189,7 @@ def main() -> int:
         source = repro_snapshot / name
         if source.is_file():
             shutil.copy2(source, output / "repro_snapshot" / name)
+    isolated_driver = materialize_isolated_driver(code_snapshot, output)
     runtime_hashes = materialize_base_evaluator_runtime(repro_files, output)
     bddl_hashes = materialize_root_bddl(output)
 
@@ -198,6 +218,7 @@ def main() -> int:
         "original_repro_manifest_sha256": sha256(repro_snapshot / "MANIFEST.txt"),
         "files": execution_hashes,
         "frozen_base_evaluator": str((output / FROZEN_BASE_EVALUATOR_RELATIVE).resolve()),
+        "frozen_driver_evaluator": str(isolated_driver.resolve()),
         "frozen_runtime_files": runtime_hashes,
         "frozen_bddl_files": bddl_hashes,
     }

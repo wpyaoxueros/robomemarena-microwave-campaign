@@ -56,6 +56,9 @@ def main() -> int:
             assert sha256(output / "code_snapshot" / original_launcher.name) == sha256(original_launcher)
             assert sha256(output / "code_snapshot" / original_evaluator.name) == sha256(original_evaluator)
             assert sha256(original_evaluator) == evaluator_sha
+            isolated_driver = output / "driver" / original_evaluator.name
+            assert sha256(isolated_driver) == sha256(original_evaluator)
+            assert not (isolated_driver.parent / "eval_common.py").exists()
 
             manifests = list(task_root.glob("logs_task_sync_hold/*/repro_snapshot/*/MANIFEST.txt"))
             assert len(manifests) == 1
@@ -106,6 +109,7 @@ def main() -> int:
                 original_evaluator
             )
             assert manifest["frozen_base_evaluator"] == str(frozen_base)
+            assert manifest["frozen_driver_evaluator"] == str(isolated_driver)
 
     print("PASS archived original execution-pack contract")
     return 0

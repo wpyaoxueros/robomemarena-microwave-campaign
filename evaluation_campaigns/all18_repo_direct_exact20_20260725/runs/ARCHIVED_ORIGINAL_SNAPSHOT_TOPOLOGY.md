@@ -31,6 +31,7 @@ RoboMemArena/evaluation_benchmark/reference_evaluation/
   tasks2_26_vlm5_reference/eval_tasks2_26_vlm_vla.py
 RoboMemArena/evaluation_benchmark/openpi_minimal_runtime/*.py
 RoboMemArena/bddl/*.bddl
+driver/eval_tasks2_26_sync_endpose_hold_officialscore.py
 ```
 
 This hierarchy is required because the unchanged base evaluator derives its
@@ -40,6 +41,10 @@ repository root containing both `evaluation_benchmark` and `bddl`. A previous fl
 `ModuleNotFoundError: retry_tasks2_26_stage_from_anygrasp`; it is excluded.
 The corrected pack preserves the archived base evaluator byte-for-byte and
 copies the matching original runtime modules with recorded SHA256 hashes.
+The archived outer evaluator is also copied byte-for-byte to the isolated
+`driver/` directory. This mirrors the original `SOURCE_ROOT/evaluators`
+execution context, which had no sibling `eval_common.py`; the full archived
+`code_snapshot/` remains available for the frozen launcher and scorer assets.
 
 The two-GPU runner uses only that pack for:
 
