@@ -23,10 +23,16 @@ without creating unverified pending formal jobs.
 
 | Task | Submit account | Waits for | Wait session | Frozen campaign commit |
 | --- | --- | --- | --- | --- |
-| 12 | `xiangqim` | Task6 job `437171` | `lhs_wait_t12_after_t6_20260725_101000` | `cab03422b8150b2c4432f866568cefced76a694c` |
-| 13 | `zzhang510` | Task2 job `437250` | `lhs_wait_t13_after_t2_20260725_101500` | `cab03422b8150b2c4432f866568cefced76a694c` |
-| 25 | `zzhang510` | Task3 job `437278` | `lhs_wait_t25_after_t3_20260725_101500` | `cab03422b8150b2c4432f866568cefced76a694c` |
-| 26 | `xiangqim` | Task18 job `437253` | `lhs_wait_t26_after_t18_20260725_101500` | `cab03422b8150b2c4432f866568cefced76a694c` |
+| 12 | `xiangqim` | Task6 job `437171` | `lhs_wait_t12_after_t437171_v2_20260725_102812` | `cab03422b8150b2c4432f866568cefced76a694c` |
+| 13 | `zzhang510` | Task2 job `437250` | `lhs_wait_t13_after_t437250_v2_20260725_102814` | `cab03422b8150b2c4432f866568cefced76a694c` |
+| 25 | `zzhang510` | Task3 job `437278` | `lhs_wait_t25_after_t437278_v2_20260725_102814` | `cab03422b8150b2c4432f866568cefced76a694c` |
+| 26 | `xiangqim` | Task18 job `437253` | `lhs_wait_t26_after_t437253_v2_20260725_102812` | `cab03422b8150b2c4432f866568cefced76a694c` |
+
+The first generation of wait sessions (`..._101000` and `..._101500`) wrote
+only their initial wait line and then exited before submission. They are
+superseded by the listed `v2` sessions, which remain alive, recheck the
+predecessor from the submit account, and retry the mandatory fresh probes until
+an exact two-GPU formal submission succeeds.
 
 ## Excluded Runs
 
