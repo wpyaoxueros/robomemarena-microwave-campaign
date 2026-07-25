@@ -54,6 +54,13 @@ superseded by the listed `v2` sessions, which remain alive, recheck the
 predecessor from the submit account, and retry the mandatory fresh probes until
 an exact two-GPU formal submission succeeds.
 
+Task26's waiter observed the Task18 cancellation and submitted job `437459`
+before the waiter could be removed. Its own original Task26 snapshot requires
+`pick_gripper_gate=1` and `pick_lift_gate=1`, which the new run manifest
+confirms. It remains a valid Task26 replay. Task18 is explicitly deferred until
+the next two-GPU slot, where it will restart with the corrected
+`pick_lift_gate=0` contract.
+
 ## Excluded Runs
 
 - Task6 job `437037` used the campaign's single-GPU overlay, which remapped
