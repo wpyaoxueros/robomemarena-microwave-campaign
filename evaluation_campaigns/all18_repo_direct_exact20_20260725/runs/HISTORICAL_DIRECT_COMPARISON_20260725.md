@@ -9,10 +9,28 @@ the listed account-side output contains its runtime manifest and summary.
 | Task | Submit account | Job | Topology | Frozen scorer | Output root | State at launch |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | `zzhang510` | `437154` | two GPU, original archived launcher | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_repro20_historical/task1_historical66e789_exact20_20260725_084435` | complete: 14/20, TSR=70.0%, CSR=82.5% |
-| 6 | `xiangqim` | `437171` | VLA first visible GPU; VLM/eval second visible GPU | `d9f83ac5182e25ad7f0a301a77a0b667f2392df1` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/counting_historical_two_gpu/task6_historical_d9f83ac_exact20_20260725_090223` | running |
-| 2 | `zzhang510` | `437250` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task2_originalsnapshot66e789_exact20_20260725_095829` | running after account-side import-layout check |
-| 3 | `zzhang510` | `437278` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task3_originalsnapshot66e789_exact20_20260725_100422` | running after account-side two-GPU probe |
-| 18 | `xiangqim` | `437253` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task18_originalsnapshot66e789_exact20_20260725_095844` | running after account-side import-layout check |
+| 6 | `xiangqim` | `437171` | VLA first visible GPU; VLM/eval second visible GPU | `d9f83ac5182e25ad7f0a301a77a0b667f2392df1` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/counting_historical_two_gpu/task6_historical_d9f83ac_exact20_20260725_090223` | running; snapshot 2026-07-25 10:36: 18/20 complete, 15 stage-success |
+| 2 | `zzhang510` | `437250` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task2_originalsnapshot66e789_exact20_20260725_095829` | running; snapshot 2026-07-25 10:36: 7/7 completed and successful |
+| 3 | `zzhang510` | `437278` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/zzhang510/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task3_originalsnapshot66e789_exact20_20260725_100422` | running; snapshot 2026-07-25 10:36: 4/6 successful |
+| 18 | `xiangqim` | `437253` | two GPU, archived original source topology | `66e7894f8188be8114911e5df0f8bf89fe4581ce` | `/data/user/xiangqim/hlei573_borrow_outputs/all18_repo_direct_exact20_20260725/archived_original_snapshot/task18_originalsnapshot66e789_exact20_20260725_095844` | running; snapshot 2026-07-25 10:36: 3/6 successful |
+
+## Pinned 6221403 Runtime for Microwave Replays
+
+Task20/21/23/24 frozen packages require the exact OpenHelix scorer commit
+`62214036103ee8d5fef9b475dd8b344b6e2cfc03`; they must not fall back to a later
+checkout or to the old scorer. The isolated detached worktree is:
+
+```text
+/data/user/hlei573/vla_memory_experiments/official_runtime_sources/RoboMemArena_openhelix_6221403_20260725
+```
+
+It is clean at that commit, contains
+`evaluation_benchmark/scripts/task2_26_reference_stage.py`, and that script's
+SHA256 is
+`0ab5e19cb7b90844b86fe04a76facc0364af55f1e841c4754aa675404a318538`.
+Both `zzhang510` and `xiangqim` have verified read access and can run
+`git rev-parse HEAD` using only a local safe-directory override. The worktree
+is isolated from the stable source repository and is not modified by a replay.
 
 ## Queued Follow-ups
 
