@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "baseline_id": "baseline-stageonly-17tasks-199of340-20260726",
+  "git_tag": "baseline-stageonly-17tasks-199of340-20260726",
+  "created_date": "2026-07-26",
+  "metric_definition": {
+    "name": "stage_only_tsr",
+    "episode_success": "all required stages complete",
+    "goal_success_used": false,
+    "microwave_close_stage": "optional according to each frozen package"
+  },
+  "scope": {
+    "task_ids": [1, 2, 3, 6, 7, 10, 12, 13, 14, 16, 18, 20, 21, 23, 24, 25, 26],
+    "excluded_task_ids": [22],
+    "episodes_per_task": 20,
+    "total_episodes": 340
+  },
+  "result": {
+    "stage_successes": 199,
+    "tsr_fraction": 0.5852941176470589,
+    "tsr_percent": 58.529411764705884,
+    "csr_percent": null,
+    "csr_status": "pending per-episode stage-score audit"
+  },
+  "tasks": [
+    {"task_id": 1, "stage_successes": 14, "episodes": 20},
+    {"task_id": 2, "stage_successes": 20, "episodes": 20},
+    {"task_id": 3, "stage_successes": 11, "episodes": 20},
+    {"task_id": 6, "stage_successes": 17, "episodes": 20},
+    {"task_id": 7, "stage_successes": 11, "episodes": 20},
+    {"task_id": 10, "stage_successes": 2, "episodes": 20},
+    {"task_id": 12, "stage_successes": 10, "episodes": 20},
+    {"task_id": 13, "stage_successes": 14, "episodes": 20},
+    {"task_id": 14, "stage_successes": 2, "episodes": 20},
+    {"task_id": 16, "stage_successes": 17, "episodes": 20},
+    {"task_id": 18, "stage_successes": 19, "episodes": 20},
+    {"task_id": 20, "stage_successes": 8, "episodes": 20},
+    {"task_id": 21, "stage_successes": 11, "episodes": 20},
+    {"task_id": 23, "stage_successes": 15, "episodes": 20},
+    {"task_id": 24, "stage_successes": 14, "episodes": 20},
+    {"task_id": 25, "stage_successes": 9, "episodes": 20},
+    {"task_id": 26, "stage_successes": 5, "episodes": 20}
+  ],
+  "provenance": {
+    "summary_index": "docs/EXACT20_REPRODUCTION_PLAN_CN.md",
+    "task7_manifest": "evidence/canonical/runs/task7_fixedseed100_guarded20_16gpu_20260725_222939/run_manifest.json",
+    "scoring_scope": "mixed frozen scorer/runtime versions; not a uniform latest-scorer strict rerun"
+  }
+}

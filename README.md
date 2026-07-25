@@ -1,5 +1,10 @@
 # RoboMemArena Reproduction Campaign
 
+The primary rollback point for the current 17-task frozen stage-only baseline is
+documented in
+[`docs/BASELINE_17TASK_STAGEONLY_199OF340_CN.md`](docs/BASELINE_17TASK_STAGEONLY_199OF340_CN.md).
+Its Git tag is `baseline-stageonly-17tasks-199of340-20260726`.
+
 This is the single monorepo for the Task20--Task24 microwave reproduction
 campaign and the Task14 drawer baseline. Every frozen task version lives below
 `tasks/` or `task14/versions/`; each run keeps its evaluator, configuration,
