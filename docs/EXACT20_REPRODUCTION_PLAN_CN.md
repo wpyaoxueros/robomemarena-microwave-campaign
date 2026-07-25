@@ -38,6 +38,31 @@
 | 25 | 8 | 2/8 | historical partial | 补为 canonical 20。 |
 | 26 | 20 | 5/20 | pre-correction | 用冻结 runtime + d9 scorer 重新 gate 后跑 20。 |
 
+## 已归档的完整 20ep（不得再误报为“没跑”）
+
+这张表与上表不同：它记录仓库中已经冻结的完整 20ep 证据。部分使用较早的 scorer，因此不能自动代替 d9 canonical run；但它们已经有完整分母，不应因为没有写进 7 月 25 日外部运行总账而被遗漏。
+
+| Task | 已归档完整结果 | scorer / 说明 |
+| ---: | --- | --- |
+| 1 | 14/20 | 原版成功包。 |
+| 2 | 20/20 | 7 月 25 日 d9 分片 14 条加 6 条 repair。 |
+| 3 | 11/20 | 7 月 25 日 d9 poolstep 15 条加 5 条补片。 |
+| 6 | 17/20 | d9 frozen two-GPU，pre-correction。 |
+| 10 | 2/20 | d9 direct20，pre-correction。 |
+| 12 | 10/20 | d9 exact20，pre-correction。 |
+| 13 | 14/20 | d9 exact20，pre-correction。 |
+| 14 | 2/20 | 仓库 `v1_latestscore_35999_20ep/results/`。 |
+| 16 | 17/20 | d9 frozen two-GPU，pre-correction。 |
+| 18 | 19/20 | 原版成功包历史记录。 |
+| 20 | 8/20 | 仓库 Task20 v110 固定 seed106，remote 622。 |
+| 21 | 11/20 | 仓库 Task21 v133 固定 seed107，remote 622。 |
+| 23 | 15/20 | 仓库 Task23 v155 固定 seed105，remote 622。 |
+| 24 | 14/20 | 仓库 Task24 v131 固定 seed108，remote 622。 |
+| 25 | 9/20 | 原版成功包历史记录。 |
+| 26 | 5/20 | d9 direct20，pre-correction；另有原版 8/20 历史记录。 |
+
+当前明确没有完整 20ep 归档的只有 Task7（正在补第 20 条）和 Task22。若要求所有结果都转换为 d9 + current strict，则不是“补缺失条数”，而是必须为每个旧 scorer 版本建立一条新的独立 canonical 20ep run。
+
 ## 调度顺序
 
 1. 完成正在运行的 Task7；仅补缺失 episode，不覆盖已有 19 条。
