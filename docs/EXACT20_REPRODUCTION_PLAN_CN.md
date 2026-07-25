@@ -20,8 +20,8 @@
 | Task | 当前有效条数 | 当前 stage 成功 | 当前状态 | 本计划动作 |
 | ---: | ---: | ---: | --- | --- |
 | 1 | 20 | 14/20 | historical pinned | 用本地原 runtime + d9 scorer 重跑 20。 |
-| 2 | 0 | - | corrected run 无 official summary | 修正 BDDL/stage 接口后从 1ep gate 重跑。 |
-| 3 | 0 | - | corrected run 无 official summary | 用原 no-order runtime + d9 scorer 从 1ep gate 重跑。 |
+| 2 | 20 | 20/20 | 7 月 25 日 d9 分片 + repair6，已完成 | 补登记并复核终止控制；不再误写成 0。 |
+| 3 | 20 | 11/20 | 7 月 25 日 d9 poolstep 分片 + 5 条补片，已完成 | 补登记并复核终止控制；不再误写成 0。 |
 | 6 | 20 | 17/20 | pre-correction | 用冻结 counting runtime 重跑 20。 |
 | 7 | 19 | 10/19 | guarded fixed-seed 新版本，进行中 | 补完第 20 条，提交结果记录；随后决定是否扩展多 seed。 |
 | 10 | 20 | 2/20 | pre-correction | 用冻结 Task10 runtime 重新 gate 后跑 20。 |
@@ -41,10 +41,11 @@
 ## 调度顺序
 
 1. 完成正在运行的 Task7；仅补缺失 episode，不覆盖已有 19 条。
-2. 先处理已有原 runtime 且只差数量的 `12,13,18,25`。每个任务做 1ep contract gate 后，按缺口并行补到 20。
-3. 处理已有 20 条但不符合 current contract 的 `1,6,10,16,26`，每个任务建立新的 canonical run，不混入旧分母。
-4. 处理接口/运行时未通过的 `2,3,14,21`。先单独修正并提交 contract test，gate 有 valid official summary 后才投入 20ep。
-5. 最后处理微波炉 `20,22,23,24`。必须满足：VLM 自主输出 prompt、无 oracle prompt 注入、无 object anchor；本地 hold/release 只辅助等待或防回退，不能替 VLM 写下一 prompt。
+2. 将已完成的 Task2/Task3 25 号 d9 分片补入总账，明确它们的终止控制和版本，不再重跑或与其它 Task2/3 分片混合。
+3. 处理已有原 runtime 且只差数量的 `12,13,18,25`。每个任务做 1ep contract gate 后，按缺口并行补到 20。
+4. 处理已有 20 条但不符合 current contract 的 `1,6,10,16,26`，每个任务建立新的 canonical run，不混入旧分母。
+5. 处理接口/运行时未通过的 `14,21`。先单独修正并提交 contract test，gate 有 valid official summary 后才投入 20ep。
+6. 最后处理微波炉 `20,22,23,24`。必须满足：VLM 自主输出 prompt、无 oracle prompt 注入、无 object anchor；本地 hold/release 只辅助等待或防回退，不能替 VLM 写下一 prompt。
 
 ## 每个任务的交付物
 
