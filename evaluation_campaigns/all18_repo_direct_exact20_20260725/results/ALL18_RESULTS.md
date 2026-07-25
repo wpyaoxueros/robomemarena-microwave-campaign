@@ -16,7 +16,7 @@ run manifest. A historical result is not counted as a new campaign result.
 | 14 | Task14 v1 | 0/20 | - | d9f83ac | recorded VLM path recovered and readable; two-GPU exact replay pending | `LOCAL_ASSET_REGISTRY.md` |
 | 16 | Task16 counting package | 0/20 | - | d9f83ac | current frozen-package run active; counts when 20 valid summaries exist | `runs/COUNTING_DIRECT20_OVERLAYFIX_20260725.md` |
 | 18 | Task18 v2 original snapshot | 0/20 | - | d9 overlay pending | fresh required | current v3/archived worker excluded |
-| 20 | Task20 v110 | 0/20 | - | d9 overlay ready | recorded VLM and both frozen robot-anchor HDF assets recovered; two-GPU exact replay pending | `LOCAL_ASSET_REGISTRY.md` |
+| 20 | Task20 v110 | 0/20 | - | d9f83ac | running: frozen two-GPU worker0 is validating fixed-seed-106 episodes 0..3; remaining workers will be added without changing v110 rollout controls | `runs/TASK20_V110_D9_WORKER0_20260725.md` |
 | 21 | Task21 v121 | 0/20 | - | d9f83ac | invalid single-GPU attempt: 13 launched episodes produced no official score; each reached native abort/cancellation before an eligible summary. Relaunch with the frozen two-GPU topology. | `runs/TASK21_D9_DIRECT20_SINGLE_GPU.md` |
 | 22 | Task22 autonomous package | 0/20 | - | d9f83ac | fresh required | - |
 | 23 | Task23 v155 | 0/20 | - | d9 overlay pending | fresh required | - |
