@@ -58,6 +58,7 @@ ORIGINAL_RMA_ROOT = pathlib.Path(
     "/data/user/hlei573/tmp/rma_refeval_fresh_20260513_052445/RoboMemArena"
 )
 ORIGINAL_RUNTIME_DIR = ORIGINAL_RMA_ROOT / "evaluation_benchmark" / "openpi_minimal_runtime"
+ORIGINAL_BDDL_DIR = ORIGINAL_RMA_ROOT / "bddl"
 FROZEN_BASE_EVALUATOR_RELATIVE = pathlib.Path(
     "RoboMemArena/evaluation_benchmark/reference_evaluation/"
     "tasks2_26_vlm5_reference/eval_tasks2_26_vlm_vla.py"
@@ -129,6 +130,18 @@ def materialize_base_evaluator_runtime(repro_files: pathlib.Path, output: pathli
     }
 
 
+def materialize_root_bddl(output: pathlib.Path) -> dict[str, str]:
+    """Copy the original BDDL root required by the untouched runtime resolver."""
+    if not ORIGINAL_BDDL_DIR.is_dir():
+        raise FileNotFoundError(ORIGINAL_BDDL_DIR)
+    frozen_bddl = output / "RoboMemArena" / "bddl"
+    shutil.copytree(ORIGINAL_BDDL_DIR, frozen_bddl, copy_function=shutil.copy2)
+    return {
+        str(path.relative_to(output)): sha256(path)
+        for path in sorted(item for item in frozen_bddl.rglob("*") if item.is_file())
+    }
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--task-id", type=int, choices=sorted(TASK_ROOTS), required=True)
@@ -158,6 +171,7 @@ def main() -> int:
         if source.is_file():
             shutil.copy2(source, output / "repro_snapshot" / name)
     runtime_hashes = materialize_base_evaluator_runtime(repro_files, output)
+    bddl_hashes = materialize_root_bddl(output)
 
     original_hashes = {
         **{f"code_snapshot/{key}": value for key, value in collect_hashes(code_snapshot).items()},
@@ -185,6 +199,7 @@ def main() -> int:
         "files": execution_hashes,
         "frozen_base_evaluator": str((output / FROZEN_BASE_EVALUATOR_RELATIVE).resolve()),
         "frozen_runtime_files": runtime_hashes,
+        "frozen_bddl_files": bddl_hashes,
     }
     (output / "execution_pack_manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n",

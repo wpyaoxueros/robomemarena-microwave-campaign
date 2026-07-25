@@ -34,6 +34,13 @@ the listed account-side output contains its runtime manifest and summary.
   Both exited before episode zero with a missing local runtime module and have
   no rollout result. They are excluded; the corrected materializer reconstructs
   the original layout and records every copied runtime-module hash.
+- Task2 job `437188` and Task18 job `437191` used that corrected evaluator and
+  runtime-module hierarchy, but the first correction omitted the top-level
+  archived `RoboMemArena/bddl` directory. The original runtime's untouched
+  root resolver requires both `evaluation_benchmark` and `bddl`; Task2 exited
+  before episode zero and Task18 was cancelled during VLA startup before any
+  rollout. Both are excluded. The next pack copies and hashes the complete
+  original BDDL root as well.
 - Any archived or counting run using `*_single_gpu*` is recorded only as a
   compatibility diagnostic, not a historical-success reproduction.
 

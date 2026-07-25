@@ -30,10 +30,12 @@ directory of the archived base evaluator:
 RoboMemArena/evaluation_benchmark/reference_evaluation/
   tasks2_26_vlm5_reference/eval_tasks2_26_vlm_vla.py
 RoboMemArena/evaluation_benchmark/openpi_minimal_runtime/*.py
+RoboMemArena/bddl/*.bddl
 ```
 
 This hierarchy is required because the unchanged base evaluator derives its
-runtime-module directory relative to `__file__`. A previous flat-copy attempt
+runtime-module directory relative to `__file__` and searches upward for a
+repository root containing both `evaluation_benchmark` and `bddl`. A previous flat-copy attempt
 (`437181` / `437179`) failed before episode zero with
 `ModuleNotFoundError: retry_tasks2_26_stage_from_anygrasp`; it is excluded.
 The corrected pack preserves the archived base evaluator byte-for-byte and

@@ -25,6 +25,7 @@ RUNTIME_SOURCE = pathlib.Path(
     "/data/user/hlei573/tmp/rma_refeval_fresh_20260513_052445/RoboMemArena/"
     "evaluation_benchmark/openpi_minimal_runtime"
 )
+BDDL_SOURCE = RUNTIME_SOURCE.parents[1] / "bddl"
 
 
 def sha256(path: pathlib.Path) -> str:
@@ -82,6 +83,19 @@ def main() -> int:
                 assert sha256(
                     output / "RoboMemArena" / "evaluation_benchmark" / "openpi_minimal_runtime" / module
                 ) == sha256(RUNTIME_SOURCE / module)
+            task_bddl = output / "RoboMemArena" / "bddl" / (
+                "2_butter_popcorn_basket.bddl"
+                if task_id == 2
+                else "18_chocolate_butter_cabinet.bddl"
+            )
+            assert sha256(task_bddl) == sha256(BDDL_SOURCE / task_bddl.name)
+            runtime_path = output / "RoboMemArena" / "evaluation_benchmark" / "openpi_minimal_runtime"
+            resolved_root = next(
+                candidate
+                for candidate in [runtime_path, *runtime_path.parents]
+                if (candidate / "evaluation_benchmark").is_dir() and (candidate / "bddl").is_dir()
+            )
+            assert resolved_root == output / "RoboMemArena"
 
             manifest = json.loads((output / "execution_pack_manifest.json").read_text(encoding="utf-8"))
             assert manifest["task_id"] == task_id
